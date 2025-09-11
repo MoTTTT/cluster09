@@ -1,0 +1,76 @@
+site_name: Podzone
+site_url: https://musings.thruhere.net/podzone/
+
+site_description: Podzone Private Consumer cloud
+site_author: Martin Colley
+
+plugins:
+    - search
+    - mermaid2
+    - swagger-ui-tag
+
+theme:
+  name: readthedocs
+  analytics:
+    gtag: G-SY1HLECK2G
+
+nav:
+  - 'Requirements':
+    - requirementIntroduction.md
+    - requirementBackground.md
+    - requirementBusinessBrief.md
+    - requirementRadio.md
+    - technicalProjectTech.md
+  - 'Analysis':
+    - technicalSecurity.md
+    - technicalConsumerCloud.md
+    - technicalExternalServices.md
+    - inventorySite.md
+    - technicalTasklist1.md
+    - technicalTasklist2.md
+    - inventoryCosting.md
+    - technicalKubernetes.md
+    - technicalSound.md
+    - technicalHardware.md
+  - 'Workload':
+    - technicalRadio.md
+    - technicalSiteStructure.md
+    - technicalStaticSite.md
+    - technicalFlux.md
+    - technicalWordpress.md
+    - technicalApplication.md
+    - technicalIoT.md
+    - technicalRedmine.md
+  - 'Troubleshooting':
+    - technicalTroubleshooting.md
+  - 'Substrate':
+    - technicalTalos.md
+    - technicalLinstor.md
+    - technicalKubespray.md
+    - technicalCluster.md
+    - technicalDataCentre.md
+    - technicalCeph.md
+    - technicalIngress.md
+    - technicalNFS.md
+    - technicalNetwork.md
+    - technicalProxy.md
+    - technicalIssues.md
+  - 'Tools':
+    - technicalTools.md
+    - technicalPrometheus.md
+    - technicalWireguard.md
+    - technicalMkDocs.md
+  - 'Inventory':
+    - inventoryServers.md
+    - inventoryHosts.md
+    - inventoryIoT.md
+    - inventoryVm.md
+    - inventoryWorkstation.md
+  - 'References':
+    - referencesApplication.md
+    - referencesHardware.md
+    - referencesIoT.md
+    - referencesResearch.md
+    - referencesReserve.md
+    - referencesTroubleshooting.md
+    - referencesRadio.md
