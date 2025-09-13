@@ -1,0 +1,64 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 01-network
+  namespace: flux-system
+spec:
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitpos-infra/01-network
+  prune: true
+  patches:
+    - patch: |
+        apiVersion: "cilium.io/v2alpha1"
+        kind: CiliumLoadBalancerIPPool
+        metadata:
+          name: "ip-pool"
+        spec:
+          blocks:
+          - start: "192.168.4.198"
+            stop: "192.168.4.199"
+      target:
+        kind: CiliumLoadBalancerIPPool
+        name: ip-pool
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 02-network
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: 01-network
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitpos-infra/02-network
+  prune: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 03-network
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: 02-network
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitpos-infra/03-network
+  prune: true
