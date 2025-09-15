@@ -32,6 +32,23 @@ spec:
       namespaces:
         from: All
 
+  - hostname: linbit.podzone.cloud
+    name: linbit-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: linbit.podzone.cloud
+    name: linbit-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: linbit-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+
   - hostname: hubble.podzone.cloud
     name: hubble-podzone-cloud-http
     port: 80
@@ -47,7 +64,6 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
-
 ---
 apiVersion: cert-manager.io/v1 
 kind: ClusterIssuer
@@ -74,7 +90,7 @@ metadata:
   namespace: kube-system
 spec:
   hostnames:
-  - cluster09.podzone.cloud
+  - hubble.podzone.cloud
   parentRefs:
   - name: gateway
   rules:
