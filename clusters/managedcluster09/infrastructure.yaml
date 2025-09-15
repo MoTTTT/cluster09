@@ -44,3 +44,21 @@ spec:
     name: flux-system
   path: ./gitpos-infra/02-network
   prune: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 03-storage
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: 02-network
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitpos-infra/03-storage
+  prune: true
