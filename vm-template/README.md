@@ -39,5 +39,7 @@ Take note of the installation image for use in the Cluster API cluster template.
 - Once the VM is running, check that is is in maintenance mode.
 - Stop the VM
 - Convert the VM to a VM template
-- Delete the CloudInit drive from the template (Cluster API will create this on it's own)
-- Note the VM ID, for use in the Cluster API configuration%                                            
+- Clone two VMs from the template, for the control plane and worker nodes of the management cluster
+- Manually configure IP addresses in the VM cloudinit network configuration.
+- Now delete the CloudInit drive from the template for user with Cluster API (Cluster API needs to create this on it's own)
+- Note the Template VM ID, for use in the Cluster API configuration

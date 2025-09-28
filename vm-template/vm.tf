@@ -1,4 +1,3 @@
-vm.venus 
 resource "proxmox_virtual_environment_vm" "talos-template" {
   name        = "talos-template"
   description = "Talos Cluster API Template"

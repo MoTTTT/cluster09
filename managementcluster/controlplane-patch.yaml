@@ -1,0 +1,12 @@
+# This file is used to patch the controlplane.yaml file for Talos
+machine:
+  network:
+    interfaces:
+      - deviceSelector:
+          physical: true
+        vip:
+          ip: 192.168.4.200
+cluster:
+  extraManifests:
+    - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
+#    - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml

@@ -1,0 +1,52 @@
+# This file is used to generated patched controlplane.yaml and worker.yaml files for Talos
+machine:
+  install:
+# This is the default ProxMox boot device name
+    disk: /dev/vda
+# This is the Talos image to install, based on the https://factory.talos.dev/ configuration required
+    image: factory.talos.dev/nocloud-installer/ed7716909fb764e0c322ab43dd20918e30cf8ffa3914ba3fa229afec9efe4d84:v1.10.2
+  kernel:
+
+#  For Management cluster, disable proxy and registry mirrors
+#  env:
+#    http_proxy: "http://192.168.4.2:3128"
+#    https_proxy: "http://192.168.4.2:3128"
+#    no_proxy: "localhost,127.0.0.1,192.168.4.1/24,10.244.0.0/16,10.96.0.0/12"
+# For Harbor caching registry
+#  registries:
+#    config:
+#      192.168.4.4:
+#        auth:
+#          username: admin
+#          password: Harbor15194
+#    mirrors:
+#      docker.io:
+#        endpoints:
+#          - http://192.168.4.4/v2/proxy-docker.io
+#        overridePath: true
+#      ghcr.io:
+#        endpoints:
+#          - http://192.168.4.4/v2/proxy-ghcr.io
+#        overridePath: true
+#      gcr.io:
+#        endpoints:
+#          - http://192.168.4.4/v2/proxy-gcr.io
+#        overridePath: true
+#      registry.k8s.io:
+#        endpoints:
+#          - http://192.168.4.4/v2/proxy-registry.k8s.io
+#        overridePath: true
+#      quay.io:
+#        endpoints:
+#          - http://192.168.4.4/v2/proxy-quay.io
+#        overridePath: true
+#      cr.fluentbit.io:
+#        endpoints:
+#          - http://192.168.4.4/v2/proxy-cr.fluentbit.io
+#        overridePath: true
+cluster:
+# To access the cluster API via a bastion server
+  apiServer:
+    certSANs:
+      - 192.168.1.80
+      - clustermanager.podzone.cloud
