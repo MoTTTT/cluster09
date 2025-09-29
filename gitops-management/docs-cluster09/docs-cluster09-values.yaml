@@ -1,0 +1,27 @@
+# Values for docs podzone
+certificate:
+  name: podzone-cert
+  dnsName: cluster09-docs.podzone.cloud
+gitsyncimage:
+  args:
+    - --repo=https://github.com/MoTTTT/cluster09.git
+    - --depth=1
+    - --period=240s
+    - --max-failures=10
+    - --link=current
+    - --root=/git-apache
+    - --verbose=9
+ingress:
+  className: "nginx"
+  hosts:
+  - host: cluster09-docs.podzone.cloud
+    paths:
+      - path: /
+        pathType: ImplementationSpecific
+  tls:
+    - secretName: podzone-cert
+      hosts:
+        - cluster09-docs.podzone.cloud
+test:
+  url: "https://cluster09-docs.podzone.cloud/index.html"
+replicaCount: 1

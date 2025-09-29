@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: docs-cluster09
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: static-site
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://motttt.github.io/charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: docs-cluster09
+  namespace: flux-system
+spec:
+  targetNamespace: docs-cluster09
+  chart:
+    spec:
+      chart: static-site
+      sourceRef:
+        kind: HelmRepository
+        name: static-site
+      version: 0.1.1
+  valuesFrom:
+    - kind: ConfigMap
+      name:  docs-cluster09-values
+  interval: 10m0s

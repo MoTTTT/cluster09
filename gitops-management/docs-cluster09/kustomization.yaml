@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: docs-cluster09
+resources:
+  - docs-cluster09.yaml
+  - static-site-source.yaml
+  - cluster-issuer.yaml
+configMapGenerator:
+  - name: docs-cluster09-values
+    files:
+      - values.yaml=./docs-cluster09-values.yaml
+configurations:
+  - kustomizeconfig.yaml
