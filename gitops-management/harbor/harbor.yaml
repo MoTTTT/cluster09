@@ -18,7 +18,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: os-master
+  name: harbor
   namespace: flux-system
 spec:
   targetNamespace: harbor
@@ -35,3 +35,28 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name:  harbor-values
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  name: harbor-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - cluster09-harbor.podzone.cloud
+    secretName: control-cert
+  rules:
+  - host: cluster09-harbor.podzone.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: harbor
+            port:
+              number: 80
