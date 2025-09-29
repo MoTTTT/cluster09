@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://musings.thruhere.net/podzone/</loc>
+         <loc>https://cluster09.podzone.cloud/cluster09/</loc>
          <lastmod>2025-09-29</lastmod>
     </url>
     <url>
-         <loc>https://musings.thruhere.net/podzone/Cilium/</loc>
+         <loc>https://cluster09.podzone.cloud/cluster09/Cilium/</loc>
          <lastmod>2025-09-29</lastmod>
     </url>
     <url>
-         <loc>https://musings.thruhere.net/podzone/ClusterAPI/</loc>
+         <loc>https://cluster09.podzone.cloud/cluster09/ClusterAPI/</loc>
          <lastmod>2025-09-29</lastmod>
     </url>
     <url>
-         <loc>https://musings.thruhere.net/podzone/ClusterTaskTracking/</loc>
+         <loc>https://cluster09.podzone.cloud/cluster09/ClusterTaskTracking/</loc>
          <lastmod>2025-09-29</lastmod>
     </url>
     <url>
-         <loc>https://musings.thruhere.net/podzone/Flux/</loc>
+         <loc>https://cluster09.podzone.cloud/cluster09/Flux/</loc>
          <lastmod>2025-09-29</lastmod>
     </url>
     <url>
-         <loc>https://musings.thruhere.net/podzone/Network/</loc>
+         <loc>https://cluster09.podzone.cloud/cluster09/Manifests/</loc>
          <lastmod>2025-09-29</lastmod>
     </url>
     <url>
-         <loc>https://musings.thruhere.net/podzone/Storage/</loc>
+         <loc>https://cluster09.podzone.cloud/cluster09/Network/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/Storage/</loc>
          <lastmod>2025-09-29</lastmod>
     </url>
 </urlset>

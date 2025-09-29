@@ -7,12 +7,10 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Podzone Private Consumer cloud" name="description"/>
 <meta content="Martin Colley" name="author"/>
-<link href="https://cluster09.podzone.cloud/cluster09/Storage/" rel="canonical"/>
-<link href="../ClusterAPI/" rel="prev"/>
-<link href="../Cilium/" rel="next"/>
+<link href="https://cluster09.podzone.cloud/cluster09/Manifests/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.20" name="generator"/>
-<title>Storage - cluster09</title>
+<title>Manifests - cluster09</title>
 <link href="../assets/stylesheets/main.e53b48f4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -24,7 +22,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#storage">
+<a class="md-skip" href="#manifests">
           Skip to content
         </a>
 </div>
@@ -48,7 +46,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Storage
+              Manifests
             
           </span>
 </div>
@@ -135,8 +133,8 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
 <span class="md-ellipsis">
     Provisioning
@@ -144,7 +142,7 @@
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
             Provisioning
@@ -166,79 +164,13 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    Storage
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Storage/">
 <span class="md-ellipsis">
     Storage
     
   </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#zfs-storage-configuration-on-hypervisor">
-<span class="md-ellipsis">
-      ZFS storage configuration on hypervisor
-    </span>
-</a>
-<nav aria-label="ZFS storage configuration on hypervisor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#example-raid-0-configuration">
-<span class="md-ellipsis">
-      Example Raid 0 configuration
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#distributed-storage">
-<span class="md-ellipsis">
-      Distributed storage
-    </span>
-</a>
-<nav aria-label="Distributed storage" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linstor-installation">
-<span class="md-ellipsis">
-      Linstor installation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#switching-to-gitops">
-<span class="md-ellipsis">
-      Switching to gitops
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../Cilium/">
@@ -326,217 +258,143 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#zfs-storage-configuration-on-hypervisor">
-<span class="md-ellipsis">
-      ZFS storage configuration on hypervisor
-    </span>
-</a>
-<nav aria-label="ZFS storage configuration on hypervisor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#example-raid-0-configuration">
-<span class="md-ellipsis">
-      Example Raid 0 configuration
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#distributed-storage">
-<span class="md-ellipsis">
-      Distributed storage
-    </span>
-</a>
-<nav aria-label="Distributed storage" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linstor-installation">
-<span class="md-ellipsis">
-      Linstor installation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#switching-to-gitops">
-<span class="md-ellipsis">
-      Switching to gitops
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
-    </span>
-</a>
-</li>
-</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="storage">Storage</h1>
-<h2 id="zfs-storage-configuration-on-hypervisor">ZFS storage configuration on hypervisor</h2>
-<ul>
-<li>Hypervisor storage resources: 8 X 600GB SAS Disk, configured in IT mode</li>
-<li>1 Disk assigned to hypervisor (no redundancy, SPOF)</li>
-<li>7 disks configured in raid 0 array (Any of 7 disks SPOF)</li>
-<li>Optimising for disk utilisation, and speed</li>
-<li>Optimising for cluster build repeatability</li>
-</ul>
-<h3 id="example-raid-0-configuration">Example Raid 0 configuration</h3>
-<ul>
-<li>List available volumes: <code>ls -la /dev/disk/by-id</code></li>
-<li>Create pool: <code>zpool create pool1 wwn-0x5000cca05633e2d0 ... wwn-0x500003930821ed54</code></li>
-<li>Add pool: <code>pvesm add zfspool pool1 -pool pool1</code></li>
-</ul>
-<h2 id="distributed-storage">Distributed storage</h2>
-<ul>
-<li>Using in-cluster Linstor</li>
-</ul>
-<h3 id="linstor-installation">Linstor installation</h3>
-<ul>
-<li>Check talos extensions: <code>talosctl --talosconfig=./talosconfig --endpoints 192.168.4.114 --nodes 192.168.4.114 get extensions</code></li>
-<li>Check talos loaded modules: <code>talosctl --talosconfig=./talosconfig --endpoints 192.168.4.114 --nodes 192.168.4.114 read /proc/modules</code></li>
-<li>Check talos drbd config: <code>talosctl --talosconfig=./talosconfig --endpoints 192.168.4.114 --nodes 192.168.4.114 read /sys/module/drbd/parameters/usermode_helper</code></li>
-<li><code>kubectl apply --server-side -k "https://github.com/piraeusdatastore/piraeus-operator/config/default?ref=v2.8.1"</code></li>
-</ul>
-<p>Apply overrides:</p>
-<pre><code class="language-yaml">apiVersion: piraeus.io/v1
-kind: LinstorSatelliteConfiguration
-metadata:
-  name: talos-loader-override
-spec:
-  podTemplate:
-    spec:
-      initContainers:
-        - name: drbd-shutdown-guard
-          $patch: delete
-        - name: drbd-module-loader
-          $patch: delete
-      volumes:
-        - name: run-systemd-system
-          $patch: delete
-        - name: run-drbd-shutdown-guard
-          $patch: delete
-        - name: systemd-bus-socket
-          $patch: delete
-        - name: lib-modules
-          $patch: delete
-        - name: usr-src
-          $patch: delete
-        - name: etc-lvm-backup
-          hostPath:
-            path: /var/etc/lvm/backup
-            type: DirectoryOrCreate
-        - name: etc-lvm-archive
-          hostPath:
-            path: /var/etc/lvm/archive
-            type: DirectoryOrCreate
-</code></pre>
-<p>Create Linstor cluster:</p>
-<pre><code class="language-yaml">apiVersion: piraeus.io/v1
-kind: LinstorCluster
-metadata:
-  name: linstorcluster
-spec: {}
-</code></pre>
-<p>Check node list: <code>kubectl -n piraeus-datastore exec deploy/linstor-controller -- linstor node list</code></p>
-<p>Configure storage:</p>
-<pre><code class="language-yaml">apiVersion: piraeus.io/v1
-kind: LinstorSatelliteConfiguration
-metadata:
-  name: storage-pool
-spec:
-  storagePools:
-    - name: pool1
-      fileThinPool:
-        directory: /var/lib/piraeus-datastore/pool1
-</code></pre>
-<p>Check storage pool: <code>kubectl -n piraeus-datastore exec deploy/linstor-controller -- linstor storage-pool list</code></p>
-<p>Create storage class:</p>
-<pre><code class="language-yaml">apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: piraeus-storage
-provisioner: linstor.csi.linbit.com
-allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
-parameters:
-  linstor.csi.linbit.com/storagePool: pool1
-</code></pre>
-<p>Replicated storage class:</p>
-<pre><code class="language-yaml">apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: piraeus-storage-replicated
-provisioner: linstor.csi.linbit.com
-allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
-parameters:
-  linstor.csi.linbit.com/storagePool: pool1
-  linstor.csi.linbit.com/placementCount: "2"
-</code></pre>
-<p>Snapshots: <a href="https://piraeus.io/docs/stable/tutorial/snapshots">https://piraeus.io/docs/stable/tutorial/snapshots</a></p>
-<p>Deploy snapshot controller</p>
-<pre><code class="language-bash">kubectl apply -k https://github.com/kubernetes-csi/external-snapshotter//client/config/crd
-kubectl apply -k https://github.com/kubernetes-csi/external-snapshotter//deploy/kubernetes/snapshot-controller
-</code></pre>
-<p>Create SnapshotClass</p>
-<pre><code class="language-yaml">apiVersion: snapshot.storage.k8s.io/v1
-kind: VolumeSnapshotClass
-metadata:
-  name: piraeus-snapshots
-driver: linstor.csi.linbit.com
-deletionPolicy: Delete
-</code></pre>
-<p>Create VolumeSnapshot</p>
-<pre><code class="language-yaml">apiVersion: snapshot.storage.k8s.io/v1
-kind: VolumeSnapshot
-metadata:
-  name: data-volume-snapshot-1
-spec:
-  volumeSnapshotClassName: piraeus-snapshots
-  source:
-    persistentVolumeClaimName: data-volume
-</code></pre>
-<p>Affinity controller:</p>
-<p><code>helm repo add piraeus-charts https://piraeus.io/helm-charts/</code>
-<code>helm install linstor-affinity-controller piraeus-charts/linstor-affinity-controller</code></p>
-<p>Monitoring with Prometheus operator:</p>
-<p>Install prometheus:</p>
-<p><code>$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts</code></p>
-<pre><code class="language-bash">helm install --create-namespace -n monitoring prometheus prometheus-community/kube-prometheus-stack \
-  --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false \
-  --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues=false \
-  --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues=false
-</code></pre>
-<p>Add monitoring and alert rules for piraeus:</p>
-<pre><code class="language-bash">kubectl apply --server-side -n piraeus-datastore -k "https://github.com/piraeusdatastore/piraeus-operator//config/extras/monitoring?ref=v2"
-</code></pre>
-<h2 id="switching-to-gitops">Switching to gitops</h2>
-<ul>
-<li><code>flux create source helm piraeus-charts  --url=https://prometheus-community.github.io/helm-charts --interval=10m --export</code></li>
-<li><code>flux create hr affinity-controller  --interval=10m  --source=HelmRepository/piraeus-charts  --chart=linstor-affinity-controller --export</code></li>
-<li>See gitops-infra for manifests.</li>
-</ul>
-<h2 id="references">References</h2>
-<ul>
-<li>Reference: <a href="https://piraeus.io/docs/stable/tutorial/get-started">https://piraeus.io/docs/stable/tutorial/get-started</a></li>
-</ul>
+<h1 id="manifests">Manifests</h1>
+<p>During talos node configuration, a set of kubernetes manifests are loaded.</p>
+<p>These are cached in the Cluster09 repo, and served from the web server in the management cluster.</p>
+<p>Their configuration can be found in the Cluster template, in the cluster.extraManifests array.</p>
+<table>
+<thead>
+<tr>
+<th>manifest name</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kubelet-serving-cert-approver.yaml</td>
+<td><a href="https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml">https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml</a></td>
+</tr>
+<tr>
+<td>metrics-server.yaml</td>
+<td><a href="https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml">https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</a></td>
+</tr>
+<tr>
+<td>piraeus-operator.yaml</td>
+<td><a href="https://github.com/piraeusdatastore/piraeus-operator/releases/latest/download/manifest.yaml">https://github.com/piraeusdatastore/piraeus-operator/releases/latest/download/manifest.yaml</a></td>
+</tr>
+<tr>
+<td>gateway-api.yaml</td>
+<td><a href="https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml">https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml</a></td>
+</tr>
+<tr>
+<td>cilium.yaml</td>
+<td>helm template \</td>
+</tr>
+<tr>
+<td></td>
+<td>cilium \</td>
+</tr>
+<tr>
+<td></td>
+<td>cilium/cilium \</td>
+</tr>
+<tr>
+<td></td>
+<td>--version 1.17.4 \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set hubble.relay.enabled=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set hubble.ui.enabled=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set ingressController.enabled=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set ingressController.loadbalancerMode=shared \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set ingressController.default=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set l2announcements.enabled=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set l2announcements.leaseDuration=3s \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set l2announcements.leaseRenewDeadline=1s \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set l2announcements.leaseRetryPeriod=200ms \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set loadBalancerIPs.enable=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set gatewayAPI.enabled=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set loadBalancer.l7.backend=envoy \</td>
+</tr>
+<tr>
+<td></td>
+<td>--namespace kube-system \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set ipam.mode=kubernetes \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set kubeProxyReplacement=true \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set securityContext.capabilities.ciliumAgent="{CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}" \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set securityContext.capabilities.cleanCiliumState="{NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}" \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set cgroup.autoMount.enabled=false \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set cgroup.hostRoot=/sys/fs/cgroup \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set k8sServiceHost=localhost \</td>
+</tr>
+<tr>
+<td></td>
+<td>--set k8sServicePort=7445 &gt; cilium.yaml</td>
+</tr>
+</tbody>
+</table>
+<p>```</p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
