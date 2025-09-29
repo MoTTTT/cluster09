@@ -20,7 +20,7 @@ for wip in ${workerIPAddresses}; do
 done
 
 talosctl config merge ./talosconfig
-talosctl config endpoint 192.168.4.200
+talosctl config endpoint 192.168.4.201
 
 set +x
 echo ================================ NEXT STEPS ==============================================
