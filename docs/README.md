@@ -61,4 +61,3 @@ To support airgapped green-fields deployment, all dependencies need to be met lo
 ## Proxmox hypervisor
 
 - Proxmox V9 installed
-- 
