@@ -17,7 +17,7 @@ theme:
 nav:
   - 'Introduction':
     - README.md
-    - ClusterTaskTracking.md
+    - Talos.md
   - 'Provisioning':
     - Network.md
     - ClusterAPI.md

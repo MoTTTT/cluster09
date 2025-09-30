@@ -18,7 +18,7 @@ metadata:
   name: ingress-nginx
   namespace: ingress-nginx
 spec:
-#  targetNamespace: ingress-nginx
+  targetNamespace: ingress-nginx
   chart:
     spec:
       chart: ingress-nginx
