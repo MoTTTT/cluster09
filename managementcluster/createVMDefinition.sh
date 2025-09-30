@@ -1,13 +1,13 @@
 #/bin/bash
 
-clusterID=control-cluster
+clusterID=ManagementCluster
 proxmoxnode=venus
 proxmoxurl=https://192.168.4.50:8006/
 proxmoxuser=root@pam
 proxmoxpass=XXXXXXX
-concontrolPlaneIPAddress=192.168.4.200
-concontrolPlaneIPAddresses='192.168.4.201'
-workerIPAddresses='192.168.4.205'
+concontrolPlaneIPAddress=192.168.4.210
+concontrolPlaneIPAddresses='192.168.4.211'
+workerIPAddresses='192.168.4.215'
 gateway=192.168.4.1
 bridge=vmbr0
 pool=pool1
