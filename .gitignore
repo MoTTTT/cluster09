@@ -2,3 +2,8 @@
 .DS_Store
 site/sitemap.xml.gz
 vm-template/providers.tf
+*terraform*
+talosconfig
+worker.yaml
+controlplane-patched.yaml
+controlplane.yaml
