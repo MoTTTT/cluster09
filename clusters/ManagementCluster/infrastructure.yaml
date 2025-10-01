@@ -1,48 +1,48 @@
-#---
-#apiVersion: kustomize.toolkit.fluxcd.io/v1
-#kind: Kustomization
-#metadata:
-#  name: 00-prerequisites
-#  namespace: flux-system
-#spec:
-#  interval: 1h
-#  retryInterval: 1m
-#  timeout: 5m
-#  sourceRef:
-#    kind: GitRepository
-#    name: flux-system
-#  path: ./gitops-management/00-prerequisites
-#  prune: true
-#patches:
-#  - patch: |
-#      apiVersion: "cilium.io/v2alpha1"
-#      kind: CiliumLoadBalancerIPPool
-#      metadata:
-#        name: "ip-pool"
-#      spec:
-#        blocks:
-#        - start: "192.168.4.218"
-#          stop: "192.168.4.219"
-#    target:
-#      kind: CiliumLoadBalancerIPPool
-#      name: ip-pool
-#---
-#apiVersion: kustomize.toolkit.fluxcd.io/v1
-#kind: Kustomization
-#metadata:
-#  name: 01-prerequisites
-#  namespace: flux-system
-#spec:
-#  dependsOn:
-#    - name: 00-prerequisites
-#  interval: 1h
-#  retryInterval: 1m
-#  timeout: 5m
-#  sourceRef:
-#    kind: GitRepository
-#    name: flux-system
-#  path: ./gitops-management/01-prerequisites
-#  prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 00-prerequisites
+  namespace: flux-system
+spec:
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops-management/00-prerequisites
+  prune: true
+patches:
+  - patch: |
+      apiVersion: "cilium.io/v2alpha1"
+      kind: CiliumLoadBalancerIPPool
+      metadata:
+        name: "ip-pool"
+      spec:
+        blocks:
+        - start: "192.168.4.218"
+          stop: "192.168.4.219"
+    target:
+      kind: CiliumLoadBalancerIPPool
+      name: ip-pool
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 01-prerequisites
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: 00-prerequisites
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops-management/01-prerequisites
+  prune: true
 #---
 #apiVersion: kustomize.toolkit.fluxcd.io/v1
 #kind: Kustomization
