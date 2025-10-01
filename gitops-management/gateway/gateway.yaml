@@ -35,7 +35,7 @@ spec:
   gatewayClassName: cilium
   listeners:
   - hostname: harbor.podzone.cloud
-    name: charbor-podzone-cloud-http
+    name: harbor-podzone-cloud-http
     port: 80
     protocol: HTTP
   - hostname: harbor.podzone.cloud
