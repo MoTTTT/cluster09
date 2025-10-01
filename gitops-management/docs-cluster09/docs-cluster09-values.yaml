@@ -12,7 +12,7 @@ gitsyncimage:
     - --root=/git-apache
     - --verbose=9
 ingress:
-  className: "nginx"
+  className: "cilium"
   hosts:
   - host: cluster09-docs.podzone.cloud
     paths:

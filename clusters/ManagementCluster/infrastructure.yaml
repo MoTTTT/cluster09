@@ -45,8 +45,6 @@ spec:
   path: ./gitops-management/harbor
   prune: true
 
-
-
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -64,3 +62,5 @@ spec:
     name: flux-system
   path: ./gitops-management/gateway
   prune: true
+
+  ---
