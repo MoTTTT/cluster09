@@ -9,7 +9,8 @@ resource "proxmox_virtual_environment_download_file" "talos_nocloud_image" {
   datastore_id            = "local"
   node_name               = "venus"
   file_name               = "talos-${local.talos.version}-nocloud-amd64-CLUSTER.img"
-  url                     = "https://factory.talos.dev/image/TALOSIMAGEID/${local.talos.version}/nocloud-amd64.iso"
-  overwrite               = false
+#  url                     = "https://factory.talos.dev/image/TALOSIMAGEID/${local.talos.version}/nocloud-amd64.iso"
+  url                     = "http://192.168.4.1/nocloud-amd64.iso"
+  overwrite               = fals
 }
 
