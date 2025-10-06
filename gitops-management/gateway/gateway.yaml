@@ -5,11 +5,29 @@ metadata:
   name: cilium
 spec:
   controllerName: io.cilium/gateway-controller
+#---
+#apiVersion: cert-manager.io/v1 
+#kind: ClusterIssuer
+#metadata:
+#  name: lets-encrypt-gateway
+#spec:
+#  acme:
+#    email: martinjcolley@gmail.com
+#    server: https://acme-v02.api.letsencrypt.org/directory
+#    privateKeySecretRef:
+#      name: letsencrypt-key
+#    solvers:
+#    - http01:
+#          gatewayHTTPRoute:
+#            parentRefs:
+#              - name: gateway
+#                namespace: kube-system
+#                kind: Gateway
 ---
 apiVersion: cert-manager.io/v1 
 kind: ClusterIssuer
 metadata:
-  name: lets-encrypt-gateway
+  name: lets-encrypt
 spec:
   acme:
     email: martinjcolley@gmail.com
@@ -23,22 +41,22 @@ spec:
               - name: gateway
                 namespace: kube-system
                 kind: Gateway
----
-apiVersion: cert-manager.io/v1 
-kind: ClusterIssuer
-metadata:
-  name: lets-encrypt-ingress
-spec:
-  acme:
-    email: martinjcolley@gmail.com
-    server: https://acme-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      name: letsencrypt-ingress
-    solvers:
-    - http01:
-        ingress:
-          class: cilium
-      selector: {}
+#---
+#apiVersion: cert-manager.io/v1 
+#kind: ClusterIssuer
+#metadata:
+#  name: lets-encrypt-ingress
+#spec:
+#  acme:
+#    email: martinjcolley@gmail.com
+#    server: https://acme-v02.api.letsencrypt.org/directory
+#    privateKeySecretRef:
+#      name: letsencrypt-ingress
+#    solvers:
+#    - http01:
+#        ingress:
+#          class: cilium
+#      selector: {}
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
@@ -46,7 +64,8 @@ metadata:
   name: gateway
   namespace: kube-system
   annotations:
-    cert-manager.io/cluster-issuer: lets-encrypt-gateway
+#    cert-manager.io/cluster-issuer: lets-encrypt-gateway
+    cert-manager.io/cluster-issuer: lets-encrypt
 spec:
   gatewayClassName: cilium
   listeners:
@@ -65,23 +84,21 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
-
-  - hostname: cluster09-docs.podzone.cloud
-    name: cluster09-docs-podzone-cloud-http
-    port: 80
-    protocol: HTTP
-  - hostname: cluster09-docs.podzone.cloud
-    name: cluster09-docs-podzone-cloud-https
-    port: 443
-    protocol: HTTPS
-    tls:
-      mode: Terminate
-      certificateRefs:
-        - name: cluster09-docs-secret
-    allowedRoutes:
-      namespaces:
-        from: All
-
+#  - hostname: cluster09-docs.podzone.cloud
+#    name: cluster09-docs-podzone-cloud-http
+#    port: 80
+#    protocol: HTTP
+#  - hostname: cluster09-docs.podzone.cloud
+#    name: cluster09-docs-podzone-cloud-https
+#    port: 443
+#    protocol: HTTPS
+#    tls:
+#      mode: Terminate
+#      certificateRefs:
+#        - name: cluster09-docs-secret
+#    allowedRoutes:
+#      namespaces:
+#        from: All
   - hostname: hubble.podzone.cloud
     name: hubble-podzone-cloud-http
     port: 80
