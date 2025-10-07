@@ -57,61 +57,60 @@ spec:
 #        ingress:
 #          class: cilium
 #      selector: {}
-#---
-#apiVersion: gateway.networking.k8s.io/v1
-#kind: Gateway
-#metadata:
-#  name: gateway
-#  namespace: kube-system
-#  annotations:
-##    cert-manager.io/cluster-issuer: lets-encrypt-gateway
-#    cert-manager.io/cluster-issuer: lets-encrypt
-#spec:
-#  gatewayClassName: cilium
-#  listeners:
-#  - hostname: harbor.podzone.cloud
-#    name: harbor-podzone-cloud-http
-#    port: 80
-#    protocol: HTTP
-#  - hostname: harbor.podzone.cloud
-#    name: harbor-podzone-cloud-https
-#    port: 443
-#    protocol: HTTPS
-#    tls:
-#      mode: Terminate
-#      certificateRefs:
-#        - name: harbor-secret
-#    allowedRoutes:
-#      namespaces:
-#        from: All
-#  - hostname: cluster09-docs.podzone.cloud
-#    name: cluster09-docs-podzone-cloud-http
-#    port: 80
-#    protocol: HTTP
-#  - hostname: cluster09-docs.podzone.cloud
-#    name: cluster09-docs-podzone-cloud-https
-#    port: 443
-#    protocol: HTTPS
-#    tls:
-#      mode: Terminate
-#      certificateRefs:
-#        - name: cluster09-docs-secret
-#    allowedRoutes:
-#      namespaces:
-#        from: All
-#  - hostname: hubble.podzone.cloud
-#    name: hubble-podzone-cloud-http
-#    port: 80
-#    protocol: HTTP
-#  - hostname: hubble.podzone.cloud
-#    name: hubble-podzone-cloud-https
-#    port: 443
-#    protocol: HTTPS
-#    tls:
-#      mode: Terminate
-#      certificateRefs:
-#        - name: hubble-secret
-#    allowedRoutes:
-#      namespaces:
-#        from: All
-#
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: kube-system
+  annotations:
+#    cert-manager.io/cluster-issuer: lets-encrypt-gateway
+    cert-manager.io/cluster-issuer: lets-encrypt
+spec:
+  gatewayClassName: cilium
+  listeners:
+  - hostname: harbor.podzone.cloud
+    name: harbor-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: harbor.podzone.cloud
+    name: harbor-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: harbor-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: cluster09-docs.podzone.cloud
+    name: cluster09-docs-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: cluster09-docs.podzone.cloud
+    name: cluster09-docs-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: cluster09-docs-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: hubble.podzone.cloud
+    name: hubble-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: hubble.podzone.cloud
+    name: hubble-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: hubble-secret
+    allowedRoutes:
+      namespaces:
+        from: All
