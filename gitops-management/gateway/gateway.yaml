@@ -5,24 +5,6 @@ metadata:
   name: cilium
 spec:
   controllerName: io.cilium/gateway-controller
-#---
-#apiVersion: cert-manager.io/v1 
-#kind: ClusterIssuer
-#metadata:
-#  name: lets-encrypt-gateway
-#spec:
-#  acme:
-#    email: martinjcolley@gmail.com
-#    server: https://acme-v02.api.letsencrypt.org/directory
-#    privateKeySecretRef:
-#      name: letsencrypt-key
-#    solvers:
-#    - http01:
-#          gatewayHTTPRoute:
-#            parentRefs:
-#              - name: gateway
-#                namespace: kube-system
-#                kind: Gateway
 ---
 apiVersion: cert-manager.io/v1 
 kind: ClusterIssuer
@@ -41,22 +23,6 @@ spec:
               - name: gateway
                 namespace: kube-system
                 kind: Gateway
-#---
-#apiVersion: cert-manager.io/v1 
-#kind: ClusterIssuer
-#metadata:
-#  name: lets-encrypt-ingress
-#spec:
-#  acme:
-#    email: martinjcolley@gmail.com
-#    server: https://acme-v02.api.letsencrypt.org/directory
-#    privateKeySecretRef:
-#      name: letsencrypt-ingress
-#    solvers:
-#    - http01:
-#        ingress:
-#          class: cilium
-#      selector: {}
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
@@ -64,7 +30,6 @@ metadata:
   name: gateway
   namespace: kube-system
   annotations:
-#    cert-manager.io/cluster-issuer: lets-encrypt-gateway
     cert-manager.io/cluster-issuer: lets-encrypt
 spec:
   gatewayClassName: cilium
@@ -123,3 +88,4 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
+---
