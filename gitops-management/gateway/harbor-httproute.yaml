@@ -11,8 +11,8 @@ spec:
   - name: gateway
   rules:
   - backendRefs:
-    - name: harbor-harbor-portal
-      port: 80
+    - name: harbor
+      port: 30002
     matches:
     - path:
         type: PathPrefix
