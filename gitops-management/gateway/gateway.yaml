@@ -73,6 +73,9 @@ spec:
     name: harbor-podzone-cloud-http
     port: 80
     protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
   - hostname: harbor.podzone.cloud
     name: harbor-podzone-cloud-https
     port: 443
@@ -88,6 +91,9 @@ spec:
     name: cluster09-docs-podzone-cloud-http
     port: 80
     protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
   - hostname: cluster09-docs.podzone.cloud
     name: cluster09-docs-podzone-cloud-https
     port: 443
@@ -103,6 +109,9 @@ spec:
     name: hubble-podzone-cloud-http
     port: 80
     protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
   - hostname: hubble.podzone.cloud
     name: hubble-podzone-cloud-https
     port: 443
