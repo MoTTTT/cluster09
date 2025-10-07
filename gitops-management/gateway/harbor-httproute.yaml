@@ -12,7 +12,7 @@ spec:
   rules:
   - backendRefs:
     - name: harbor
-      port: 30002
+      port: 80
     matches:
     - path:
         type: PathPrefix
