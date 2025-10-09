@@ -8,7 +8,7 @@ expose:
       group: gateway.networking.k8s.io
       kind: Gateway
     parentRefs:
-      - gateway
+      - name: gateway
     hosts: 
       - harbor.podzone.cloud
 
