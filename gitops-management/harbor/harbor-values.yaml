@@ -1,5 +1,8 @@
 expose:
   type: route
+  tls:
+    auto:
+     commonName: "harbor.podzone.cloud"
   route:
     annotations:
       name: gateway
