@@ -59,7 +59,7 @@ expose:
     parentRefs:
       - "harbor.podzone.cloud"
     hosts: 
-      - []
+      - harbor.podzone.cloud
   clusterIP:
     # The name of ClusterIP service
     name: harbor
