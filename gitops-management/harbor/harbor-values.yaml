@@ -1,5 +1,5 @@
 expose:
-  type: clusterIP
+  type: route
   tls:
     enabled: false
 
