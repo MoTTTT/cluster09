@@ -2,11 +2,11 @@ expose:
   type: route
   route:
     annotations:
-      - name: gateway
-        namespace: kube-system
-        sectionName: harbor-podzone-cloud-http
-        group: gateway.networking.k8s.io
-        kind: Gateway
+      name: gateway
+      namespace: kube-system
+      sectionName: harbor-podzone-cloud-http
+      group: gateway.networking.k8s.io
+      kind: Gateway
     parentRefs:
       - "harbor.podzone.cloud"
     hosts: 
