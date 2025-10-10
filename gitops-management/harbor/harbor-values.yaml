@@ -8,7 +8,7 @@ expose:
     annotations:
       name: gateway
       namespace: kube-system
-      sectionName: harbor-podzone-cloud-http
+      sectionName: harbor-podzone-cloud-https
       group: gateway.networking.k8s.io
       kind: Gateway
     parentRefs:
