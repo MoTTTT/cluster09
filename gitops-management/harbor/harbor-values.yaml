@@ -1,8 +1,9 @@
 expose:
   type: route
   tls:
-    auto:
-     commonName: "harbor.podzone.cloud"
+    certSource: secret
+    secret:
+      secretName: harbor-secret
   route:
     annotations:
       name: gateway
