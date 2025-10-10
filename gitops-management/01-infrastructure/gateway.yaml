@@ -1,10 +1,47 @@
 ---
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: GatewayClass
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
 metadata:
-  name: cilium
+  name: gateway
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
 spec:
-  controllerName: io.cilium/gateway-controller
+  gatewayClassName: cilium
+  listeners:
+  - hostname: harbor.podzone.cloud
+    name: harbor-podzone-cloud
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: harbor-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: cluster09-docs.podzone.cloud
+    name: cluster09-docs-podzone-cloud
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: cluster09-docs-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: hubble.podzone.cloud
+    name: hubble-podzone-cloud
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: hubble-secret
+    allowedRoutes:
+      namespaces:
+        from: All
 ---
 apiVersion: cert-manager.io/v1 
 kind: ClusterIssuer
@@ -24,68 +61,9 @@ spec:
                 namespace: kube-system
                 kind: Gateway
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: GatewayClass
 metadata:
-  name: gateway
-  namespace: kube-system
-  annotations:
-    cert-manager.io/cluster-issuer: lets-encrypt
+  name: cilium
 spec:
-  gatewayClassName: cilium
-  listeners:
-  - hostname: harbor.podzone.cloud
-    name: harbor-podzone-cloud-http
-    port: 80
-    protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: All
-  - hostname: harbor.podzone.cloud
-    name: harbor-podzone-cloud-https
-    port: 443
-    protocol: HTTPS
-    tls:
-      mode: Terminate
-      certificateRefs:
-        - name: harbor-secret
-    allowedRoutes:
-      namespaces:
-        from: All
-  - hostname: cluster09-docs.podzone.cloud
-    name: cluster09-docs-podzone-cloud-http
-    port: 80
-    protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: All
-  - hostname: cluster09-docs.podzone.cloud
-    name: cluster09-docs-podzone-cloud-https
-    port: 443
-    protocol: HTTPS
-    tls:
-      mode: Terminate
-      certificateRefs:
-        - name: cluster09-docs-secret
-    allowedRoutes:
-      namespaces:
-        from: All
-  - hostname: hubble.podzone.cloud
-    name: hubble-podzone-cloud-http
-    port: 80
-    protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: All
-  - hostname: hubble.podzone.cloud
-    name: hubble-podzone-cloud-https
-    port: 443
-    protocol: HTTPS
-    tls:
-      mode: Terminate
-      certificateRefs:
-        - name: hubble-secret
-    allowedRoutes:
-      namespaces:
-        from: All
----
+  controllerName: io.cilium/gateway-controller
