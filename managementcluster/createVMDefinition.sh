@@ -1,6 +1,6 @@
 #/bin/bash
 
-clusterID=ManagementCluster
+clusterID=Management
 proxmoxnode=venus
 proxmoxurl=https://192.168.4.50:8006/
 proxmoxuser=root@pam
