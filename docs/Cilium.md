@@ -18,10 +18,12 @@ Missing in Management Cluster Iteration 3 for Management Cluster:
 
 Additional settings from <https://docs.siderolabs.com/kubernetes-guides/cni/deploying-cilium>
 
+```yaml
+---
+
     --set gatewayAPI.enableAlpn=true \
     --set gatewayAPI.enableAppProtocol=true
-
-
+```
 
 - `helm repo add cilium https://helm.cilium.io/`
 - `helm repo update`
