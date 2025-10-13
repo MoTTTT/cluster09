@@ -10,6 +10,13 @@ spec:
   gatewayClassName: cilium
   listeners:
   - hostname: harbor.podzone.cloud
+    name: harbor-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: harbor.podzone.cloud
     name: harbor-podzone-cloud
     port: 443
     protocol: HTTPS
@@ -28,6 +35,20 @@ spec:
       mode: Terminate
       certificateRefs:
         - name: cluster09-docs-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: cluster09-docs.podzone.cloud
+    name: cluster09-docs-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: hubble.podzone.cloud
+    name: hubble-podzone-cloud-http
+    port: 80
+    protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
