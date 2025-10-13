@@ -63,6 +63,25 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
+
+  - hostname: linstor.podzone.cloud
+    name: linstor-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: linstor.podzone.cloud
+    name: linstor-podzone-cloud
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: linstor-secret
+    allowedRoutes:
+      namespaces:
+        from: All
 ---
 apiVersion: cert-manager.io/v1 
 kind: ClusterIssuer
