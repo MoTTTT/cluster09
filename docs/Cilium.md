@@ -1,6 +1,27 @@
 # Cilium
 
+## Diagnostics
+
+- Monitor: `kubectl -n kube-system exec ds/cilium -- cilium-dbg monitor`
+- Service list: `kubectl -n kube-system exec ds/cilium -- cilium-dbg service list`
+- Verbose status: `kubectl -n kube-system exec ds/cilium -- cilium-dbg status --verbose`
+
 ## Generating the cilium manifest
+
+Missing in Management Cluster Iteration 3 for Management Cluster:
+
+```yaml
+
+ l7Proxy=true
+ envoyConfig.enabled=true
+```
+
+Additional settings from <https://docs.siderolabs.com/kubernetes-guides/cni/deploying-cilium>
+
+    --set gatewayAPI.enableAlpn=true \
+    --set gatewayAPI.enableAppProtocol=true
+
+
 
 - `helm repo add cilium https://helm.cilium.io/`
 - `helm repo update`
@@ -10,6 +31,8 @@ helm template \
     cilium \
     cilium/cilium \
     --version 1.17.4 \
+    --set hl7Proxy.enabled=true \
+    --set envoyConfig.enabled=true \
     --set hubble.relay.enabled=true \
     --set hubble.ui.enabled=true \
     --set ingressController.enabled=true \
@@ -21,6 +44,8 @@ helm template \
     --set l2announcements.leaseRetryPeriod=200ms \
     --set loadBalancerIPs.enable=true \
     --set gatewayAPI.enabled=true \
+    --set gatewayAPI.enableAlpn=true \
+    --set gatewayAPI.enableAppProtocol=true \
     --set loadBalancer.l7.backend=envoy \
     --namespace kube-system \
     --set ipam.mode=kubernetes \
