@@ -45,7 +45,7 @@ spec:
     kind: Gateway
   rules:
   - backendRefs:
-    - name: cluster09-docs
+    - name: cluster09-docs-cluster09-docs-static-site
       port: 80
     matches:
     - path:
