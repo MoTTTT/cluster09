@@ -81,6 +81,8 @@ spec:
   - linstor.podzone.cloud
   parentRefs:
   - name: gateway
+    namespace: kube-system
+    kind: Gateway
   rules:
   - backendRefs:
     - name: linstor-controller

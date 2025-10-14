@@ -13,6 +13,8 @@ expose:
 #      kind: Gateway
     parentRefs:
       - name: gateway
+        namespace: kube-system
+        kind: Gateway
     hosts: 
       - harbor.podzone.cloud
 
