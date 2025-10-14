@@ -12,16 +12,7 @@ gitsyncimage:
     - --root=/git-apache
     - --verbose=9
 ingress:
-  className: "cilium"
-  hosts:
-  - host: cluster09-docs.podzone.cloud
-    paths:
-      - path: /
-        pathType: ImplementationSpecific
-  tls:
-    - secretName: podzone-cert
-      hosts:
-        - cluster09-docs.podzone.cloud
+  enabled: false
 test:
   url: "https://cluster09-docs.podzone.cloud/index.html"
 replicaCount: 1
