@@ -25,6 +25,6 @@ echo To extract etcd certificates for Prometheus monitoring: talosctl get etcdro
 echo    and: talosctl get etcdsecret -o yaml --nodes CONTROLPLANEIP --endpoints CONTROLPLANEIP --talosconfig=./talosconfig
 echo    see https://blog.neilfren.ch/scraping-cluster-metrics-from-talos/
 echo To generate bastion API config file: sed -e 's/CONTROLPLANEIP/CERTSANIP/g' -e 's/6443/APIPORT/g' config.CLUSTER > config.CLUSTER-CERTSANHOST
-echo To bootstrap flux gitops: flux bootstrap github --context=admin@CLUSTER --owner=MoTTTT --repository=venus --branch=main --personal --path=clusters/CLUSTER --token-auth=true
+echo To bootstrap flux gitops: flux bootstrap github --context=admin@CLUSTER --owner=MoTTTT --repository=cluster09 --branch=main --personal --path=clusters/CLUSTER --token-auth=true
 echo To view the control talos dashboard: talosctl dashboard --nodes CONTROLPLANEIP --endpoints CONTROLPLANEIP --talosconfig=./talosconfig
 echo To add port forwarding on bastion CERTSANHOST: iptables -t nat -A PREROUTING -i wlp2s0 -p tcp --dport APIPORT -j DNAT --to-destination CONTROLPLANEIP:6443

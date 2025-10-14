@@ -5,12 +5,12 @@ expose:
     secret:
       secretName: harbor-secret
   route:
-    annotations:
-      name: gateway
-      namespace: kube-system
-      sectionName: harbor-podzone-cloud
-      group: gateway.networking.k8s.io
-      kind: Gateway
+#    annotations:
+#      name: gateway
+#      namespace: kube-system
+#      sectionName: harbor-podzone-cloud
+#      group: gateway.networking.k8s.io
+#      kind: Gateway
     parentRefs:
       - name: gateway
     hosts: 
