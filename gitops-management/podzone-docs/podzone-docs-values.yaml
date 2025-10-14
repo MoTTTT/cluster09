@@ -1,0 +1,18 @@
+# Values for docs podzone
+certificate:
+  name: podzone-cert
+  dnsName: podzone-docs.podzone.cloud
+gitsyncimage:
+  args:
+    - --repo=https://github.com/MoTTTT/podzone.git
+    - --depth=1
+    - --period=240s
+    - --max-failures=10
+    - --link=current
+    - --root=/git-apache
+    - --verbose=9
+ingress:
+  enabled: false
+test:
+  url: "https://podzone-docs.podzone.cloud/index.html"
+replicaCount: 1

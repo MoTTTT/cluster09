@@ -82,6 +82,28 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
+
+
+  - hostname: docs.podzone.cloud
+    name: docs-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: docs.podzone.cloud
+    name: docs-podzone-cloud
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: docs-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+
 ---
 apiVersion: cert-manager.io/v1 
 kind: ClusterIssuer
