@@ -165,11 +165,11 @@ spec:
             proxy:
               disabled: true
             extraManifests:
-              - http://192.168.4.5/kubelet-serving-cert-approver.yaml
-              - http://192.168.4.5/metrics-server.yaml
-              - http://192.168.4.5/piraeus-operator.yaml
-              - http://192.168.4.5/gateway-api.yaml
-              - http://192.168.4.5/cilium.yaml
+              - http://192.168.4.1/kubelet-serving-cert-approver.yaml
+              - http://192.168.4.1/metrics-server.yaml
+              - http://192.168.4.1/piraeus-operator.yaml
+              - http://192.168.4.1/gateway-api.yaml
+              - http://192.168.4.1/cilium.yam
             externalCloudProvider:
               enabled: true
               manifests:
