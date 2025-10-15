@@ -13,7 +13,7 @@ metadata:
   namespace: cluster09
 stringData:
   secret: 20740230-b100-49b1-aec4-64173d401f81
-  token: root@pam!autotoken
+  token: root@pam!clusterapi
   url: https://192.168.4.50:8006
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
