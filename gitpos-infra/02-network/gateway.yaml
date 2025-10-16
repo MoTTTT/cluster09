@@ -32,18 +32,18 @@ spec:
       namespaces:
         from: All
 
-  - hostname: linbit.podzone.cloud
-    name: linbit-podzone-cloud-http
+  - hostname: linstor.podzone.cloud
+    name: linstor-podzone-cloud-http
     port: 80
     protocol: HTTP
-  - hostname: linbit.podzone.cloud
-    name: linbit-podzone-cloud-https
+  - hostname: linstor.podzone.cloud
+    name: linstor-podzone-cloud-https
     port: 443
     protocol: HTTPS
     tls:
       mode: Terminate
       certificateRefs:
-        - name: linbit-secret
+        - name: linstor-secret
     allowedRoutes:
       namespaces:
         from: All
