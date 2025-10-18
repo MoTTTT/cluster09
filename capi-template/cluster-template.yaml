@@ -109,8 +109,8 @@ spec:
               config:
                 harbor.podzone.cloud:
                   auth:
-                    username: admin
-                    password: Harbor12345
+                    username: installer
+                    password: installeR1
               mirrors:
                 docker.io:
                   endpoints:
@@ -199,8 +199,8 @@ spec:
               config:
                 harbor.podzone.cloud:
                   auth:
-                    username: admin
-                    password: Harbor15194
+                    username: installer
+                    password: installeR1
               mirrors:
                 docker.io:
                   endpoints:
