@@ -244,7 +244,7 @@ metadata:
   namespace: cluster09
 spec:
   clusterName: cluster09
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels: null
   template:
