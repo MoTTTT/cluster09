@@ -244,7 +244,7 @@ metadata:
   namespace: observability
 spec:
   clusterName: observability
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels: null
   template:
