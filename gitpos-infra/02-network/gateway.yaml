@@ -49,7 +49,6 @@ spec:
       namespaces:
         from: All
 
-
   - hostname: hubble.podzone.cloud
     name: hubble-podzone-cloud-http
     port: 80
@@ -65,6 +64,39 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
+
+  - hostname: prometheus.podzone.cloud
+    name: prometheus-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: prometheus.podzone.cloud
+    name: prometheus-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: prometheus-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: dashboards.podzone.cloud
+    name: dashboards-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: dashboards.podzone.cloud
+    name: dashboards-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: dashboards-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
 ---
 apiVersion: cert-manager.io/v1 
 kind: ClusterIssuer

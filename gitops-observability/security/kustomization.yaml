@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - cluster-ingress.yaml
+  - keycloak.yaml
+configMapGenerator:
+  - name: oath2-proxy-values
+    namespace: flux-system
+    files:
+      - values.yaml=oath2-proxy-values.yaml
+configurations:
+  - kustomizeconfig.yaml

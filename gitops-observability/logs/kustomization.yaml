@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - opensearch.yaml
+configMapGenerator:
+  - name: os-master-values
+    namespace: flux-system
+    files:
+      - values.yaml=os-master-values.yaml
+  - name: os-data-values
+    namespace: flux-system
+    files:
+      - values.yaml=os-data-values.yaml
+  - name: os-client-values
+    namespace: flux-system
+    files:
+      - values.yaml=os-client-values.yaml
+  - name: opensearch-dashboard-values
+    namespace: flux-system
+    files:
+      - values.yaml=opensearch-dashboard-values.yaml
+  - name: fluentbit-values
+    namespace: flux-system
+    files:
+      - values.yaml=fluentbit-values.yaml
+configurations:
+  - kustomizeconfig.yaml
