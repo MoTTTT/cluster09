@@ -17,21 +17,21 @@ spec:
   gatewayClassName: cilium
   listeners:
 
-  - hostname: cluster09.podzone.cloud
-    name: cluster09-podzone-cloud-http
-    port: 80
-    protocol: HTTP
-  - hostname: cluster09.podzone.cloud
-    name: cluster09-podzone-cloud-https
-    port: 443
-    protocol: HTTPS
-    tls:
-      mode: Terminate
-      certificateRefs:
-        - name: cluster09-secret
-    allowedRoutes:
-      namespaces:
-        from: All
+#  - hostname: cluster09.podzone.cloud
+#    name: cluster09-podzone-cloud-http
+#    port: 80
+#    protocol: HTTP
+#  - hostname: cluster09.podzone.cloud
+#    name: cluster09-podzone-cloud-https
+#    port: 443
+#    protocol: HTTPS
+#    tls:
+#      mode: Terminate
+#      certificateRefs:
+#        - name: cluster09-secret
+#    allowedRoutes:
+#      namespaces:
+#        from: All
 
   - hostname: linstor.podzone.cloud
     name: linstor-podzone-cloud-http
