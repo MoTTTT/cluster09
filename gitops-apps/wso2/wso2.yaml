@@ -59,3 +59,5 @@ spec:
 #    - path:
 #        type: PathPrefix
 #        value: /
+
+#wso2.podzone.cloud,gateway.podzone.cloud,websub.podzone.cloud,websocket.podzone.cloud

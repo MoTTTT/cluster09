@@ -20,13 +20,3 @@ wso2:
         websocket:
           enabled: false
           hostname: "websocket.podzone.cloud"
-  
-kubernetes:
-  # Name of Kubernetes service account
-  serviceAccount: "wso2am-single-node-svc-account"
-
-# Override sub chart parameters
-mysql-am:
-  mysql:
-    persistence:
-      storageClass: *storage_class
