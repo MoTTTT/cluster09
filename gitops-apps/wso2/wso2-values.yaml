@@ -2,6 +2,11 @@
 wso2:
 
   deployment:
+    dependencies:
+      cluster_mysql: false
+      nfsServerProvisioner: false
+    persistentRuntimeArtifacts:
+      storageClass: piraeus-datastore
     am:
       imageTag: "4.5.0"
       # Configure Ingresses
@@ -22,7 +27,7 @@ wso2:
           hostname: "websocket.podzone.cloud"
 
 # Override sub chart parameters
-mysql-am:
-  mysql:
-    persistence:
-      storageClass: piraeus-datastore
+#mysql-am:
+#  mysql:
+#    persistence:
+#      storageClass: piraeus-datastore
