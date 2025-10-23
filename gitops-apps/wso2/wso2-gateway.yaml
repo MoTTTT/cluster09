@@ -1,0 +1,101 @@
+---
+# wso2.podzone.cloud,gateway.podzone.cloud,websub.podzone.cloud,websocket.podzone.cloud
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: wso2-gateway
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+spec:
+  gatewayClassName: cilium
+  listeners:
+  - hostname: wso2.podzone.cloud
+    name: wso2-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: wso2.podzone.cloud
+    name: wso2-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: wso2-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: gateway.podzone.cloud
+    name: gateway-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: gateway.podzone.cloud
+    name: gateway-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: gateway-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: websub.podzone.cloud
+    name: websub-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: websub.podzone.cloud
+    name: websub-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: websub-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: websocket.podzone.cloud
+    name: websocket-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: websocket.podzone.cloud
+    name: websocket-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: websocket-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+#wso2.podzone.cloud,gateway.podzone.cloud,websub.podzone.cloud,websocket.podzone.cloud
+
+#
+#---
+#apiVersion: gateway.networking.k8s.io/v1
+#kind: HTTPRoute
+#metadata:
+#  name: wso2
+#  namespace: wso2
+#spec:
+#  hostnames:
+#  - wso2.podzone.cloud
+#  parentRefs:
+#  - name: wso2-gateway
+#    namespace: kube-system
+#    kind: Gateway
+#  rules:
+#  - backendRefs:
+#    - name: hubble-ui
+#      port: 80
+#    matches:
+#    - path:
+#        type: PathPrefix
+#        value: /
+#
