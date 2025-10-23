@@ -1,0 +1,32 @@
+
+wso2:
+
+  deployment:
+    am:
+      imageTag: "4.5.0"
+      # Configure Ingresses
+      ingress:
+        management:
+          enabled: false
+          # Hostname for API Manager Carbon Management Console, Publisher, DevPortal and Admin Portal
+          hostname: "wso2.podzone.cloud"
+        gateway:
+          enabled: false
+          # Hostname for Gateway profile
+          hostname: "gateway.podzone.cloud"
+        websub:
+          enabled: false
+          hostname: "websub.podzone.cloud"
+        websocket:
+          enabled: false
+          hostname: "websocket.podzone.cloud"
+  
+kubernetes:
+  # Name of Kubernetes service account
+  serviceAccount: "wso2am-single-node-svc-account"
+
+# Override sub chart parameters
+mysql-am:
+  mysql:
+    persistence:
+      storageClass: *storage_class
