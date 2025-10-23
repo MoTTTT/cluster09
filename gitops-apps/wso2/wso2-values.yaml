@@ -20,3 +20,9 @@ wso2:
         websocket:
           enabled: false
           hostname: "websocket.podzone.cloud"
+
+# Override sub chart parameters
+mysql-am:
+  mysql:
+    persistence:
+      storageClass: piraeus-datastore
