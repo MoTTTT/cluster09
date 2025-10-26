@@ -17,50 +17,34 @@ spec:
   gatewayClassName: cilium
   listeners:
 
-#  - hostname: cluster09.podzone.cloud
-#    name: cluster09-podzone-cloud-http
-#    port: 80
-#    protocol: HTTP
-#  - hostname: cluster09.podzone.cloud
-#    name: cluster09-podzone-cloud-https
-#    port: 443
-#    protocol: HTTPS
-#    tls:
-#      mode: Terminate
-#      certificateRefs:
-#        - name: cluster09-secret
-#    allowedRoutes:
-#      namespaces:
-#        from: All
-
-  - hostname: linstor.podzone.cloud
-    name: linstor-podzone-cloud-http
+  - hostname: observability-disk.podzone.cloud
+    name: observability-disk-podzone-cloud-http
     port: 80
     protocol: HTTP
-  - hostname: linstor.podzone.cloud
-    name: linstor-podzone-cloud-https
+  - hostname: observability-disk.podzone.cloud
+    name: observability-disk-podzone-cloud-https
     port: 443
     protocol: HTTPS
     tls:
       mode: Terminate
       certificateRefs:
-        - name: linstor-secret
+        - name: observability-disk-secret
     allowedRoutes:
       namespaces:
         from: All
 
-  - hostname: hubble.podzone.cloud
-    name: hubble-podzone-cloud-http
+  - hostname: observability-network.podzone.cloud
+    name: observability-network-podzone-cloud-http
     port: 80
     protocol: HTTP
-  - hostname: hubble.podzone.cloud
-    name: hubble-podzone-cloud-https
+  - hostname: observability-network.podzone.cloud
+    name: observability-network-podzone-cloud-https
     port: 443
     protocol: HTTPS
     tls:
       mode: Terminate
       certificateRefs:
-        - name: hubble-secret
+        - name: observability-network-secret
     allowedRoutes:
       namespaces:
         from: All
@@ -124,7 +108,7 @@ metadata:
   namespace: kube-system
 spec:
   hostnames:
-  - hubble.podzone.cloud
+  - observability-network.podzone.cloud
   parentRefs:
   - name: gateway
     namespace: kube-system
@@ -133,6 +117,28 @@ spec:
   - backendRefs:
     - name: hubble-ui
       port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: linstor
+  namespace: piraeus-datastore
+spec:
+  hostnames:
+  - observability-disk.podzone.cloud
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: linstor-controller
+      port: 3370
     matches:
     - path:
         type: PathPrefix

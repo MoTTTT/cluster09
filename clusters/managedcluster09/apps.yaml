@@ -51,3 +51,6 @@ spec:
 #    name: flux-system
 #  path: ./gitops-apps/wso2
 #  prune: true
+
+
+wso2-network,wso2-disk,cluster09-network,cluster09-disk,management-disk,management-network

@@ -1,0 +1,91 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: GatewayClass
+metadata:
+  name: cilium
+spec:
+  controllerName: io.cilium/gateway-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+spec:
+  gatewayClassName: cilium
+  listeners:
+
+  - hostname: wso2-linstor.podzone.cloud
+    name: wso2-linstor-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: wso2-linstor.podzone.cloud
+    name: wso2-linstor-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: wso2-linstor-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: wso2-hubble.podzone.cloud
+    name: wso2-hubble-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: wso2-hubble.podzone.cloud
+    name: wso2-hubble-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: wso2-hubble-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+---
+apiVersion: cert-manager.io/v1 
+kind: ClusterIssuer
+metadata:
+  name: lets-encrypt
+spec:
+  acme:
+    email: martinjcolley@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-key
+    solvers:
+    - http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - name: gateway
+                namespace: kube-system
+                kind: Gateway
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: wso2-hubble
+  namespace: kube-system
+spec:
+  hostnames:
+  - wso2-hubble.podzone.cloud
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: hubble-ui
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
