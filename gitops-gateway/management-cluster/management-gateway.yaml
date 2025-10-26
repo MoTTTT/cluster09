@@ -28,40 +28,40 @@ spec:
       namespaces:
         from: All
 
-  - hostname: management-hubble.podzone.cloud
-    name: management-hubble-podzone-cloud-http
+  - hostname: management-network.podzone.cloud
+    name: management-network-podzone-cloud-http
     port: 80
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
-  - hostname: management-hubble.podzone.cloud
-    name: management-hubble-podzone-cloud
+  - hostname: management-network.podzone.cloud
+    name: management-network-podzone-cloud
     port: 443
     protocol: HTTPS
     tls:
       mode: Terminate
       certificateRefs:
-        - name: management-hubble-secret
+        - name: management-network-secret
     allowedRoutes:
       namespaces:
         from: All
 
-  - hostname: linstor.podzone.cloud
-    name: management-linstor-podzone-cloud-http
+  - hostname: management-disk.podzone.cloud
+    name: management-disk-podzone-cloud-http
     port: 80
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
-  - hostname: management-linstor.podzone.cloud
-    name: management-linstor-podzone-cloud
+  - hostname: management-disk.podzone.cloud
+    name: management-disk-podzone-cloud
     port: 443
     protocol: HTTPS
     tls:
       mode: Terminate
       certificateRefs:
-        - name: management-linstor-secret
+        - name: management-disk-secret
     allowedRoutes:
       namespaces:
         from: All
@@ -100,7 +100,7 @@ metadata:
   namespace: kube-system
 spec:
   hostnames:
-  - management-hubble.podzone.cloud
+  - management-network.podzone.cloud
   parentRefs:
   - name: gateway
   rules:
