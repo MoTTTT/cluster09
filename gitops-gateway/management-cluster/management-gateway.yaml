@@ -9,21 +9,21 @@ metadata:
 spec:
   gatewayClassName: cilium
   listeners:
-  - hostname: management-harbor.podzone.cloud
-    name: management-harbor-podzone-cloud-http
+  - hostname: harbor.podzone.cloud
+    name: harbor-podzone-cloud-http
     port: 80
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
-  - hostname: management-harbor.podzone.cloud
-    name: management-harbor-podzone-cloud
+  - hostname: harbor.podzone.cloud
+    name: harbor-podzone-cloud
     port: 443
     protocol: HTTPS
     tls:
       mode: Terminate
       certificateRefs:
-        - name: management-harbor-secret
+        - name: harbor-secret
     allowedRoutes:
       namespaces:
         from: All
