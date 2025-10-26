@@ -79,6 +79,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-management/harbor
+  path: ./gitops-apps/harbor
   prune: true
 
