@@ -11,7 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitpos-infra/01-network
+  path: ./gitops/gitops-infra/01-network
   prune: true
   patches:
     - patch: |
@@ -43,7 +43,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-gateway/wso2
+  path: ./gitops/gitops-gateway/wso2
   prune: true
 
 ---
@@ -61,7 +61,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitpos-infra/02-storage
+  path: ./gitops/gitops-infra/02-storage
   prune: true
 
 ---
@@ -79,5 +79,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitpos-infra/03-storage
+  path: ./gitops/gitops-infra/03-storage
   prune: true

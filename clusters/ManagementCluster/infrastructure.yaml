@@ -11,7 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-management/00-prerequisites
+  path: ./gitops/gitops-management/00-prerequisites
   prune: true
   patches:
     - patch: |
@@ -43,7 +43,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-management/01-infrastructure
+  path: ./gitops/gitops-management/01-infrastructure
   prune: true
 
 ---
@@ -61,5 +61,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-gateway/management-cluster
+  path: ./gitops/gitops-gateway/management-cluster
   prune: true

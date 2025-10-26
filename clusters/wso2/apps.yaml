@@ -14,7 +14,7 @@
 #  sourceRef:
 #    kind: GitRepository
 #    name: flux-system
-#  path: ./gitops-apps/wso2
+#  path: .gitops/gitops-apps/wso2
 #  prune: true
 
 

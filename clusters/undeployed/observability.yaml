@@ -13,7 +13,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-observability/logs
+  path: ./gitops/gitops-observability/logs
   prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -30,5 +30,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-observability/metrics
+  path: ./gitops/gitops-observability/metrics
   prune: true

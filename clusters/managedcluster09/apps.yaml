@@ -13,7 +13,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-apps/cluster09-docs
+  path: ./gitops/gitops-apps/cluster09-docs
   prune: true
 ---
 
@@ -31,6 +31,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-apps/podzone-docs
+  path: ./gitops/gitops-apps/podzone-docs
   prune: true
 ---
