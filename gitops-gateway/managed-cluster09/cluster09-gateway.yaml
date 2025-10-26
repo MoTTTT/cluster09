@@ -1,0 +1,129 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: GatewayClass
+metadata:
+  name: cilium
+spec:
+  controllerName: io.cilium/gateway-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+spec:
+  gatewayClassName: cilium
+  listeners:
+
+  - hostname: docs.podzone.cloud
+    name: docs-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: docs.podzone.cloud
+    name: docs-podzone-cloud
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: docs-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: cluster09-docs.podzone.cloud
+    name: cluster09-docs-podzone-cloud
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: cluster09-docs-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+  - hostname: cluster09-docs.podzone.cloud
+    name: cluster09-docs-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: cluster09-disk.podzone.cloud
+    name: cluster09-disk-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: cluster09-disk.podzone.cloud
+    name: cluster09-disk-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: cluster09-disk-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: cluster09-network.podzone.cloud
+    name: cluster09-network-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: cluster09-network.podzone.cloud
+    name: cluster09-network-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: cluster09-network-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+---
+apiVersion: cert-manager.io/v1 
+kind: ClusterIssuer
+metadata:
+  name: lets-encrypt
+spec:
+  acme:
+    email: martinjcolley@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-key
+    solvers:
+    - http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - name: gateway
+                namespace: kube-system
+                kind: Gateway
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: cluster09-network
+  namespace: kube-system
+spec:
+  hostnames:
+  - cluster09-network.podzone.cloud
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: hubble-ui
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

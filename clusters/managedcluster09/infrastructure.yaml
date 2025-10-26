@@ -38,11 +38,29 @@ spec:
     - name: 01-network
   interval: 1h
   retryInterval: 1m
+  timeout: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops-gateway/managed-cluster09
+  prune: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 02-storage
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: 01-network
+  interval: 1h
+  retryInterval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitpos-infra/02-network
+  path: ./gitpos-infra/02-storage
   prune: true
 
 ---

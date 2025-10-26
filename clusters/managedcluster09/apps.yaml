@@ -2,16 +2,52 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: ws02
+  name: cluster09-docs
   namespace: flux-system
 spec:
   dependsOn:
-    - name: 03-storage
+    - name: 01-infrastructure
   interval: 1h
   retryInterval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops-apps/wso2
+  path: ./gitops-apps/cluster09-docs
   prune: true
+---
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: podzone-docs
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: 01-infrastructure
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops-apps/podzone-docs
+  prune: true
+---
+#
+#apiVersion: kustomize.toolkit.fluxcd.io/v1
+#kind: Kustomization
+#metadata:
+#  name: ws02
+#  namespace: flux-system
+#spec:
+#  dependsOn:
+#    - name: 03-storage
+#  interval: 1h
+#  retryInterval: 1m
+#  timeout: 5m
+#  sourceRef:
+#    kind: GitRepository
+#    name: flux-system
+#  path: ./gitops-apps/wso2
+#  prune: true
