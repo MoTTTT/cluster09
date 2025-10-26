@@ -6,14 +6,14 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: 03-storage
+    - name: 04-storage
   interval: 1h
   retryInterval: 1m
   timeout: 1h
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops/gitops-observability/logs
+  path: ./gitops/gitops-apps/logs
   prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -23,12 +23,12 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: 03-storage
+    - name: 04-storage
   interval: 1h
   retryInterval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops/gitops-observability/metrics
+  path: ./gitops/gitops-apps/metrics
   prune: true
