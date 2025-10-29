@@ -63,7 +63,7 @@ spec:
           sizeGb: 140
       format: qcow2
       full: true
-      memoryMiB: 8048
+      memoryMiB: 16384
       metadataSettings:
         providerIDInjection: true
       network:
@@ -172,7 +172,7 @@ spec:
     kind: ProxmoxMachineTemplate
     name: observability-controlplane
     namespace: observability
-  replicas: 3
+  replicas: 1
   version: v1.32.0
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
