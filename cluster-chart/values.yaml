@@ -1,98 +1,40 @@
-# Default values for cluster-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Default values for cluster-chart: Cluster API managed cluster manifests.
 
-replicaCount: 1
+cluster:
+  name: "cluster09"
+  kubernetes-version: "v1.32.0"
 
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+network:
+  ip-ranges: "[192.168.4.101-192.168.4.107]"
+  ip-prefix: "24"
+  gateway: "192.168.4.1"
+  bastion-host: "freyr"
+  bastion-host-endpoint-ip: "192.168.1.80"
+  dns-servers: "[192.168.1.201]"
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+controlplane:
+  endpoint-ip: "192.168.4.100"
+  machine-count: 1
+  boot-volume-size: 40
+  num-cores: 4
+  num-sockets: 4
+  memory-mib: 16384
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+workers:
+  machine-count: 1
+  boot-volume-size: 140
+  num-cores: 4
+  num-sockets: 4
+  memory-mib: 16384
 
-podAnnotations: {}
-podLabels: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  port: 80
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
-
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+proxmox:
+  url: "https://proxmox:8006"
+  token: "Token name"
+  allowed-nodes: "[venus]"
+  secret: "Token value"
+  template:
+    sourcenode: "venus"
+    template-vmid: "100"
+  vm:
+    boot-volume-device: "virtio0"
+    bridge: "vmbr0"
