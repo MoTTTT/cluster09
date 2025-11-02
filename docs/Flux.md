@@ -20,6 +20,13 @@ When the bootstrap process concludes, the GIT repo will contain the flux-system 
 flux bootstrap github --context=microk8s --owner=MoTTTT --repository=podzonedev-gitops --branch=main --personal --path=clusters/megalith --token-auth=true
 ```
 
+## Flux operator helm chart installation
+
+
+- <https://fluxcd.control-plane.io/operator/install/>
+- <https://fluxcd.control-plane.io/operator/flux-sync/>
+
+
 ## Troubleshooting
 
 - <https://fluxcd.io/flux/cheatsheets/troubleshooting/>
