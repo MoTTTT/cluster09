@@ -1,0 +1,23 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
+metadata:
+  name: flux
+  namespace: flux-system
+spec:
+  distribution:
+    version: "2.7.x"
+    registry: "ghcr.io/fluxcd"
+  sync:
+    kind: GitRepository
+    url: "https://github.com/MoTTTT/cluster09.git"
+    ref: "refs/heads/main"
+    path: "clusters/observability"
+    pullSecret: "flux-system"
+
+#flux create secret git flux-system --url=https://github.com/MoTTTT/cluster09.git  --username=git \
+#  --password=$GITLAB_TOKEN
+
+#flux create secret git flux-system \
+#  --url=https://gitlab.com/my-org/my-fleet.git \
+#  --username=git \
+#  --password=$GITLAB_TOKEN
