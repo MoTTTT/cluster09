@@ -25,7 +25,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podzone-charts
-      version: 0.1.1
+      version: 0.1.2
   valuesFrom:
     - kind: ConfigMap
       name:  observability-values
