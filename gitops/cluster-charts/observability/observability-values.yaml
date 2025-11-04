@@ -7,7 +7,7 @@ cluster:
 
 network:
   ip_ranges: [192.168.4.101-192.168.4.107]
-  ip_prefix: "24"
+  ip_prefix: 24
   gateway: "192.168.4.1"
   bastion_host: "freyr"
   bastion_host_endpoint_ip: "192.168.1.80"
