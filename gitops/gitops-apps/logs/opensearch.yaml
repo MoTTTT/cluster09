@@ -35,7 +35,7 @@ metadata:
 spec:
   targetNamespace: opensearch
   interval: 30m
-  timeout: 30m
+  timeout: 60m
   chart:
     spec:
       chart: opensearch
@@ -58,7 +58,7 @@ metadata:
 spec:
   targetNamespace: opensearch
   interval: 30m
-  timeout: 30m
+  timeout: 60m
   chart:
     spec:
       chart: opensearch
@@ -81,7 +81,7 @@ metadata:
 spec:
   targetNamespace: opensearch
   interval: 30m
-  timeout: 30m
+  timeout: 60m
   chart:
     spec:
       chart: opensearch
@@ -104,7 +104,7 @@ metadata:
 spec:
   targetNamespace: opensearch
   interval: 30m
-  timeout: 30m
+  timeout: 60m
   chart:
     spec:
       chart: opensearch-dashboards
