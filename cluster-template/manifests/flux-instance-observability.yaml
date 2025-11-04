@@ -1,3 +1,6 @@
+# This recource depends on a secret in the target cluster, created for example as follows:
+# flux create secret git flux-system --url=https://github.com/MoTTTT/cluster09.git  --username=martinjcolley@gmail.com  --password=$GITLAB_TOKE
+
 apiVersion: fluxcd.controlplane.io/v1
 kind: FluxInstance
 metadata:
@@ -13,11 +16,3 @@ spec:
     ref: "refs/heads/main"
     path: "clusters/observability"
     pullSecret: "flux-system"
-
-#flux create secret git flux-system --url=https://github.com/MoTTTT/cluster09.git  --username=git \
-#  --password=$GITLAB_TOKEN
-
-#flux create secret git flux-system \
-#  --url=https://gitlab.com/my-org/my-fleet.git \
-#  --username=git \
-#  --password=$GITLAB_TOKEN
