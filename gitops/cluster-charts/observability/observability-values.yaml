@@ -22,7 +22,7 @@ controlplane:
   memory_mib: 16384
 
 worker:
-  machine_count: 1
+  machine_count: 3
   boot_volume_size: 140
   num_cores: 4
   num_sockets: 4
