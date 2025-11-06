@@ -18,6 +18,7 @@ metadata:
   name: cluster09
   namespace: flux-system
 spec:
+  interval: 10m0s
   targetNamespace: cluster09
   chart:
     spec:
