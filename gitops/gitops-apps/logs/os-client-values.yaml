@@ -71,7 +71,7 @@ persistence:
   storageClass: piraeus-datastore
   accessModes:
     - ReadWriteOnce
-  size: 8Gi
+  size: 80Gi
   annotations: {}
 extraVolumes: []
 extraVolumeMounts: []

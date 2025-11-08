@@ -11,6 +11,7 @@ metadata:
   namespace: affinity-controller
 spec:
   interval: 10m0s
+  timeout: 60m
   url: https://piraeus.io/helm-charts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
@@ -27,3 +28,4 @@ spec:
         kind: HelmRepository
         name: piraeus-charts
   interval: 10m0s
+  timeout: 60m
