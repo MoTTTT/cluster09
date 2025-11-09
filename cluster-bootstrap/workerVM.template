@@ -1,0 +1,44 @@
+resource "proxmox_virtual_environment_vm" "CLUSTER-worker-NODEID" {
+  depends_on = [ proxmox_virtual_environment_vm.CLUSTER-control-1 ]
+  name        = "CLUSTER-worker-NODEID"
+  description = "CLUSTER Worker Node NODEID"
+  tags        = ["terraform","talos","worker","CLUSTER"]
+  node_name   = "PROXMOXNODE"
+  on_boot     = true
+  cpu {
+    cores = 4
+    type = "x86-64-v2-AES"
+  }
+  memory {
+    dedicated = 8192
+  }
+  agent {
+    enabled = true
+  }
+  network_device {
+    bridge = "BRIDGE"
+  }
+  disk {
+    datastore_id = "POOL"
+    file_id      = proxmox_virtual_environment_download_file.talos_nocloud_image.id
+    file_format  = "raw"
+    interface    = "virtio0"
+    size         = 60
+  }
+  operating_system {
+    type = "l26"
+  }
+  initialization {
+    datastore_id = "POOL"
+    ip_config {
+      ipv4 {
+        address = "NODEIP/24"
+        gateway = "GATEWAY"
+      }
+      ipv6 {
+        address = "dhcp"
+      }
+    }
+  }
+}
+
