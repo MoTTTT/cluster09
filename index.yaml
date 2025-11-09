@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  cluster-chart:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-11-09T00:14:44.506515Z"
+    description: A Helm chart to generate Cluster API managed Cluster manifests.
+    digest: 51383a83d697585634b3a900847e7087d4ebb1bcb50688080af07f3c131989c3
+    name: cluster-chart
+    type: application
+    urls:
+    - cluster-chart-0.1.6.tgz
+    version: 0.1.6
+generated: "2025-11-09T00:14:44.505635Z"

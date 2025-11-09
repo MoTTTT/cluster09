@@ -1,0 +1,23 @@
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: ProxmoxCluster
+metadata:
+  name: proxmox-cluster
+  namespace: "{{ .Values.cluster.name }}"
+  labels:
+    {{- include "cluster-chart.labels" . | nindent 4 }}
+spec:
+  schedulerHints:
+    memoryAdjustment: 0
+  allowedNodes: {{ .Values.proxmox.allowed_nodes }}
+  controlPlaneEndpoint:
+    host: {{ .Values.controlplane.endpoint_ip }}
+    port: 6443
+  dnsServers: {{ .Values.network.dns_servers }}
+  ipv4Config:
+    addresses: {{ .Values.network.ip_ranges }}
+    gateway: {{ .Values.network.gateway }}
+    prefix: {{ .Values.network.ip_prefix }}
+  credentialsRef:
+    name: capmox-manager-credentials
+    namespace: capmox-system

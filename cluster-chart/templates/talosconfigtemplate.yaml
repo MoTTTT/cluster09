@@ -1,0 +1,32 @@
+---
+apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
+kind: TalosConfigTemplate
+metadata:
+  name: talosconfig-worker
+  namespace: "{{ .Values.cluster.name }}"
+  labels:
+    cluster-name: "{{ .Values.cluster.name }}"
+    {{- include "cluster-chart.labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      generateType: worker
+      talosVersion: v1.10
+      strategicPatches:
+        - |
+          machine:
+            install:
+              disk: /dev/vda
+              image: {{ .Values.cluster.image }}
+            sysctls:
+              vm.max_map_count: 262144
+            kernel:
+              modules:
+                - name: drbd
+                  parameters:
+                    - usermode_helper=disabled
+                - name: drbd_transport_tcp
+            kubelet:
+              extraArgs:
+                rotate-server-certificates: true
+                cloud-provider: external

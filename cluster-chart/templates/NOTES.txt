@@ -1,0 +1,45 @@
+Thank you for installing {{ .Chart.Name }}. Your release is named {{ .Release.Name }}. Cluster API resources have been created in the {{ .Values.cluster.name }} namespace.
+
+To viw progress with the Cluster API provisioning:
+  $ clusterctl describe cluster {{ .Values.cluster.name }} -n {{ .Values.cluster.name }} --show-conditions all --show-templates --show-resourcesets --grouping=false --echo
+
+To extract a talos configuration file for the the target cluster: 
+  $ kubectl get secret --namespace {{ .Values.cluster.name }} {{ .Values.cluster.name }}-talosconfig -o jsonpath='{.data.talosconfig}' | base64 -d > {{ .Values.cluster.name }}-talosconfig
+
+To extract kubectl config file for the the target cluster.
+  $ kubectl get secret --namespace {{ .Values.cluster.name }} {{ .Values.cluster.name }}-kubeconfig -o jsonpath='{.data.value}' | base64 -d > {{ .Values.cluster.name }}-kubeconfig
+This step is optional, but will be required where the access configuration needs to be provided to a cluster owner, or where a bastion server is used.
+If you are going to be accessing the kubernetes API for the target cluster via a bastion server, it will be necessary to adjust the generated endpoint in the {{ .Values.cluster.name }}-kubeconfig file accordingly.
+
+Configure kubectl (i.e. your ~/.kube/config file) to include the context and credentials for the new cluster:
+  $ talosctl kubeconfig --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
+This will set the kubectl context of the target cluster active.
+
+Kubectl or k9s can be used to watch the cluster pods provisioning, and view logs. Depending on your cluster configuration this may take a while.
+
+Once your cluster stabilises, and the pods are all running, you can bootstrap your cluster to a gitops repo. 
+
+Configure a FluxInstance of the form (this could be loaded with extraManifests from you gitops cluster):
+
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
+metadata:
+  name: flux
+  namespace: flux-system
+spec:
+  distribution:
+    version: "2.7.x"
+    registry: "ghcr.io/fluxcd"
+  sync:
+    kind: GitRepository
+    url: "https://github.com/<username>/<Git repository name>.git"
+    ref: "refs/heads/main"
+    path: "clusters/{{ .Values.cluster.name }}"
+    pullSecret: "flux-system"
+---
+
+Add a secret to your cluster with the following (using the kubectl context of of the {{ .Values.cluster.name }} cluster):
+  $ flux create secret git flux-system --url=https://github.com/<username>/<Git repository name>.git  --username=<Git username>  --password=<Git token>
+
+The flux operator will pick up the secret and sync your cluster to your gitops repository.

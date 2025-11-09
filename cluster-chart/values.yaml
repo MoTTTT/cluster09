@@ -1,0 +1,50 @@
+# Default values for cluster-chart: Cluster API managed cluster manifests.
+
+cluster:
+  name: "cluster09"
+  kubernetes_version: v1.32.0
+  image: factory.talos.dev/nocloud-installer/6adc7e7fba27948460e2231e5272e88b85159da3f3db980551976bf9898ff64b:v1.11.1
+
+network:
+  ip_ranges: [192.168.4.191-192.168.4.197]
+  ip_prefix: 24
+  gateway: 192.168.4.1
+  bastion_host: freyr
+  bastion_host_endpoint_ip: "192.168.1.80"
+  dns_servers: [192.168.1.201]
+
+controlplane:
+  endpoint_ip: "192.168.4.190"
+  machine_count: 1
+  boot_volume_size: 40
+  num_cores: 4
+  num_sockets: 4
+  memory_mib: 16384
+  extra_manifests:
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/cilium.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/kubelet-serving-cert-approver.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/metrics-server.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/piraeus-operator.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/gateway-api.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/flux.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/flux-instance-cluster09.yaml
+
+worker:
+  machine_count: 1
+  boot_volume_size: 140
+  num_cores: 4
+  num_sockets: 4
+  memory_mib: 16384
+
+proxmox:
+  allowed_nodes: [venus]
+  template:
+    sourcenode: venus
+    template_vmid: 100
+  vm:
+    boot_volume_device: virtio0
+    bridge: vmbr0
+# Removed, to be added to cluster with 
+#  token: "Token name"
+#  secret: "Token value"
+#  url: https://proxmox:8006
