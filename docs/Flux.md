@@ -22,10 +22,8 @@ flux bootstrap github --context=microk8s --owner=MoTTTT --repository=podzonedev-
 
 ## Flux operator helm chart installation
 
-
 - <https://fluxcd.control-plane.io/operator/install/>
 - <https://fluxcd.control-plane.io/operator/flux-sync/>
-
 
 ## Troubleshooting
 

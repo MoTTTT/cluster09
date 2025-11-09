@@ -53,8 +53,8 @@ clusterctl generate yaml --from cluster-template.yaml > cluster08.yaml
 
 ## References
 
-- <https://cluster-api.sigs.k8s.io/user/quick-start>
-- <https://github.com/k8s-proxmox/cluster-api-provider-proxmox>
+- <https://cluster-api.sigs.k8s.io/introduction>
+- <https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main>
 - <https://github.com/siderolabs/cluster-api-bootstrap-provider-talos>
 - <https://github.com/siderolabs/cluster-api-control-plane-provider-talos>
 - Discussion on flux with Cluster API Operator: <https://github.com/ionos-cloud/cluster-api-provider-proxmox/issues/221>

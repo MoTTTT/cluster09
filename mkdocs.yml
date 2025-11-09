@@ -15,12 +15,17 @@ theme:
     gtag: G-SY1HLECK2G
 
 nav:
-  - 'Introduction':
     - README.md
-    - Talos.md
-  - 'Provisioning':
-    - Network.md
-    - ClusterAPI.md
-    - Storage.md
     - Cilium.md
+    - ClusterAPI.md
+    - ClusterChart.md
+    - ClusterTemplate.md
     - Flux.md
+    - Manifests.md
+    - Network.md
+    - Storage.md
+    - Talos.md
+    - TalosTemplateCreation.md
+    - Planning.md
+    - References.md
+
