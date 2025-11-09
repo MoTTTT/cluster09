@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cluster08
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: cluster-chart
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://motttt.github.io/cluster09/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: cluster08
+  namespace: flux-system
+spec:
+  targetNamespace: cluster08
+  chart:
+    spec:
+      chart: cluster-chart
+      sourceRef:
+        kind: HelmRepository
+        name: cluster-chart
+      version: 0.1.7
+  valuesFrom:
+    - kind: ConfigMap
+      name:  cluster-values
+  interval: 10m0s
+  timeout: 20m
+---
