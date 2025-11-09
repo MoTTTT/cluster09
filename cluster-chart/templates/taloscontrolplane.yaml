@@ -1,0 +1,70 @@
+---
+apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
+kind: TalosControlPlane
+metadata:
+  name: talos-controlplane
+  namespace: "{{ .Values.cluster.name }}"
+  labels:
+    {{- include "cluster-chart.labels" . | nindent 4 }}
+spec:
+  version: {{ .Values.cluster.kubernetes_version }}
+  replicas: {{ .Values.controlplane.machine_count }}
+  infrastructureTemplate:
+    kind: ProxmoxMachineTemplate
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+    name: "{{ .Values.cluster.name }}-controlplane"
+    namespace: "{{ .Values.cluster.name }}"
+  controlPlaneConfig:
+    controlplane:
+      generateType: controlplane
+      talosVersion: v1.10
+      strategicPatches:
+        - |
+          machine:
+            network:
+              interfaces:
+                - deviceSelector:
+                    physical: true
+                  vip:
+                    ip: {{ .Values.controlplane.endpoint_ip }}
+            install:
+              disk: /dev/vda
+              image: {{ .Values.cluster.image }}
+            kernel:
+              modules:
+                - name: drbd
+                  parameters:
+                    - usermode_helper=disabled
+                - name: drbd_transport_tcp
+            kubelet:
+              extraArgs:
+                rotate-server-certificates: true
+                cloud-provider: external
+            features:
+              kubernetesTalosAPIAccess:
+                enabled: true
+                allowedRoles:
+                  - os:reader
+                allowedKubernetesNamespaces:
+                  - kube-system
+            sysctls:
+              vm.max_map_count: 262144
+          cluster:
+            apiServer:
+              certSANs:
+                - {{ .Values.network.bastion_host_endpoint_ip }}
+                - {{ .Values.network.bastion_host }}
+            network:
+              cni:
+                name: none
+            proxy:
+              disabled: true
+            {{- with .Values.controlplane.extra_manifests }}
+            extraManifests:
+            {{- toYaml . | nindent 14 }}
+            {{- end }}
+            externalCloudProvider:
+              enabled: true
+              manifests:
+                - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml
+

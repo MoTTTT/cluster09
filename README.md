@@ -22,7 +22,6 @@ Scripts, templates, manifests and documentation for a the provisioning of a Clus
 - Extract talosctl and kubectl configurations
 - Flux bootstrap Management cluster
 - GitOps: Deploy infrastructure components to Management cluster
-- GitOps: Deploy and configure harvest
 
 ### Workload cluster
 

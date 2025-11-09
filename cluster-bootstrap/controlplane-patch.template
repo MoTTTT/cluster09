@@ -1,0 +1,8 @@
+# Talos patch for controlplane.yaml file
+cluster:
+  extraManifests:
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/cilium.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/kubelet-serving-cert-approver.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/metrics-server.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/piraeus-operator.yaml
+    - https://raw.githubusercontent.com/MoTTTT/cluster09/refs/heads/main/cluster-manifests/gateway-api.yaml
