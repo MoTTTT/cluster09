@@ -6,11 +6,11 @@ metadata:
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: podzone-charts
+  name: cluster09-charts
   namespace: flux-system
 spec:
   interval: 10m0s
-  url: https://motttt.github.io/charts/
+  url: https://motttt.github.io/cluster09/
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
@@ -25,6 +25,6 @@ spec:
       chart: cluster-chart
       sourceRef:
         kind: HelmRepository
-        name: podzone-charts
+        name: cluster09-charts
       version: 0.1.6
 ---
