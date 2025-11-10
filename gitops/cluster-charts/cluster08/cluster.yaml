@@ -25,7 +25,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cluster-chart
-      version: 0.1.7
+      version: 0.1.8
   valuesFrom:
     - kind: ConfigMap
       name:  cluster-values
