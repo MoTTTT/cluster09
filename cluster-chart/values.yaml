@@ -45,7 +45,7 @@ proxmox:
   vm:
     boot_volume_device: virtio0
     bridge: vmbr0
-# Removed, to be added to cluster with 
+# Removed, to be added to cluster with sops
 #  token: "Token name"
 #  secret: "Token value"
 #  url: https://proxmox:8006
