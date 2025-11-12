@@ -49,6 +49,37 @@ spec:
                   - kube-system
             sysctls:
               vm.max_map_count: 262144
+            registries:
+              config:
+                harbor.podzone.cloud:
+                  auth:
+                    username: admin
+                    password: Harbor12345
+              mirrors:
+                docker.io:
+                  endpoints:
+                    - https://harbor.podzone.cloud/v2/proxy-docker.io
+                  overridePath: true
+                ghcr.io:
+                  endpoints:
+                    - http://harbor.podzone.cloud/v2/proxy-ghcr.io
+                  overridePath: true
+                gcr.io:
+                  endpoints:
+                    - http://harbor.podzone.cloud/v2/proxy-gcr.io
+                  overridePath: true
+                registry.k8s.io:
+                  endpoints:
+                    - http://harbor.podzone.cloud/v2/proxy-registry.k8s.io
+                  overridePath: true
+                quay.io:
+                  endpoints:
+                    - http://harbor.podzone.cloud/v2/proxy-quay.io
+                  overridePath: true
+                cr.fluentbit.io:
+                  endpoints:
+                    - http://harbor.podzone.cloud/v2/proxy-cr.fluentbit.io
+                  overridePath: true
           cluster:
             apiServer:
               certSANs:

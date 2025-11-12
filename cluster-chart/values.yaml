@@ -1,9 +1,4 @@
-# Default values for cluster-chart: Cluster API managed cluster manifests.
-# Need to move these back into gitops:
-#    - http://192.168.4.1/kubelet-serving-cert-approver.yaml
-#    - http://192.168.4.1/metrics-server.yaml
-#    - http://192.168.4.1/piraeus-operator.yaml
-#    - http://192.168.4.1/gateway-api.yaml
+# Cluster API managed cluster manifests for Cluster 09: default values
 
 cluster:
   name: "cluster09"
@@ -45,7 +40,7 @@ proxmox:
   vm:
     boot_volume_device: virtio0
     bridge: vmbr0
-# Removed, to be added to cluster with 
+# Removed, to be added to cluster with sops
 #  token: "Token name"
 #  secret: "Token value"
 #  url: https://proxmox:8006
