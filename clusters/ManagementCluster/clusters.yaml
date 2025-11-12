@@ -15,23 +15,21 @@ spec:
   path: ./gitops/cluster-charts/observability
   prune: true
 
-
-
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster08-cluster
-  namespace: flux-system
-spec:
-  interval: 10m
-  retryInterval: 1m
-  timeout: 10m
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  path: ./gitops/cluster-charts/cluster08
-  prune: true
+#---
+#apiVersion: kustomize.toolkit.fluxcd.io/v1
+#kind: Kustomization
+#metadata:
+#  name: cluster08-cluster
+#  namespace: flux-system
+#spec:
+#  interval: 10m
+#  retryInterval: 1m
+#  timeout: 10m
+#  sourceRef:
+#    kind: GitRepository
+#    name: flux-system
+#  path: ./gitops/cluster-charts/cluster08
+#  prune: true
 
 #---
 #apiVersion: kustomize.toolkit.fluxcd.io/v1
