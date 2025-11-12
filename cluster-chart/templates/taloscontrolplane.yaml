@@ -3,7 +3,7 @@ apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
 kind: TalosControlPlane
 metadata:
   name: talos-controlplane
-  namespace: "{{ .Values.cluster.name }}"
+  namespace: {{ .Values.cluster.name }}
   labels:
     {{- include "cluster-chart.labels" . | nindent 4 }}
 spec:
@@ -12,8 +12,8 @@ spec:
   infrastructureTemplate:
     kind: ProxmoxMachineTemplate
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
-    name: "{{ .Values.cluster.name }}-controlplane"
-    namespace: "{{ .Values.cluster.name }}"
+    name: {{ .Values.cluster.name }}-controlplane
+    namespace: {{ .Values.cluster.name }}
   controlPlaneConfig:
     controlplane:
       generateType: controlplane

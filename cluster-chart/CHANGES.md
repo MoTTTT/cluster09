@@ -6,7 +6,13 @@
 - [ ] SOPS for secrets. Potential candidates: Proxmox credentials; Flux GIT token.
 - [X] Roll cluster-chart into cluster09
 
+## Issues
+
+- [ ] Name and Namespace not rendering correctly
+
 ## Versions
+
+- [ ] Debug name and namespace
 
 ### V0.1.9
 
