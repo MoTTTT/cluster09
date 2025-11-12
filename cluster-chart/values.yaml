@@ -1,9 +1,4 @@
-# Default values for cluster-chart: Cluster API managed cluster manifests.
-# Need to move these back into gitops:
-#    - http://192.168.4.1/kubelet-serving-cert-approver.yaml
-#    - http://192.168.4.1/metrics-server.yaml
-#    - http://192.168.4.1/piraeus-operator.yaml
-#    - http://192.168.4.1/gateway-api.yaml
+# Cluster API managed cluster manifests for Cluster 09: default values
 
 cluster:
   name: "cluster09"
