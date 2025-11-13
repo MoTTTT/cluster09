@@ -7,5 +7,9 @@ network:
 controlplane:
   endpoint_ip: 192.168.4.180
   machine_count: 1
+  extra_manifests:
+    - http://192.168.4.1/cilium.yaml
+    - http://192.168.4.1/flux.yaml
+    - http://192.168.4.1/flux-instance-cluster08.yaml
 worker:
   machine_count: 1

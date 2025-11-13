@@ -7,12 +7,12 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Podzone Private Consumer cloud" name="description"/>
 <meta content="Martin Colley" name="author"/>
-<link href="https://cluster09.podzone.cloud/cluster09/ClusterAPI/" rel="canonical"/>
-<link href="../Cilium/" rel="prev"/>
-<link href="../ClusterChart/" rel="next"/>
+<link href="https://cluster09.podzone.cloud/cluster09/TalosTemplateCreation/" rel="canonical"/>
+<link href="../Talos/" rel="prev"/>
+<link href="../Planning/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.20" name="generator"/>
-<title>Cluster API - cluster09</title>
+<title>Talos Template creation - cluster09</title>
 <link href="../assets/stylesheets/main.e53b48f4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -24,7 +24,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#cluster-api">
+<a class="md-skip" href="#talos-template-creation">
           Skip to content
         </a>
 </div>
@@ -48,7 +48,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Cluster API
+              Talos Template creation
             
           </span>
 </div>
@@ -117,57 +117,13 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    Cluster API
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ClusterAPI/">
 <span class="md-ellipsis">
     Cluster API
     
   </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clusterctl">
-<span class="md-ellipsis">
-      clusterctl
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cluster-api-operator">
-<span class="md-ellipsis">
-      Cluster API Operator
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#issues-and-notes">
-<span class="md-ellipsis">
-      Issues and notes
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../ClusterChart/">
@@ -225,13 +181,43 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../TalosTemplateCreation/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Talos Template creation
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     Talos Template creation
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pre-requisites">
+<span class="md-ellipsis">
+      Pre-requisites
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usage">
+<span class="md-ellipsis">
+      Usage
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../Planning/">
@@ -264,30 +250,16 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#clusterctl">
+<a class="md-nav__link" href="#pre-requisites">
 <span class="md-ellipsis">
-      clusterctl
+      Pre-requisites
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#cluster-api-operator">
+<a class="md-nav__link" href="#usage">
 <span class="md-ellipsis">
-      Cluster API Operator
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#issues-and-notes">
-<span class="md-ellipsis">
-      Issues and notes
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
+      Usage
     </span>
 </a>
 </li>
@@ -298,63 +270,42 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="cluster-api">Cluster API</h1>
-<h2 id="clusterctl">clusterctl</h2>
+<h1 id="talos-template-creation">Talos Template creation</h1>
+<p>This is a method of creating a VM template for use with Clauter API.</p>
+<p>There are arguably better methods, like scripting against the Proxmox API.</p>
+<p>This method is used because it is based on a pre Cluster API provisioning method that was used.</p>
+<h2 id="pre-requisites">Pre-requisites</h2>
 <ul>
-<li>Tested successfully with 2 node talos cluster (Aug 2025)</li>
-<li>Install cert-manager: <code>helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true</code></li>
-<li>Set up clusterctl config file: <code>~/.cluster-api/clusterctl.yaml</code> (On initial install only CAPI mandatory fields are set)</li>
-<li>Install components: <code>clusterctl init --ipam in-cluster --core cluster-api -c talos -b talos -i proxmox</code></li>
-<li>Version installed, based on init response:</li>
+<li>terraform installation</li>
+<li>Determine the Talos image required, and load it into the resource server.</li>
+<li>Tested with schematic ID: 6adc7e7fba27948460e2231e5272e88b85159da3f3db980551976bf9898ff64b</li>
+<li>Talos image config item: Nocloud</li>
+<li>Talos image config item: amd64</li>
+<li>Talos extensions: siderolabs/drbd, siderolabs/qemu-guest-agent</li>
 </ul>
-<pre><code class="language-bash">Installing provider="cluster-api" version="v1.10.5" targetNamespace="capi-system"
-Installing provider="bootstrap-talos" version="v0.6.9" targetNamespace="cabpt-system"
-Installing provider="control-plane-talos" version="v0.5.10" targetNamespace="cacppt-system"
-Installing provider="infrastructure-proxmox" version="v0.7.3" targetNamespace="capmox-system"
-Installing provider="ipam-in-cluster" version="v1.0.3" targetNamespace="capi-ipam-in-cluster-system"
+<p>Resulting customization specification:</p>
+<pre><code class="language-yaml">customization:
+    systemExtensions:
+        officialExtensions:
+            - siderolabs/drbd
+            - siderolabs/qemu-guest-agent 
 </code></pre>
-<p>clusterctl generate yaml --list-variables --from cluster-template.yaml &gt; cluster08-variables.yaml
-clusterctl generate yaml --from cluster-template.yaml &gt; cluster08.yaml </p>
+<p>Resulting image: <a href="https://factory.talos.dev/image/6adc7e7fba27948460e2231e5272e88b85159da3f3db980551976bf9898ff64b/v1.11.1/nocloud-amd64.iso">https://factory.talos.dev/image/6adc7e7fba27948460e2231e5272e88b85159da3f3db980551976bf9898ff64b/v1.11.1/nocloud-amd64.iso</a></p>
+<p>Take note of the installation image for use in the Cluster API cluster template. In this case, it is <factory.talos.dev 6adc7e7fba27948460e2231e5272e88b85159da3f3db980551976bf9898ff64b:v1.11.1="" nocloud-installer="">.</factory.talos.dev></p>
+<h2 id="usage">Usage</h2>
 <ul>
-<li>Spin up a cluster: <code>kubectl apply -f proxmoxcluster.yaml</code></li>
-<li>Describe cluster: <code>clusterctl describe cluster cluster07 -n cluster07 --show-conditions all --show-templates --show-resourcesets --grouping=false --echo</code></li>
-<li>Retrieve talos config: <code>kubectl get secret --namespace cluster07 cluster07-talosconfig -o jsonpath='{.data.talosconfig}' | base64 -d &gt; cluster07-talosconfig</code></li>
-<li>Retrieve kubeconfig: <code>talosctl kubeconfig --nodes 192.168.4.170 --endpoints 192.168.4.170 --talosconfig=./cluster07-talosconfig</code></li>
-<li>To retrieve file: <code>kubectl get secret --namespace cluster07 cluster07-kubeconfig -o jsonpath='{.data.value}' | base64 -d &gt; cluster07-kubeconfig</code></li>
-<li>scale up cluster control plane: Change replicas to 3</li>
-<li>scale up workers: Change replicas to 2</li>
-<li>bootstrap flux: <code>flux bootstrap github --context=admin@cluster07 --owner=MoTTTT --repository=venus --branch=main --personal --path=clusters/managedcluster07 --token-auth=true</code></li>
-</ul>
-<h2 id="cluster-api-operator">Cluster API Operator</h2>
-<ul>
-<li>Install cert-manager: <code>helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true</code></li>
-<li>Install CAPI Operator: <code>helm install capi-operator capi-operator/cluster-api-operator --create-namespace -n capi-operator-system --set infrastructure.proxmox.enabled=true --set controlPlane.talos.enabled=true --set  bootstrap.talos.enabled=true --wait --timeout 90s</code></li>
-<li>Configure proxmox credentials: <code>kubectl apply -f capmox-manager-credentials.yml</code></li>
-<li><code>helm repo add capi-operator https://kubernetes-sigs.github.io/cluster-api-operator</code></li>
-<li><code>helm install capi-operator capi-operator/cluster-api-operator --create-namespace -n capi-operator-system --set infrastructure.proxmox.enabled=true --set configSecret.name=capmox-manager-credentials --set configSecret.namespace=default --set controlPlane.talos.enabled=true --set  bootstrap.talos.enabled=true --wait --timeout 90s</code></li>
-</ul>
-<h2 id="issues-and-notes">Issues and notes</h2>
-<ul>
-<li>Setting IP addresses using cloudinit: <code>You will need to make sure that your VM template doesn't have Cloud-init Driver provided by Proxmox, otherwise, that will overwrite the config of CAPMOX. No need to pre-set up the Cloud-init Drive.Just use an empty CD ROM at ide0, and CAPMOX will do the job.</code></li>
-<li><code>clusterctl generate cluster</code> does not have an option to specify control-plane or bootstrap providers, and assumes cubeadm for both.</li>
-<li>clusterctl init creates a secret called <code>capmox-manager-credentials</code> in the <code>capmox-system</code> namespace.</li>
-<li>cluster operator creates this in the <code>proxmox-infrastructure-system namespace</code> (with empty values).</li>
-<li>Loading a secret manifest sets the values. Loading a cluster manifest resets them to their defaults (to be confirmed...)</li>
-<li>In cluster operator scenario, Proxmox expects ProxmoxCluster to include a spec.credentialsRef.</li>
-<li><code>clusterctl generate cluster</code> does not include spec.credentialsRef in the generated ProxmoxCluster manifest.</li>
-<li>The above discrepancies could relate to version differences.</li>
-<li>Generate cluster manifest: <code>clusterctl generate cluster cluster07 --kubernetes-version v1.31.2 --control-plane-machine-count=1 --infrastructure=proxmox:v0.7.3 &gt; cluster07.yaml</code></li>
-<li>NOTE: This is not useful for talos controlplane an bootstrap unless a custom template is used.</li>
-<li>For cluster management investigate headlamp, <a href="https://github.com/Jont828/cluster-api-visualizer/tree/main">https://github.com/Jont828/cluster-api-visualizer/tree/main</a></li>
-</ul>
-<h2 id="references">References</h2>
-<ul>
-<li><a href="https://cluster-api.sigs.k8s.io/introduction">https://cluster-api.sigs.k8s.io/introduction</a></li>
-<li><a href="https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main">https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main</a></li>
-<li><a href="https://github.com/siderolabs/cluster-api-bootstrap-provider-talos">https://github.com/siderolabs/cluster-api-bootstrap-provider-talos</a></li>
-<li><a href="https://github.com/siderolabs/cluster-api-control-plane-provider-talos">https://github.com/siderolabs/cluster-api-control-plane-provider-talos</a></li>
-<li>Discussion on flux with Cluster API Operator: <a href="https://github.com/ionos-cloud/cluster-api-provider-proxmox/issues/221">https://github.com/ionos-cloud/cluster-api-provider-proxmox/issues/221</a></li>
-<li>Flux repo example: <a href="https://github.com/a7d-corp/homelab-clusters-fleet/tree/main">https://github.com/a7d-corp/homelab-clusters-fleet/tree/main</a></li>
+<li>Edit files.tf, correcting the talos image required. I use a local web server for image and manifests. The URL from Talos Image factory can be used directly.</li>
+<li>Edit providers.tf, correcting the details for the proxmox host</li>
+<li>Edit vm.tf, setting defaults for the the CPU, RAM and Disk</li>
+<li>Run <code>terraform init</code></li>
+<li>Run <code>terraform apply</code></li>
+<li>Once the VM is running, check that is is in maintenance mode.</li>
+<li>Stop the VM</li>
+<li>Convert the VM to a VM template</li>
+<li>Clone two VMs from the template, for the control plane and worker nodes of the management cluster</li>
+<li>Manually configure IP addresses in the VM cloudinit network configuration.</li>
+<li>Now delete the CloudInit drive from the template for user with Cluster API (Cluster API needs to create this on it's own)</li>
+<li>Note the Template VM ID, for use in the Cluster API configuration</li>
 </ul>
 </article>
 </div>

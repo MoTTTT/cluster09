@@ -2,34 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://cluster09.podzone.cloud/cluster09/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/Bastion/</loc>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/BastionDiagram/</loc>
+         <lastmod>2025-11-13</lastmod>
     </url>
     <url>
          <loc>https://cluster09.podzone.cloud/cluster09/Cilium/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <lastmod>2025-11-13</lastmod>
     </url>
     <url>
          <loc>https://cluster09.podzone.cloud/cluster09/ClusterAPI/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <lastmod>2025-11-13</lastmod>
     </url>
     <url>
-         <loc>https://cluster09.podzone.cloud/cluster09/ClusterTaskTracking/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <loc>https://cluster09.podzone.cloud/cluster09/ClusterChart/</loc>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/ClusterTemplate/</loc>
+         <lastmod>2025-11-13</lastmod>
     </url>
     <url>
          <loc>https://cluster09.podzone.cloud/cluster09/Flux/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/Harbor/</loc>
+         <lastmod>2025-11-13</lastmod>
     </url>
     <url>
          <loc>https://cluster09.podzone.cloud/cluster09/Manifests/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <lastmod>2025-11-13</lastmod>
     </url>
     <url>
          <loc>https://cluster09.podzone.cloud/cluster09/Network/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/Planning/</loc>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/References/</loc>
+         <lastmod>2025-11-13</lastmod>
     </url>
     <url>
          <loc>https://cluster09.podzone.cloud/cluster09/Storage/</loc>
-         <lastmod>2025-09-29</lastmod>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/Talos/</loc>
+         <lastmod>2025-11-13</lastmod>
+    </url>
+    <url>
+         <loc>https://cluster09.podzone.cloud/cluster09/TalosTemplateCreation/</loc>
+         <lastmod>2025-11-13</lastmod>
     </url>
 </urlset>

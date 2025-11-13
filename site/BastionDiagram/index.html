@@ -7,12 +7,10 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Podzone Private Consumer cloud" name="description"/>
 <meta content="Martin Colley" name="author"/>
-<link href="https://cluster09.podzone.cloud/cluster09/ClusterAPI/" rel="canonical"/>
-<link href="../Cilium/" rel="prev"/>
-<link href="../ClusterChart/" rel="next"/>
+<link href="https://cluster09.podzone.cloud/cluster09/BastionDiagram/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.20" name="generator"/>
-<title>Cluster API - cluster09</title>
+<title>BastionDiagram - cluster09</title>
 <link href="../assets/stylesheets/main.e53b48f4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -24,7 +22,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#cluster-api">
+<a class="md-skip" href="#network">
           Skip to content
         </a>
 </div>
@@ -48,7 +46,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Cluster API
+              BastionDiagram
             
           </span>
 </div>
@@ -117,57 +115,13 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    Cluster API
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ClusterAPI/">
 <span class="md-ellipsis">
     Cluster API
     
   </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#clusterctl">
-<span class="md-ellipsis">
-      clusterctl
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cluster-api-operator">
-<span class="md-ellipsis">
-      Cluster API Operator
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#issues-and-notes">
-<span class="md-ellipsis">
-      Issues and notes
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../ClusterChart/">
@@ -264,30 +218,9 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#clusterctl">
+<a class="md-nav__link" href="#network">
 <span class="md-ellipsis">
-      clusterctl
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#cluster-api-operator">
-<span class="md-ellipsis">
-      Cluster API Operator
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#issues-and-notes">
-<span class="md-ellipsis">
-      Issues and notes
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
+      Network
     </span>
 </a>
 </li>
@@ -298,64 +231,44 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="cluster-api">Cluster API</h1>
-<h2 id="clusterctl">clusterctl</h2>
-<ul>
-<li>Tested successfully with 2 node talos cluster (Aug 2025)</li>
-<li>Install cert-manager: <code>helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true</code></li>
-<li>Set up clusterctl config file: <code>~/.cluster-api/clusterctl.yaml</code> (On initial install only CAPI mandatory fields are set)</li>
-<li>Install components: <code>clusterctl init --ipam in-cluster --core cluster-api -c talos -b talos -i proxmox</code></li>
-<li>Version installed, based on init response:</li>
-</ul>
-<pre><code class="language-bash">Installing provider="cluster-api" version="v1.10.5" targetNamespace="capi-system"
-Installing provider="bootstrap-talos" version="v0.6.9" targetNamespace="cabpt-system"
-Installing provider="control-plane-talos" version="v0.5.10" targetNamespace="cacppt-system"
-Installing provider="infrastructure-proxmox" version="v0.7.3" targetNamespace="capmox-system"
-Installing provider="ipam-in-cluster" version="v1.0.3" targetNamespace="capi-ipam-in-cluster-system"
-</code></pre>
-<p>clusterctl generate yaml --list-variables --from cluster-template.yaml &gt; cluster08-variables.yaml
-clusterctl generate yaml --from cluster-template.yaml &gt; cluster08.yaml </p>
-<ul>
-<li>Spin up a cluster: <code>kubectl apply -f proxmoxcluster.yaml</code></li>
-<li>Describe cluster: <code>clusterctl describe cluster cluster07 -n cluster07 --show-conditions all --show-templates --show-resourcesets --grouping=false --echo</code></li>
-<li>Retrieve talos config: <code>kubectl get secret --namespace cluster07 cluster07-talosconfig -o jsonpath='{.data.talosconfig}' | base64 -d &gt; cluster07-talosconfig</code></li>
-<li>Retrieve kubeconfig: <code>talosctl kubeconfig --nodes 192.168.4.170 --endpoints 192.168.4.170 --talosconfig=./cluster07-talosconfig</code></li>
-<li>To retrieve file: <code>kubectl get secret --namespace cluster07 cluster07-kubeconfig -o jsonpath='{.data.value}' | base64 -d &gt; cluster07-kubeconfig</code></li>
-<li>scale up cluster control plane: Change replicas to 3</li>
-<li>scale up workers: Change replicas to 2</li>
-<li>bootstrap flux: <code>flux bootstrap github --context=admin@cluster07 --owner=MoTTTT --repository=venus --branch=main --personal --path=clusters/managedcluster07 --token-auth=true</code></li>
-</ul>
-<h2 id="cluster-api-operator">Cluster API Operator</h2>
-<ul>
-<li>Install cert-manager: <code>helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true</code></li>
-<li>Install CAPI Operator: <code>helm install capi-operator capi-operator/cluster-api-operator --create-namespace -n capi-operator-system --set infrastructure.proxmox.enabled=true --set controlPlane.talos.enabled=true --set  bootstrap.talos.enabled=true --wait --timeout 90s</code></li>
-<li>Configure proxmox credentials: <code>kubectl apply -f capmox-manager-credentials.yml</code></li>
-<li><code>helm repo add capi-operator https://kubernetes-sigs.github.io/cluster-api-operator</code></li>
-<li><code>helm install capi-operator capi-operator/cluster-api-operator --create-namespace -n capi-operator-system --set infrastructure.proxmox.enabled=true --set configSecret.name=capmox-manager-credentials --set configSecret.namespace=default --set controlPlane.talos.enabled=true --set  bootstrap.talos.enabled=true --wait --timeout 90s</code></li>
-</ul>
-<h2 id="issues-and-notes">Issues and notes</h2>
-<ul>
-<li>Setting IP addresses using cloudinit: <code>You will need to make sure that your VM template doesn't have Cloud-init Driver provided by Proxmox, otherwise, that will overwrite the config of CAPMOX. No need to pre-set up the Cloud-init Drive.Just use an empty CD ROM at ide0, and CAPMOX will do the job.</code></li>
-<li><code>clusterctl generate cluster</code> does not have an option to specify control-plane or bootstrap providers, and assumes cubeadm for both.</li>
-<li>clusterctl init creates a secret called <code>capmox-manager-credentials</code> in the <code>capmox-system</code> namespace.</li>
-<li>cluster operator creates this in the <code>proxmox-infrastructure-system namespace</code> (with empty values).</li>
-<li>Loading a secret manifest sets the values. Loading a cluster manifest resets them to their defaults (to be confirmed...)</li>
-<li>In cluster operator scenario, Proxmox expects ProxmoxCluster to include a spec.credentialsRef.</li>
-<li><code>clusterctl generate cluster</code> does not include spec.credentialsRef in the generated ProxmoxCluster manifest.</li>
-<li>The above discrepancies could relate to version differences.</li>
-<li>Generate cluster manifest: <code>clusterctl generate cluster cluster07 --kubernetes-version v1.31.2 --control-plane-machine-count=1 --infrastructure=proxmox:v0.7.3 &gt; cluster07.yaml</code></li>
-<li>NOTE: This is not useful for talos controlplane an bootstrap unless a custom template is used.</li>
-<li>For cluster management investigate headlamp, <a href="https://github.com/Jont828/cluster-api-visualizer/tree/main">https://github.com/Jont828/cluster-api-visualizer/tree/main</a></li>
-</ul>
-<h2 id="references">References</h2>
-<ul>
-<li><a href="https://cluster-api.sigs.k8s.io/introduction">https://cluster-api.sigs.k8s.io/introduction</a></li>
-<li><a href="https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main">https://github.com/ionos-cloud/cluster-api-provider-proxmox/tree/main</a></li>
-<li><a href="https://github.com/siderolabs/cluster-api-bootstrap-provider-talos">https://github.com/siderolabs/cluster-api-bootstrap-provider-talos</a></li>
-<li><a href="https://github.com/siderolabs/cluster-api-control-plane-provider-talos">https://github.com/siderolabs/cluster-api-control-plane-provider-talos</a></li>
-<li>Discussion on flux with Cluster API Operator: <a href="https://github.com/ionos-cloud/cluster-api-provider-proxmox/issues/221">https://github.com/ionos-cloud/cluster-api-provider-proxmox/issues/221</a></li>
-<li>Flux repo example: <a href="https://github.com/a7d-corp/homelab-clusters-fleet/tree/main">https://github.com/a7d-corp/homelab-clusters-fleet/tree/main</a></li>
-</ul>
+<h1>BastionDiagram</h1>
+<h2 id="network">Network</h2>
+<div class="mermaid">---
+title: Network
+---
+flowchart LR
+
+n0[Internet] -- StaticIP --&gt; n1[ISP Router] -- PortForward --&gt; n2[Bastion Router]
+n2 -- PortForward&lt;br&gt;Reverse Proxy --&gt; n3[machine network]
+n5[Operator client] -- ssh --&gt; n2
+
+n3 --&gt; sc1[control plane node 1]
+n3 --&gt; sc2[control plane node 2]
+n3 --&gt; sc3[control plane node 3]
+n3 --&gt; w1[worker node 1]
+n3 --&gt; w2[worker node 2]
+n3 --&gt; w3[worker node 3]
+n3 --&gt; w4[worker node 4]
+
+n3 --Internet Proxy--&gt; squid -- Gateway --&gt; n2
+n3 -- Image mirror --&gt; harbor -- Gateway --&gt; n2
+n3 -- Gateway --&gt; n2
+n3 -- File store --&gt; nfs &lt;-- Port forwarding --&gt; n2 
+
+n4[cluster network]
+
+sc1 &lt;-.-&gt; n4
+sc2 &lt;-.-&gt; n4
+sc3 &lt;-.-&gt; n4
+w1 &lt;-.-&gt; n4
+w2 &lt;-.-&gt; n4
+w3 &lt;-.-&gt; n4
+w4 &lt;-.-&gt; n4
+
+classDef box fill:#fff,stroke:#000,stroke-width:1px,color:#000;
+classDef spacewhite fill:#ffffff,stroke:#fff,stroke-width:0px,color:#000
+class sc1,sc2,sc3,w1,w2,w3,w4,squid,harbor,nfs box
+</div>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
@@ -381,7 +294,8 @@ clusterctl generate yaml --from cluster-template.yaml &gt; cluster08.yaml </p>
 </div>
 <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
 <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
-<script>document$.subscribe(() => {
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script><script>document$.subscribe(() => {
             window.update_swagger_ui_iframe_height = function (id) {
                 var iFrameID = document.getElementById(id);
                 if (iFrameID) {
