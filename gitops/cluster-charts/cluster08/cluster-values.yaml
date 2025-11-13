@@ -1,7 +1,11 @@
 # Cluster API managed cluster manifests for Cluster 08
 
-cluster.name: cluster08
-controlplane.machine_count: 1
-network.ip_ranges: [192.168.4.181-192.168.4.187]
-controlplane.endpoint_ip: 192.168.4.180
-worker.machine_count: 1
+cluster:
+  name: "cluster08"
+network:
+  ip_ranges: [192.168.4.181-192.168.4.187]
+controlplane:
+  endpoint_ip: 192.168.4.180
+  machine_count: 1
+worker:
+  machine_count: 1
