@@ -8,11 +8,17 @@
 
 ## Issues
 
-- [ ] Name and Namespace not rendering correctly
+- [X] Name and Namespace not rendering correctly: values.yaml file variable formats fixed
 
-## Versions
+## Releases
 
-- [ ] Debug name and namespace
+### V0.1.11
+
+- Fix harbour address
+
+### V0.1.10
+
+- Debug name and namespace
 
 ### V0.1.9
 
