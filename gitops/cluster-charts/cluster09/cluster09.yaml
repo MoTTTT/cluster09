@@ -27,5 +27,5 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cluster09-charts
-      version: 0.1.11
+      version: 0.1.14
 ---

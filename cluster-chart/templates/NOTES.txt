@@ -18,18 +18,18 @@ Configure kubectl (i.e. your ~/.kube/config file) to include the context and cre
 This will set the kubectl context of the target cluster active.
 
 To view the Talos dashboard for the target cluster:
-  $ talosctl dashboard --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+  $ talosctl dashboard --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
 
 Talos logs retrieval (the following examples are applied to the control plane node currently serving the k8s API VIP. The --nodes IP address should be altered to interrogate any other node):
-  $ talosctl dmesg --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+  $ talosctl dmesg --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
 List services:
-  $ talosctl services --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+  $ talosctl services --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
 Logs for a service (e.g.machined):
-  $ talosctl logs machined --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+  $ talosctl logs machined --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
 List containers:
-  $ talosctl containers -k --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+  $ talosctl containers -k --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
 Logs for a container (e.g. kube-system/cilium-envoy-zjv5m:cilium-envoy:66f785c68929):
-  $ talosctl logs -k kube-system/cilium-envoy-zjv5m:cilium-envoy:66f785c68929 --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+  $ talosctl logs -k kube-system/cilium-envoy-zjv5m:cilium-envoy:66f785c68929 --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
 
 Kubectl and k9s can be used to watch the cluster pods provisioning, and view logs. Depending on your cluster configuration this may take a while.
 
