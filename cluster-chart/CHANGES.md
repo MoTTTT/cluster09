@@ -12,6 +12,11 @@
 
 ## Releases
 
+### V0.1.12
+
+- Eternalise registries configuration, fix harbor address (V2...)
+- Add talos command cheat sheet to NOTES.md, refactored flux notes.
+
 ### V0.1.11
 
 - Fix harbour address

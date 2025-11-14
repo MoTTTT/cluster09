@@ -1,3 +1,5 @@
+Cluster API Cluster Provisioning helm chart: cluster-chart
+
 Thank you for installing {{ .Chart.Name }}. Your release is named {{ .Release.Name }}. Cluster API resources have been created in the {{ .Values.cluster.name }} namespace.
 
 To viw progress with the Cluster API provisioning:
@@ -15,11 +17,30 @@ Configure kubectl (i.e. your ~/.kube/config file) to include the context and cre
   $ talosctl kubeconfig --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.cluster.name }}-talosconfig
 This will set the kubectl context of the target cluster active.
 
-Kubectl or k9s can be used to watch the cluster pods provisioning, and view logs. Depending on your cluster configuration this may take a while.
+To view the Talos dashboard for the target cluster:
+  $ talosctl dashboard --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
 
-Once your cluster stabilises, and the pods are all running, you can bootstrap your cluster to a gitops repo. 
+Talos logs retrieval (the following examples are applied to the control plane node currently serving the k8s API VIP. The --nodes IP address should be altered to interrogate any other node):
+  $ talosctl dmesg --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+List services:
+  $ talosctl services --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+Logs for a service (e.g.machined):
+  $ talosctl logs machined --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+List containers:
+  $ talosctl containers -k --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
+Logs for a container (e.g. kube-system/cilium-envoy-zjv5m:cilium-envoy:66f785c68929):
+  $ talosctl logs -k kube-system/cilium-envoy-zjv5m:cilium-envoy:66f785c68929 --nodes {{ .Values.controlplane.endpoint_ip }} --endpoints {{ .Values.controlplane.endpoint_ip }} --talosconfig=./{{ .Values.controlplane.endpoint_ip }}-talosconfig
 
-Configure a FluxInstance of the form (this could be loaded with extraManifests from you gitops cluster):
+Kubectl and k9s can be used to watch the cluster pods provisioning, and view logs. Depending on your cluster configuration this may take a while.
+
+Once your cluster stabilises, and the pods are all running, bootstrap your cluster to a gitops repo. 
+
+Add a secret to your cluster with the following (using the kubectl context of of the {{ .Values.cluster.name }} cluster):
+  $ flux create secret git flux-system --url=https://github.com/<username>/<Git repository name>.git  --username=<Git username>  --password=<Git token>
+
+The flux operator will pick up the secret and sync your cluster to your gitops repository.
+
+If you have not loaded a FluxInstance with extraManifests from you gitops cluster, as in the default values.yaml example, you can configure and apply one now:
 
 ---
 apiVersion: fluxcd.controlplane.io/v1
@@ -39,7 +60,5 @@ spec:
     pullSecret: "flux-system"
 ---
 
-Add a secret to your cluster with the following (using the kubectl context of of the {{ .Values.cluster.name }} cluster):
-  $ flux create secret git flux-system --url=https://github.com/<username>/<Git repository name>.git  --username=<Git username>  --password=<Git token>
 
-The flux operator will pick up the secret and sync your cluster to your gitops repository.
+

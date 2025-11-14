@@ -12,7 +12,6 @@ network:
   bastion_host: freyr
   bastion_host_endpoint_ip: "192.168.1.80"
   dns_servers: [192.168.1.201]
-
 controlplane:
   endpoint_ip: "192.168.4.190"
   machine_count: 1
@@ -41,3 +40,35 @@ proxmox:
   vm:
     boot_volume_device: virtio0
     bridge: vmbr0
+
+registries:
+  config:
+    192.168.4.100:
+      auth:
+        username: admin
+        password: Harbor12345
+  mirrors:
+    docker.io:
+      endpoints:
+        - http://192.168.4.100/proxy-docker.io
+      overridePath: true
+    ghcr.io:
+      endpoints:
+        - http://192.168.4.100/proxy-ghcr.io
+      overridePath: true
+    gcr.io:
+      endpoints:
+        - http://192.168.4.100/proxy-gcr.io
+      overridePath: true
+    registry.k8s.io:
+      endpoints:
+        - http://192.168.4.100/proxy-registry.k8s.io
+      overridePath: true
+    quay.io:
+      endpoints:
+        - http://192.168.4.100/proxy-quay.io
+      overridePath: true
+    cr.fluentbit.io:
+      endpoints:
+        - http://192.168.4.100/proxy-cr.fluentbit.io
+      overridePath: true

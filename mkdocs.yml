@@ -21,8 +21,11 @@ nav:
     - ClusterChart.md
     - ClusterTemplate.md
     - Flux.md
+    - Harbor.md
     - Manifests.md
     - Network.md
+    - Bastion.md
+    - BastionDiagram.md
     - Storage.md
     - Talos.md
     - TalosTemplateCreation.md

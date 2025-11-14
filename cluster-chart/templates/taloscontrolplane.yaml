@@ -49,37 +49,10 @@ spec:
                   - kube-system
             sysctls:
               vm.max_map_count: 262144
+            {{- with .Values.registries }}
             registries:
-              config:
-                192.168.4.100:
-                  auth:
-                    username: admin
-                    password: Harbor12345
-              mirrors:
-                docker.io:
-                  endpoints:
-                    - https://192.168.4.100/v2/proxy-docker.io
-                  overridePath: true
-                ghcr.io:
-                  endpoints:
-                    - http://192.168.4.100/v2/proxy-ghcr.io
-                  overridePath: true
-                gcr.io:
-                  endpoints:
-                    - http://192.168.4.100/v2/proxy-gcr.io
-                  overridePath: true
-                registry.k8s.io:
-                  endpoints:
-                    - http://192.168.4.100/v2/proxy-registry.k8s.io
-                  overridePath: true
-                quay.io:
-                  endpoints:
-                    - http://192.168.4.100/v2/proxy-quay.io
-                  overridePath: true
-                cr.fluentbit.io:
-                  endpoints:
-                    - http://192.168.4.100/v2/proxy-cr.fluentbit.io
-                  overridePath: true
+            {{- toYaml . | nindent 14 }}
+            {{- end }}
           cluster:
             apiServer:
               certSANs:
