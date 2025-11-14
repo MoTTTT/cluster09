@@ -14,6 +14,10 @@
 
 ## Versions
 
+### V0.1.16
+
+- Fix local manifest URL
+
 ### V0.1.15
 
 - Regress to local manifest load.

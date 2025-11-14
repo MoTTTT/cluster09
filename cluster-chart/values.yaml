@@ -20,10 +20,10 @@ controlplane:
   num_sockets: 4
   memory_mib: 16384
   extra_manifests:
-    - http://192.168.4.100/cilium.yaml
-    - http://192.168.4.100/flux.yaml
-    - http://192.168.4.100/flux-instance-cluster09.yaml
-    - http://192.168.4.100/gateway-api.yaml
+    - http://192.168.4.1/cilium.yaml
+    - http://192.168.4.1/flux.yaml
+    - http://192.168.4.1/flux-instance-cluster09.yaml
+    - http://192.168.4.1/gateway-api.yaml
 
 worker:
   machine_count: 1
