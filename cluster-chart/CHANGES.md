@@ -14,6 +14,10 @@
 
 ## Versions
 
+### V0.1.15
+
+- Regress to local manifest load.
+
 ### V0.1.14
 
 - Manifest load order
