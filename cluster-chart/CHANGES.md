@@ -11,9 +11,13 @@
 
 - [X] Name and Namespace not rendering correctly: values.yaml file variable formats fixed
 
-## Releases
+## Versions
 
-### V0.1.12
+### V0.1.13
+
+- Use github pages for machine extraManifests.
+
+### V0.1.12 (not released)
 
 - Eternalise registries configuration, fix harbor address (V2...)
 - Add talos command cheat sheet to NOTES.md, refactored flux notes.

@@ -2,6 +2,15 @@
 
 Scripts, templates, manifests and documentation for a the provisioning of a Cluster API management cluster, with templated cluster manifest generation.
 
+## URLs
+
+- GitHub pages README.md: <https://motttt.github.io/cluster09/>
+- Chart index file: <https://motttt.github.io/cluster09/index.yaml>
+- Documentation site deployed in GitHub: <https://motttt.github.io/cluster09/site/>
+- Documentation site deployed to cluster09: <https://cluster09-docs.podzone.cloud/>
+- Manifest directory: <https://motttt.github.io/cluster09/manifests/>
+- Sample Cluster FluxInstance: <https://motttt.github.io/cluster09/cluster-manifests/flux-instance-observability.yaml>
+
 ## Target deployment environment, and technology selection
 
 - Proxmox hypervisor
