@@ -45,3 +45,5 @@ sed -e "s/CONTROLPLANEIPS/${concontrolPlaneIPAddresses}/g" -e "s/CONTROLPLANEIP/
 chmod +x talos/createCluster.sh
 
 echo Switch to the vms directory, and run 'terraform init', followed by 'terraform apply -parallelism=1'
+echo Once the vms are up and running, switch to the talos directory, and run `./createCluster.sh`
+echo The output of this script provides some guidance on the next steps.
