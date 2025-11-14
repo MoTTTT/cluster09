@@ -5,6 +5,7 @@
 - [ ] Extract talos patches into values file
 - [ ] SOPS for secrets. Potential candidates: Proxmox credentials; Flux GIT token.
 - [X] Roll cluster-chart into cluster09
+- [ ] Known issue: Deleting a cluster deletes the CAPMOX cluster credentials
 
 ## Issues
 
