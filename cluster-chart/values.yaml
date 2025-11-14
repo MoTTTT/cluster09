@@ -20,10 +20,10 @@ controlplane:
   num_sockets: 4
   memory_mib: 16384
   extra_manifests:
-    - https://motttt.github.io/cluster09/cluster-manifests/cilium.yaml
-    - https://motttt.github.io/cluster09/cluster-manifests/flux.yaml
-    - https://motttt.github.io/cluster09/cluster-manifests/flux-instance-cluster09.yaml
-    - https://motttt.github.io/cluster09/cluster-manifests/gateway-api.yaml
+    - http://192.168.4.100/cilium.yaml
+    - http://192.168.4.100/flux.yaml
+    - http://192.168.4.100/flux-instance-cluster09.yaml
+    - http://192.168.4.100/gateway-api.yaml
 
 worker:
   machine_count: 1
@@ -43,7 +43,7 @@ proxmox:
 
 registries:
   config:
-    192.168.4.100:80:
+    192.168.4.100:
       auth:
         username: admin
         password: Harbor12345
