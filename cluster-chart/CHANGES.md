@@ -7,6 +7,7 @@
 - [X] Roll cluster-chart into cluster09
 - [ ] Known issue: Deleting a cluster deletes the CAPMOX cluster credentials
 - [ ] Known issue: `error creating rbac.authorization.k8s.io/v1/Role/cilium-ingress-secrets: namespaces \"cilium-secrets\" not found`
+- [ ] Issue: Deleting a cluster removes `capmox-manager-credentials`: Workaround is to create and re-apply a manifest for the secret.
 
 ## Issues
 
