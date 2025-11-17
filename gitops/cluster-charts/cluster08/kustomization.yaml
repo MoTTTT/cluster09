@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: cluster08
 resources:
   - cluster.yaml
-  - cluster08-flux-secret.yaml
+  - cluster08-proxmox-secret.yaml
 configMapGenerator:
   - name: cluster-values
     files:
