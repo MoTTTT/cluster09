@@ -2,15 +2,17 @@
 
 cluster:
   name: "cluster08"
+  kubernetes_version: v1.34.2
+  image: factory.talos.dev/nocloud-installer/6adc7e7fba27948460e2231e5272e88b85159da3f3db980551976bf9898ff64b:v1.11.5
 network:
   ip_ranges: [192.168.4.181-192.168.4.187]
 controlplane:
   endpoint_ip: 192.168.4.180
   machine_count: 1
   extra_manifests:
-    - https://motttt.github.io/cluster09/cluster-manifests/cilium.yaml
-    - https://motttt.github.io/cluster09/cluster-manifests/gateway-api.yaml
-    - https://motttt.github.io/cluster09/cluster-manifests/flux.yaml
-    - https://motttt.github.io/cluster09/cluster-manifests/flux-instance-cluster08.yaml
+    - http://192.168.4.1/cilium.yaml
+    - http://192.168.4.1/flux.yaml
+    - http://192.168.4.1/flux-instance-cluster08.yaml
+    - http://192.168.4.1/gateway-api.yaml
 worker:
   machine_count: 1

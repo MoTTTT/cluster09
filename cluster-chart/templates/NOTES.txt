@@ -36,7 +36,7 @@ Kubectl and k9s can be used to watch the cluster pods provisioning, and view log
 Once your cluster stabilises, and the pods are all running, bootstrap your cluster to a gitops repo. 
 
 Add a secret to your cluster with the following (using the kubectl context of of the {{ .Values.cluster.name }} cluster):
-  $ flux create secret git flux-system --url=https://github.com/<username>/<Git repository name>.git  --username=<Git username>  --password=<Git token>
+  $   
 
 The flux operator will pick up the secret and sync your cluster to your gitops repository.
 
