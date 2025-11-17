@@ -50,25 +50,25 @@ registries:
   mirrors:
     docker.io:
       endpoints:
-        - http://192.168.4.100/proxy-docker.io
+        - http://192.168.4.100/v2/proxy-docker.io
       overridePath: true
     ghcr.io:
       endpoints:
-        - http://192.168.4.100/proxy-ghcr.io
+        - http://192.168.4.100/v2/proxy-ghcr.io
       overridePath: true
     gcr.io:
       endpoints:
-        - http://192.168.4.100/proxy-gcr.io
+        - http://192.168.4.100/v2/proxy-gcr.io
       overridePath: true
     registry.k8s.io:
       endpoints:
-        - http://192.168.4.100/proxy-registry.k8s.io
+        - http://192.168.4.100/v2/proxy-registry.k8s.io
       overridePath: true
     quay.io:
       endpoints:
-        - http://192.168.4.100/proxy-quay.io
+        - http://192.168.4.100/v2/proxy-quay.io
       overridePath: true
     cr.fluentbit.io:
       endpoints:
-        - http://192.168.4.100/proxy-cr.fluentbit.io
+        - http://192.168.4.100/v2/proxy-cr.fluentbit.io
       overridePath: true
