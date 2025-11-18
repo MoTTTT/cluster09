@@ -21,8 +21,8 @@ spec:
           name: "ip-pool"
         spec:
           blocks:
-          - start: "192.168.4.108"
-            stop: "192.168.4.109"
+          - start: "192.168.4.118"
+            stop: "192.168.4.119"
       target:
         kind: CiliumLoadBalancerIPPool
         name: ip-pool
