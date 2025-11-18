@@ -2,9 +2,27 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: 00-manifests
+  namespace: flux-system
+spec:
+  interval: 1h
+  retryInterval: 1m
+  timeout: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops/gitops-infra/00-manifests
+  prune: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: 01-network
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: 00-manifests
   interval: 1h
   retryInterval: 1m
   timeout: 5m
@@ -71,7 +89,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: 02-storage
+    - name: 02-network
   interval: 1h
   retryInterval: 1m
   timeout: 5m
