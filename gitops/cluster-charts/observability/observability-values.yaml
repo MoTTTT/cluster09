@@ -8,7 +8,7 @@ network:
 
 controlplane:
   endpoint_ip: 192.168.4.100
-  machine_count: 1
+  machine_count: 3
   extra_manifests:
     - http://192.168.4.1/cilium.yaml
     - http://192.168.4.1/flux.yaml
