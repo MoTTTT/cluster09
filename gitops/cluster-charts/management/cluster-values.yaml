@@ -1,0 +1,52 @@
+# Cluster API managed cluster manifests for Cluster 08
+
+cluster:
+  name: "management"
+  kubernetes_version: v1.34.2
+  image: factory.talos.dev/nocloud-installer/6adc7e7fba27948460e2231e5272e88b85159da3f3db980551976bf9898ff64b:v1.11.5
+network:
+  ip_ranges: [192.168.4.171-192.168.4.177]
+controlplane:
+  endpoint_ip: 192.168.4.170
+  machine_count: 1
+  extra_manifests:
+    - http://192.168.4.1/cilium.yaml
+    - http://192.168.4.1/flux.yaml
+    - http://192.168.4.1/flux-instance-management.yaml
+    - http://192.168.4.1/flux-secret.yaml
+    - http://192.168.4.1/gateway-api.yaml
+worker:
+  machine_count: 1
+
+
+registries:
+  config:
+    192.168.4.100:
+      auth:
+        username: admin
+        password: Harbor12345
+  mirrors:
+    docker.io:
+      endpoints:
+        - http://192.168.4.100/v2/proxy-docker.io
+      overridePath: true
+    ghcr.io:
+      endpoints:
+        - http://192.168.4.100/v2/proxy-ghcr.io
+      overridePath: true
+    gcr.io:
+      endpoints:
+        - http://192.168.4.100/v2/proxy-gcr.io
+      overridePath: true
+    registry.k8s.io:
+      endpoints:
+        - http://192.168.4.100/v2/proxy-registry.k8s.io
+      overridePath: true
+    quay.io:
+      endpoints:
+        - http://192.168.4.100/v2/proxy-quay.io
+      overridePath: true
+    cr.fluentbit.io:
+      endpoints:
+        - http://192.168.4.100/v2/proxy-cr.fluentbit.io
+      overridePath: true
