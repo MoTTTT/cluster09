@@ -15,6 +15,10 @@
 
 ## Versions
 
+### V0.1.19
+
+- Default Talos: v1.11.5; Kubernetes: v1.34.2
+
 ### V0.1.18
 
 - Default flux repo secret pull from local server.
