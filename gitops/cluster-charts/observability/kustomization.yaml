@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: observability
 resources:
   - observability.yaml
+  - proxmox-secret.yaml
 configMapGenerator:
   - name: observability-values
     files:
