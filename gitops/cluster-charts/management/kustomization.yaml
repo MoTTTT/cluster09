@@ -1,12 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: observability
+namespace: management
 resources:
-  - observability.yaml
+  - cluster.yaml
   - proxmox-secret.yaml
 configMapGenerator:
-  - name: observability-values
+  - name: cluster-values
     files:
-      - values.yaml=./observability-values.yaml
+      - values.yaml=./cluster-values.yaml
 configurations:
   - kustomizeconfig.yaml

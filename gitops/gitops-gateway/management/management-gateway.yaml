@@ -1,0 +1,113 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: GatewayClass
+metadata:
+  name: cilium
+spec:
+  controllerName: io.cilium/gateway-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+spec:
+  gatewayClassName: cilium
+  listeners:
+
+  - hostname: management-disk.podzone.cloud
+    name: management-disk-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: management-disk.podzone.cloud
+    name: management-disk-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: management-disk-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: management-network.podzone.cloud
+    name: management-network-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: management-network.podzone.cloud
+    name: management-network-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: management-network-secret
+    allowedRoutes:
+      namespaces:
+        from: All
+
+---
+apiVersion: cert-manager.io/v1 
+kind: ClusterIssuer
+metadata:
+  name: lets-encrypt
+spec:
+  acme:
+    email: martinjcolley@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-key
+    solvers:
+    - http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - name: gateway
+                namespace: kube-system
+                kind: Gateway
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: management-network
+  namespace: kube-system
+spec:
+  hostnames:
+  - management-network.podzone.cloud
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: hubble-ui
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: linstor
+  namespace: piraeus-datastore
+spec:
+  hostnames:
+  - management-disk.podzone.cloud
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: linstor-controller
+      port: 3370
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

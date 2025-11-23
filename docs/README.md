@@ -1,6 +1,6 @@
 # Cluster09, a PodZone project
 
-This repo contains a bootstraping and scaffolding and configuration for
+This repo contains bootstraping, scaffolding and configuration for
 
 - A Cluster API management cluster
 - Cluster API template for a kubernetes cluster

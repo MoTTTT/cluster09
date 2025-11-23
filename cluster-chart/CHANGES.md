@@ -2,18 +2,22 @@
 
 ## TODO
 
-- [ ] Extract talos patches into values file
-- [ ] SOPS for secrets. Potential candidates: Proxmox credentials; Flux GIT token.
+- [X] Extract talos patches into values file: extraManifests, and Registries
+- [X] SOPS for secrets. Potential candidates: Proxmox credentials; Flux GIT token.
 - [X] Roll cluster-chart into cluster09
-- [ ] Known issue: Deleting a cluster deletes the CAPMOX cluster credentials
-- [ ] Known issue: `error creating rbac.authorization.k8s.io/v1/Role/cilium-ingress-secrets: namespaces \"cilium-secrets\" not found`
-- [ ] Issue: Deleting a cluster removes `capmox-manager-credentials`: Workaround is to create and re-apply a manifest for the secret.
+- [X] Known issue: Deleting a cluster deletes the CAPMOX cluster credentials: Mitigation: add a credential per cluster, and to management cluster flux, encrypted with sops.
+- [X] Known issue: `error creating rbac.authorization.k8s.io/v1/Role/cilium-ingress-secrets: namespaces \"cilium-secrets\" not found`: Only experienced once, may have been wan related.
+- [X] Issue: Deleting a cluster removes `capmox-manager-credentials`: Workaround is to create and re-apply a manifest for the secret. Sorted
 
 ## Issues
 
 - [X] Name and Namespace not rendering correctly: values.yaml file variable formats fixed
 
 ## Versions
+
+### V0.1.18
+
+- Default flux repo secret pull from local server.
 
 ### V0.1.17
 
