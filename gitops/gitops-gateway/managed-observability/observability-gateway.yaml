@@ -17,6 +17,14 @@ spec:
   gatewayClassName: cilium
   listeners:
 
+  - hostname: opensearch.local
+    name: opensearch-local-http
+    port: 9200
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+
   - hostname: observability-disk.podzone.cloud
     name: observability-disk-podzone-cloud-http
     port: 80
@@ -144,24 +152,6 @@ spec:
         type: PathPrefix
         value: /
 
-
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: gateway-local
-  namespace: kube-system
-spec:
-  gatewayClassName: cilium
-  listeners:
-  - hostname: opensearch.local
-    name: opensearch-local-http
-    port: 9200
-    protocol: HTTPS
-    allowedRoutes:
-      namespaces:
-        from: All
-
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -172,7 +162,7 @@ spec:
   hostnames:
   - opensearch.local
   parentRefs:
-  - name: gateway-local
+  - name: gateway
     namespace: kube-system
     kind: Gateway
   rules:
