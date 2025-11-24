@@ -126,9 +126,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: fluentbit
-  namespace: opensearch
+  namespace: flux-system
 spec:
-  targetNamespace: kube-system
+  targetNamespace: opensearch
   interval: 30m
   chart:
     spec:
@@ -146,7 +146,7 @@ spec:
     - name: os-master
     - name: os-data
     - name: os-client
-#---
+---
 #
 #apiVersion: v1
 #kind: Service
