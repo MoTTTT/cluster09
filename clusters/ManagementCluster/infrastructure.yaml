@@ -76,7 +76,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: 01-network
+    - name: 02-network
   interval: 1h
   retryInterval: 1m
   timeout: 5m
