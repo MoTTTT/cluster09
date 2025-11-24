@@ -146,7 +146,7 @@ spec:
     - name: os-master
     - name: os-data
     - name: os-client
----
+#---
 #
 #apiVersion: v1
 #kind: Service
