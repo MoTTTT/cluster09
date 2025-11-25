@@ -91,7 +91,7 @@ config:
         Match *
         Host opensearch.local
         Logstash_Format On
-        Retry_Limit False
+        Retry_Limit 5
         tls Off
         tls.verify Off
         HTTP_User admin
@@ -99,7 +99,7 @@ config:
         Suppress_Type_Name On
         Logstash_Prefix logstash
         Logstash_Prefix_Key $kubernetes['namespace_name']
-        Trace_Error On
+        Trace_Error Off
 
 daemonSetVolumes:
   - name: varlog
