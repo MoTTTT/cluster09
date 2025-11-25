@@ -172,7 +172,7 @@ fsGroup: ""
 sysctl:
   enabled: false
 sysctlInit:
-  enabled: false
+  enabled: true
 plugins:
   enabled: false
   installList: []
