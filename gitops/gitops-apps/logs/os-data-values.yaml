@@ -4,15 +4,9 @@ nodeGroup: "data"
 singleNode: false
 masterService: "opensearch-cluster-master"
 roles:
-#  - master
   - ingest
   - data
-#  - remote_cluster_client
 replicas: 1
-majorVersion: ""
-global:
-  dockerRegistry: ""
-opensearchHome: /usr/share/opensearch
 config:
   opensearch.yml: |
     cluster.name: opensearch-cluster
@@ -21,163 +15,25 @@ config:
 extraEnvs:
   - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
     value: 0P3n5e@rch!
-envFrom: []
-secretMounts: []
-hostAliases: []
-image:
-  repository: "opensearchproject/opensearch"
-  tag: ""
-  pullPolicy: "IfNotPresent"
-podAnnotations: {}
-openSearchAnnotations: {}
-labels: {}
-opensearchJavaOpts: "-Xmx512M -Xms512M"
-resources:
-  requests:
-    cpu: "1000m"
-    memory: "100Mi"
-initResources: {}
-sidecarResources: {}
-networkHost: "0.0.0.0"
-rbac:
-  create: false
-  serviceAccountAnnotations: {}
-  serviceAccountName: ""
-  automountServiceAccountToken: false
-podSecurityPolicy:
-  create: false
-  name: ""
-  spec:
-    privileged: true
-    fsGroup:
-      rule: RunAsAny
-    runAsUser:
-      rule: RunAsAny
-    seLinux:
-      rule: RunAsAny
-    supplementalGroups:
-      rule: RunAsAny
-    volumes:
-      - secret
-      - configMap
-      - persistentVolumeClaim
-      - emptyDir
 persistence:
   enabled: true
   enableInitChown: true
-  labels:
-    enabled: false
-    additionalLabels: {}
   storageClass: piraeus-datastore
   accessModes:
     - ReadWriteOnce
   size: 80Gi
-  annotations: {}
-extraVolumes: []
-extraVolumeMounts: []
-extraContainers: []
-extraInitContainers: []
-priorityClassName: ""
-antiAffinityTopologyKey: "kubernetes.io/hostname"
-antiAffinity: "soft"
-customAntiAffinity: {}
-nodeAffinity: {}
-podAffinity: {}
-topologySpreadConstraints: []
-podManagementPolicy: "Parallel"
-enableServiceLinks: true
-protocol: https
+protocol: http
 httpPort: 9200
 transportPort: 9300
 metricsPort: 9600
-httpHostPort: ""
-transportHostPort: ""
-service:
-  labels: {}
-  labelsHeadless: {}
-  headless:
-    annotations: {}
-  type: ClusterIP
-  nodePort: ""
-  annotations: {}
-  httpPortName: http
-  transportPortName: transport
-  metricsPortName: metrics
-  loadBalancerIP: ""
-  loadBalancerSourceRanges: []
-  externalTrafficPolicy: ""
-updateStrategy: RollingUpdate
-maxUnavailable: 1
-podSecurityContext:
-  fsGroup: 1000
-  runAsUser: 1000
-securityContext:
-  capabilities:
-    drop:
-      - ALL
-  runAsNonRoot: true
-  runAsUser: 1000
 securityConfig:
   enabled: true
-  path: "/usr/share/opensearch/config/opensearch-security"
-  actionGroupsSecret:
-  configSecret:
-  internalUsersSecret:
-  rolesSecret:
-  rolesMappingSecret:
-  tenantsSecret:
-  config:
-    securityConfigSecret: ""
-    dataComplete: true
-    data: {}
-terminationGracePeriod: 120
-sysctlVmMaxMapCount: 262144
-startupProbe:
-  tcpSocket:
-    port: 9200
-  initialDelaySeconds: 5
-  periodSeconds: 10
-  timeoutSeconds: 3
-  failureThreshold: 30
-livenessProbe: {}
-readinessProbe:
-  tcpSocket:
-    port: 9200
-  periodSeconds: 5
-  timeoutSeconds: 3
-  failureThreshold: 3
-schedulerName: ""
-imagePullSecrets: []
-nodeSelector: {}
-tolerations: []
 ingress:
   enabled: false
-  annotations: {}
-  ingressLabels: {}
-  path: /
-  hosts:
-    - chart-example.local
-  tls: []
-nameOverride: ""
-fullnameOverride: ""
-masterTerminationFix: false
-opensearchLifecycle: {}
-lifecycle: {}
-keystore: []
-networkPolicy:
-  create: false
-  http:
-    enabled: false
-fsGroup: ""
 sysctl:
   enabled: false
 sysctlInit:
   enabled: true
-plugins:
-  enabled: false
-  installList: []
-  removeList: []
-extraObjects: []
 serviceMonitor:
   enabled: false
   path: /_prometheus/metrics
