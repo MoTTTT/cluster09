@@ -186,3 +186,25 @@ spec:
     - path:
         type: PathPrefix
         value: /
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ingestion
+  namespace: opensearch
+spec:
+  hostnames:
+  - opensearch.local
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: opensearch-cluster-data
+      port: 9200
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
