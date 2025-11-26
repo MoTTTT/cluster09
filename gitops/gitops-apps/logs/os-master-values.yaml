@@ -17,6 +17,7 @@ extraEnvs:
     value: 0P3n5e@rch!
 persistence:
   enabled: true
+  enableInitChown: true
   storageClass: piraeus-datastore
   accessModes:
     - ReadWriteOnce
@@ -33,3 +34,12 @@ sysctl:
   enabled: false
 sysctlInit:
   enabled: true
+serviceMonitor:
+  enabled: false
+  path: /_prometheus/metrics
+  scheme: http
+  interval: 10s
+  labels: {}
+  tlsConfig: {}
+  basicAuth:
+    enabled: false
