@@ -95,32 +95,32 @@ spec:
     - kind: ConfigMap
       name:  os-client-values
 
----
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: od
-  namespace: flux-system
-spec:
-  targetNamespace: opensearch
-  interval: 30m
-  timeout: 60m
-  chart:
-    spec:
-      chart: opensearch-dashboards
-      version: "3.0.0"
-      sourceRef:
-        kind: HelmRepository
-        name: opensearch
-        namespace: flux-system
-      interval: 12h
-  valuesFrom:
-    - kind: ConfigMap
-      name:  opensearch-dashboard-values
-  dependsOn: 
-    - name: os-master
-    - name: os-data
-    - name: os-client
+#---
+#apiVersion: helm.toolkit.fluxcd.io/v2
+#kind: HelmRelease
+#metadata:
+#  name: od
+#  namespace: flux-system
+#spec:
+#  targetNamespace: opensearch
+#  interval: 30m
+#  timeout: 60m
+#  chart:
+#    spec:
+#      chart: opensearch-dashboards
+#      version: "3.0.0"
+#      sourceRef:
+#        kind: HelmRepository
+#        name: opensearch
+#        namespace: flux-system
+#      interval: 12h
+#  valuesFrom:
+#    - kind: ConfigMap
+#      name:  opensearch-dashboard-values
+#  dependsOn: 
+#    - name: os-master
+#    - name: os-data
+#    - name: os-client
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
