@@ -11,3 +11,18 @@ serviceMonitor:
   path: /_prometheus/metrics
   interval: 10s
   labels: {}
+resources:
+  requests:
+    cpu: "400m"
+    memory: "512M"
+  limits:
+    cpu: "800m"
+    memory: "512M"
+updateStrategy:
+  type: "Recreate"
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
