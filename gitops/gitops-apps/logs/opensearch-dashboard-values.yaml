@@ -5,7 +5,10 @@ service:
   port: 5601
   metricsPort: 9601
 plugins:
-  enabled: false
+  enabled: true
+  ssl:
+    http:
+      enabled: true
 serviceMonitor:
   enabled: false
   path: /_prometheus/metrics
@@ -26,3 +29,5 @@ securityContext:
       - ALL
   runAsNonRoot: true
   runAsUser: 1000
+opensearch_security:
+  enabled: true
