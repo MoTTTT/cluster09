@@ -37,7 +37,6 @@ securityContext:
 config:
   opensearch_dashboards.yml: |
     opensearch_security.enabled: false
-    server.ssl.enabled: false
 
 opensearchDashboardsYml:
   defaultMode:
