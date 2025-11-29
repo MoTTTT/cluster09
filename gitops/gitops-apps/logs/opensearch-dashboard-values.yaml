@@ -35,7 +35,7 @@ securityContext:
   runAsUser: 1000
 
 config:
-  opensearch_dashboards.yml: |
+  opensearch_dashboards.yml:
     opensearch_security.enabled: false
 
 opensearchDashboardsYml:
