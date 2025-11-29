@@ -20,7 +20,7 @@ spec:
   - hostname: opensearch.local
     name: opensearch-local-http
     port: 9200
-    protocol: HTTP
+    protocol: HTTPS
     allowedRoutes:
       namespaces:
         from: All
