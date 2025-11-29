@@ -92,7 +92,7 @@ config:
         Host opensearch.local
         Logstash_Format On
         Retry_Limit 5
-        tls Off
+        tls On
         tls.verify Off
         HTTP_User admin
         HTTP_Passwd 0P3n5e@rch!
