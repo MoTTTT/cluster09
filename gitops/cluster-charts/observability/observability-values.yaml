@@ -14,7 +14,7 @@ controlplane:
     - http://192.168.4.1/flux-secret.yaml
     - http://192.168.4.1/gateway-api.yaml
 worker:
-  machine_count: 3
+  machine_count: 4
 
 registries:
   config:

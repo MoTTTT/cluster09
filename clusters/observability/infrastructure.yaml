@@ -21,8 +21,8 @@ metadata:
   name: 01-network
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: 00-manifests
+#  dependsOn:
+#    - name: 00-manifests
   interval: 1h
   retryInterval: 1m
   timeout: 5m
@@ -52,8 +52,8 @@ metadata:
   name: 02-network
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: 01-network
+#  dependsOn:
+#    - name: 01-network
   interval: 1h
   retryInterval: 1m
   timeout: 10m
@@ -70,8 +70,8 @@ metadata:
   name: 02-storage
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: 01-network
+#  dependsOn:
+#    - name: 01-network
   interval: 1h
   retryInterval: 1m
   timeout: 5m
@@ -88,8 +88,8 @@ metadata:
   name: 03-storage
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: 02-network
+#  dependsOn:
+#    - name: 02-network
   interval: 1h
   retryInterval: 1m
   timeout: 5m
@@ -106,8 +106,8 @@ metadata:
   name: 04-storage
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: 03-storage
+#  dependsOn:
+#    - name: 03-storage
   interval: 1h
   retryInterval: 1m
   timeout: 5m
