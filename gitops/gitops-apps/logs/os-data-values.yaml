@@ -32,7 +32,7 @@ image:
 podAnnotations: {}
 openSearchAnnotations: {}
 labels: {}
-opensearchJavaOpts: "-Xmx2G -Xms512M"
+opensearchJavaOpts: "-Xmx1G -Xms1G"
 resources:
   requests:
     cpu: "2000m"
