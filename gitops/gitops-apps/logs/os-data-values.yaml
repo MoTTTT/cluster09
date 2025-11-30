@@ -17,6 +17,7 @@ config:
   opensearch.yml: |
     cluster.name: opensearch-cluster
     plugins.ml_commons.only_run_on_ml_node: false
+    plugins.security.disabled: true
     network.host: 0.0.0.0
 extraEnvs:
   - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
@@ -31,11 +32,11 @@ image:
 podAnnotations: {}
 openSearchAnnotations: {}
 labels: {}
-opensearchJavaOpts: "-Xmx512M -Xms512M"
+opensearchJavaOpts: "-Xmx2G -Xms512M"
 resources:
   requests:
-    cpu: "1000m"
-    memory: "100Mi"
+    cpu: "2000m"
+    memory: "4Gi"
 initResources: {}
 sidecarResources: {}
 networkHost: "0.0.0.0"
@@ -71,7 +72,7 @@ persistence:
   storageClass: piraeus-datastore
   accessModes:
     - ReadWriteOnce
-  size: 8Gi
+  size: 80Gi
   annotations: {}
 extraVolumes: []
 extraVolumeMounts: []

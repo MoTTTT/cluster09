@@ -41,6 +41,9 @@ secretMounts: []
 podAnnotations: {}
 dashboardAnnotations: {}
 extraEnvs: []
+#extraEnvs:
+#  - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+#    value: 0P3n5e@rch!
 envFrom: []
 extraVolumes: []
 extraVolumeMounts: []
@@ -81,7 +84,7 @@ resources:
     memory: "512M"
   limits:
     cpu: "800m"
-    memory: "512M"
+    memory: "4G"
 autoscaling:
   enabled: false
   minReplicas: 1
