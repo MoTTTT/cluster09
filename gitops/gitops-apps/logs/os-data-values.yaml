@@ -17,7 +17,6 @@ config:
   opensearch.yml: |
     cluster.name: opensearch-cluster
     plugins.ml_commons.only_run_on_ml_node: false
-    plugins.security.disabled: true
     network.host: 0.0.0.0
 extraEnvs:
   - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD

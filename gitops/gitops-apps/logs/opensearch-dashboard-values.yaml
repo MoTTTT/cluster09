@@ -1,4 +1,4 @@
-opensearchHosts: "http://opensearch-cluster-master:9200"
+opensearchHosts: "https://opensearch-cluster-master:9200"
 replicaCount: 1
 image:
   repository: "opensearchproject/opensearch-dashboards"
@@ -41,9 +41,6 @@ secretMounts: []
 podAnnotations: {}
 dashboardAnnotations: {}
 extraEnvs: []
-#extraEnvs:
-#  - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
-#    value: 0P3n5e@rch!
 envFrom: []
 extraVolumes: []
 extraVolumeMounts: []
