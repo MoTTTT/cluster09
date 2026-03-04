@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: openclaw
 resources:
   - openclaw.yaml
+  - proxmox-secret.yaml
 configMapGenerator:
   - name: openclaw-values
     files:
