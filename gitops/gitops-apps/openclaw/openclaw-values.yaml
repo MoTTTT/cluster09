@@ -1,3 +1,7 @@
+app-template:
+  openclawVersion: "2026.3.1"
+  configMode: merge
+
 expose:
   type: route
   tls:
@@ -10,6 +14,6 @@ expose:
         namespace: kube-system
         kind: Gateway
     hosts: 
-      - openclaw.podzone.cloud
+      - thoth.podzone.cloud
 
-externalURL: https://openclaw.podzone.cloud
+externalURL: https://thoth.podzone.cloud
