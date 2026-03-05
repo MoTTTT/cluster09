@@ -1,27 +1,30 @@
 # Planning: cluster09
 
-## 1. Backlog
-- Full migration of `openclaw` application to the new dedicated cluster.
-- Re-enabling logging (fluentbit) and observability for the new cluster environment.
-- Post-migration cleanup of legacy cluster definitions and unused manifests.
-- **GitOpsGui**: An abstraction layer on top of cluster and workload management.
-- **cluster-chart**: Add support for default CAPI cluster and bootstrap providers (i.e. in addition to talos).
-- **Documentation**: Build out cluster09 mkdocs site.
-- **gitops-apps/observability**: Refactor to use opensearch operator helm chart.
+> ⚠️ **IMPORTANT**: This project follows the [AgentWorkFlow.md](./AgentWorkFlow.md) pattern.
+> - **Primary Task List**: [planning/tasks.md](./planning/tasks.md)
+> - **Activity Log**: [planning/changelog.md](./planning/changelog.md)
+> - **Task Routing**: High reasoning → Claude Code | Routine/Template → Ollama.
 
-## 2. Tasks in breakdown
-- **Connectivity Recovery**: Investigate the "no route to host" error when reaching the Management Cluster API at `192.168.4.170:6443`.
-- **CAPI Validation**: Verify the status of the `openclaw` Cluster API resource and ensure the Proxmox provider is reconciling correctly with the namespaced secret.
-- **Evaluate openclaw installation**:
-    - [ ] **Get Access to Cluster**: Retrieve `talosconfig` and `kubeconfig` secrets from the Management Cluster. (Testing/Refining `NOTES.txt` instructions).
-    - [ ] **Streamlined Flux Bootstrap**: Implement the simplified bootstrap process (apply SOPS key to `flux-system` namespace; core manifests pre-loaded via Talos `extraManifests`).
-    - [ ] **Check Flux Status**: Verify reconciliation on the new cluster.
-    - [ ] **Fix Networking**: Configure Gateway/HTTPRoute for `thoth.podzone.cloud`, Cloudflare NS record, and bastion server cert/route.
+## Current Focus
+Establish `openclaw` cluster connectivity and complete Flux bootstrap.
 
-## 3. Tasks scheduled
-- [ ] **Secret Application**: Manually apply the `proxmox-secret.yaml` (with `openclaw` namespace) to the management cluster via `freyr`.
-- [ ] **Hypervisor Check**: Run `qm list` on `venus` (192.168.4.50) to confirm if `openclaw-control-plane` and `openclaw-worker` VMs have been initialized.
-- [ ] **Context Update & Cleanup**: On `freyr`, remove retired contexts (`cluster08`, `wso2`, `management`) and add the `openclaw` context from the `openclaw-kubeconfig` secret.
-- [ ] **IP Documentation**: Create `documentation/IPAdressManagement.md` documenting the 10-IP allocation logic and current ranges.
-- [ ] **Gateway Manifests**: Create `gitops/gitops-gateway/openclaw/openclaw-gateway.yaml` for `thoth.podzone.cloud` (verify TLD: .cloud vs .net).
-- [ ] **Bootstrap Wiring**: Restore `- ../infrastructure.yaml` and `- ../openclaw-apps.yaml` to `clusters/openclaw/flux-system/kustomization.yaml` once nodes are Ready.
+## 1. Backlog (High Level)
+- Full migration of `openclaw` application to the new cluster.
+- Re-enable logging/observability for new cluster.
+- Cleanup legacy cluster manifests.
+- **GitOpsGui**: Abstraction layer for management.
+- **cluster-chart**: Support additional CAPI/bootstrap providers.
+
+## 2. In Progress / Scheduled (Short Term)
+*See [planning/tasks.md](./planning/tasks.md) for detailed task tracking and routing.*
+
+- **Connectivity Recovery**: Reach Management API at `192.168.4.170:6443`.
+- **CAPI Validation**: Verify Proxmox provider reconciliation.
+- **Cluster Access**: Retrieve `talosconfig`/`kubeconfig`.
+- **Flux Bootstrap**: Apply SOPS key and restore infrastructure wiring.
+- **Networking**: Configure Gateway/HTTPRoute and Cloudflare NS.
+- **Documentation**: Finalize IP Address allocation logic.
+
+## 3. Human Review Required
+- [ ] Confirm `thoth.podzone.cloud` vs `.net` TLD for the gateway.
+- [ ] Review `gitops-gateway/openclaw/openclaw-gateway.yaml` HTTPRoute.

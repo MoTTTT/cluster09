@@ -62,7 +62,8 @@ The secret required for flux to bootstrap a cluster by connecting to your GitOps
 
 - If GitOps is working as intended, and a cluster does not need any petting, the need to for direct use of the kubernetes api is limited to the installation of private keys.
 - Ideally, a cluster start-up pod could generate the necessary keys, and install them onto the cluster, publishing the public key.
-- Install secret: `cat age.agekey | kubectl create secret generic sops-age --namespace=flux-system --from-file=age.agekey=/dev/stdin`
+- To install the SOPS age key on a cluster (e.g. from `freyr`):
+  $ cat ~/.config/cluster-api/age.agekey | kubectl create secret generic sops-age --namespace=flux-system --from-file=age.agekey=/dev/stdin
 
 ### Inclusion of encrypted secrets into GitOps repos
 
