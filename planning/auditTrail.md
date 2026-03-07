@@ -11,6 +11,19 @@ A timestamped record of system administration activity performed by OpenClaw (Tr
 - **Action**: Closed [TASK-001] in `planning/tasks.md`.
 - **Action**: Updated `planning/prompts.md` and `planning/auditTrail.md` with current session activity.
 
+### 03:31 GMT
+- **Action**: Updated `values.yaml` for Qdrant, Ollama, and OpenClaw to use the `piraeus-storage-replicated` StorageClass.
+- **Reason**: Ensure persistent volumes are provisioned correctly using the cluster's replicated storage pool.
+
+### 02:42 GMT
+- **Action**: Patched `coredns` ConfigMap to use `1.1.1.1` and `8.8.8.8` as upstream forwarders.
+- **Action**: Verified DNS resolution from a test pod (`dns-test`) succeeded for `github.com`.
+- **Reason**: Unblock HelmRepository reconciliation for external domains.
+
+### 02:05 GMT
+- **Action**: Initialized `planning/prompts.md` and `planning/auditTrail.md` for historical tracking.
+- **Action**: Updated `planning/tasks.md` with TASK-011 (Ollama performance evaluation).
+
 ### 01:25 GMT
 - **Action**: Cleaned up `clusters/openclaw/flux-system/kustomization.yaml` by removing duplicate resource entries (`../infrastructure.yaml`, `../openclaw-apps.yaml`).
 - **Reason**: Fix "already registered id" error in Flux reconciliation.

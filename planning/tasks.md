@@ -148,11 +148,27 @@
 
 ### [TASK-013] Fix Helm Chart Repositories
 - **Assigned**: 🧠 Claude Code
-- **Status**: ⚠️ Blocked
+- **Status**: ✅ Completed
 - **Subtasks**:
-  - [ ] **OpenClaw**: The repository `https://filipegalo.github.io/openclaw-with-brain` is returning a 404 for `index.yaml`. Verify the correct GitHub Pages URL or chart location.
-  - [ ] **Ollama**: Fix `ollama-values.yaml` - the `otwld/ollama` chart is failing with `can't evaluate field create in type interface {}` (likely a schema mismatch in `ollama.models`).
-  - [ ] **Qdrant**: Investigate the `context deadline exceeded` error during installation.
+  - [x] **OpenClaw**: Switched to community chart `https://serhanekicii.github.io/openclaw-helm`, chart `openclaw-helm`, version `1.3.22`. (filipegalo chart has no GitHub Pages.)
+  - [x] **Ollama**: Fixed `ollama-values.yaml` — otwld/ollama v1.x changed schema from flat `ollama.models` list to `ollama.models.pull` list.
+  - [x] **Qdrant**: URL `https://qdrant.github.io/qdrant-helm` confirmed valid (HTTP 200). `context deadline exceeded` was likely a transient network issue; no manifest changes needed.
+
+### [TASK-014] GitOpsGUI — Requirements Breakdown & Build Tasks
+- **Assigned**: 🧠 Claude Code
+- **Status**: ✅ Completed
+- **Requirements**: [planning/requirements/gitopsgui.md](./requirements/gitopsgui.md)
+- **Output**: [planning/requirements/gitopsgui-tasks.md](./requirements/gitopsgui-tasks.md)
+- **Goal**: Break down the GitOpsGUI requirements into implementable build tasks covering API, data model, and UI layers.
+- **Subtasks**:
+  - [x] Read and analyse `planning/requirements/gitopsgui.md`.
+  - [x] Define API resource model: `cluster`, `application`, `change-pipeline` (REST CRUD operations).
+  - [x] Design gitops repo as object storage — define directory/file conventions for each resource type.
+  - [x] Break down UI views: cluster list/provision, workload list/add, change pipeline view, status dashboard.
+  - [x] Identify technology stack (Python FastAPI + React, deployed via Helm on openclaw cluster).
+  - [x] Create build task breakdown in `planning/requirements/gitopsgui-tasks.md`.
+
+## ✅ Completed
 - [x] Initialized cluster09 workspace.
 - [x] Created `openclaw` cluster definition and `ManagementCluster` entry.
 - [x] Updated `cluster-chart` NOTES.txt with streamlined bootstrap.

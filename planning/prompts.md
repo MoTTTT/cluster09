@@ -6,14 +6,17 @@ A timestamped record of prompts and instructions from Martin.
 
 ## 2026-03-07
 
-### 02:05 GMT
-**Request**: Please see task [TASK-011]
+### 03:36 GMT
+**Report**: Awesome, pushed
 
-### 01:39 GMT
-**Request**: Please unblock tasks waiting on DNS solution
+### 03:31 GMT
+**Request**: We need to set StorageClass probably. Please use the replicated one (piraeus-storage-replicated)
 
-### 01:34 GMT
-**Request**: Awesome. Can we close TASK-001?
+### 03:29 GMT
+**Request**: Please add task Task: Note the documentation in docs/AddingClusters.md and AddingApplications.md, and propose refinements in the instructions based on what we have leared.
+
+### 02:57 GMT
+**Report**: There is still a recnciliation issue in the kustomizations
 
 ### 00:28 GMT
 **Request**: Please add the following tasks to the plan:

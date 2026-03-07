@@ -1,10 +1,10 @@
 replicaCount: 1
 
 ollama:
-  # Models to pull on startup
   models:
-    - nomic-embed-text
-    - phi3.5
+    pull:
+      - nomic-embed-text
+      - phi3.5
 
 resources:
   requests:

@@ -6,6 +6,22 @@ Requirements
 - As a cluster operator I would like to take a workload specification and add a workload to the specified cluster
 - As a cluster operator I would like to update cluster OS, and kubernetes version
 - As a cluster operator I would like to view the status of kustomizations, helm charts, helm releases, and repo synchronisation is the management, and hosted clusters
+- As a cluster operator I would like to view the change pipeline from dev, through end-to-end deployment, to production
+- As a cluster operator I would like to view dev and end to end deployment history
+- As a cluster operator I would like to view dev and end to end testing results
+- As a cluster operator I would like to view PR reviews for platform change migration deployment.
+- As a cluster operator I would like to manage PR approvals for platform change migration deployment.
+- As a cluster operator I would like to view gitops status {repo sync, flux gitops infrastructure and application kustomizations, chart repo, chart release, deloyments, pods, etc}
+- As a cluster operator I would like to zoom in on a gitops status, to see the detail of the object (k8s describe)
+- As a cluster operator I would like to zoom in on a gitops status, to see the logs of the object (k8s logs) if applicable
+- As a build manager I would like to add a change pipeline specification
+- As a build manager I would like to view RP reviews, and manage approvals
+- As a build manager I would like to extract dev and end-to-end kubeconfig credentials
+- As a cluster operator I would like to extract dev, end-to-end, and production kubeconfig credentials
+- Business rule: Deployment to dev can be approved by build manager
+- Business rule: Deployment to end-to-end can be approved by build manager
+- Business rule: Deployment to production requires approval by both cluster operators and build manager
+- Note that these need to be enforced at the git forge repo access and authorisation level
 
 Deployment platform specification
 
@@ -20,6 +36,7 @@ Cluster specification
 - Cluster dimensions (control plane and worker node counts, CPU and memory per node type, boot volume size, etc)
 - GitOps Repo URL (infrastructure configuration, and application configuration)
 - Git Repo SOPS encrypted secret
+- Cluster kubeconfig (generated, extracted from management cluster, redacted/SOPS encrypted)
 
 Application specification
 
@@ -38,17 +55,18 @@ Change pipeline specification
 - Chart version
 - Release ID
 
-Application change specification
+Application change specification required for hosted developments
 
-- If hosted: Application repo branch
-- If hosted: Change request ID / Incident ID / Problem ID
+- Change request ID / Incident ID / Problem ID
+- Change description
+- Application repo branch
 
-Advanced requirements:
+GitOps Git repo specification
 
-- As a cluster operator I would like to view the change pipeline from dev, through end-to-end deployment, to production
-- As a cluster operator I would like to view dev and end to end deployment history
-- As a cluster operator I would like to view dev and end to end testing results
-- As a cluster operator I would like to manage PR approvals for platform change migration deployment.
+- Guard rails for change review and approvals on repo configuration
+- Make use of git forge features to record and manage PR communications
+- Tag git repos with deployment (git PM merge approval commit)
+- cluster operator and build manager approve PR merge
 
 Technical requirements:
 
@@ -57,3 +75,6 @@ Technical requirements:
 - API Rest resource: cluster, POST takes cluster specification, GET with cluster name returns specification, without returns list of clusters
 - API Rest resource: application, POST takes application specification, GET with application name returns specification, without returns list of applications
 - API Rest resource: change pipeline, POST takes change pipeline specification, GET with change pipeline name returns specification, without returns list of change pipelines
+- GitOpsGUI refers to the Front end that calls the API
+- GitOpsAPI Uses git git review and approval process to govern change progression to production. This triggers target cluster changes via the git gitops sync process
+- management cluster k8s cluster API credentials for the management cluster required to extract new cluster kubeconfig entries to encrypt and add to cluster specification
