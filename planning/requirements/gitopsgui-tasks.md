@@ -17,8 +17,9 @@
 
 | Role | Responsibilities |
 |---|---|
-| Cluster Operator | Provision clusters, add workloads, view cluster/app/Flux status, approve PRs for platform changes, extract kubeconfig for dev/ETE/production clusters |
-| Build Manager | Define change pipelines, track dev→ETE→prod progression, view/manage PR approvals, view test results and deployment history, extract kubeconfig for dev/ETE clusters |
+| Cluster Operator | Provision clusters, add workloads, view cluster/app/Flux status, approve PRs for platform changes, extract kubeconfig for dev/ETE/production clusters, interrogation use cases |
+| Build Manager | Define change pipelines, track dev→ETE→prod progression, trigger/manage PR approvals from pipeline detail and approval list views, view test results and deployment history, extract kubeconfig for dev/ETE clusters, interrogation use cases |
+| Senior Developer | Extract dev/ETE kubeconfig credentials, interrogation use cases (read-only: status, describe, logs, resource listing) |
 
 ---
 
@@ -29,7 +30,7 @@
 | Backend API (GitOpsAPI) | Python + FastAPI | Clean REST, native Kubernetes client, GitPython for repo/PR ops |
 | Git operations | GitPython + GitHub API (PyGitHub) | Read/write files; create and manage PRs via GitHub API |
 | Kubernetes status | `kubernetes` Python client | Query Flux kustomizations, HelmReleases, pod status |
-| Frontend (GitOpsGUI) | React + Vite | Role-aware views for Cluster Operator and Build Manager |
+| Frontend (GitOpsGUI) | React + Vite | Role-aware views for Cluster Operator, Build Manager, and Senior Developer |
 | Auth | OAuth2 proxy (existing) + Keycloak | Already deployed in `gitops/gitops-apps/security/`; roles via Keycloak groups |
 | Container | Docker, multi-stage build | Build frontend, serve static via FastAPI |
 | Deployment | Helm chart in `charts/gitopsgui/` | Consistent with repo pattern; deployed as Flux app |
@@ -46,7 +47,7 @@ All writes go via feature branches + PRs. Flux reconciles after PR merge.
 | Cluster | `clusters/<name>/` | `flux-system/kustomization.yaml`, values in `gitops/cluster-charts/<name>/`, `kubeconfig.sops.yaml` (SOPS-encrypted) |
 | Application | `gitops/gitops-apps/<name>/` | `<name>.yaml`, `<name>-values.yaml`, `kustomization.yaml` |
 | Change Pipeline | `pipelines/<name>/` | `pipeline.yaml` — dev/ETE/prod cluster IDs, app ID, chart version, release ID |
-| App Change Spec | `pipelines/<name>/changes/<change-id>/` | `change.yaml` — change request ID, description, branch |
+| App Change Spec | `pipelines/<name>/changes/<change-id>/` | `change.yaml` — change request ID, change name, description, branch |
 | Deployment History | `pipelines/<name>/history/` | Per-release YAML records with timestamps and status |
 | Test Results | `pipelines/<name>/history/<release-id>/tests/` | Test result YAML/JSON per run |
 
@@ -126,7 +127,7 @@ Write operation
 #### [GITGUI-007] Change pipeline object reader/writer
 - `pipeline.yaml` schema: dev_cluster_id, ete_cluster_id, prod_cluster_id, app_id, chart_version, release_id
 - `list_pipelines()`, `get_pipeline(name)`, `create_pipeline(spec)` — writes + PR
-- `create_change(pipeline, change_spec)` — writes `changes/<change-id>/change.yaml` (change_request_id, description, branch), opens PR
+- `create_change(pipeline, change_spec)` — writes `changes/<change-id>/change.yaml` (change_request_id, change_name, description, branch), opens PR
 - `record_deployment(pipeline, release_id, status)` — append to `history/`
 - `record_test_results(pipeline, release_id, results)` — write to `history/<release-id>/tests/`
 
@@ -134,11 +135,14 @@ Write operation
 
 ### Phase 3 — Kubernetes Status Service
 
-#### [GITGUI-008] Flux status queries
+#### [GITGUI-008] Flux status queries and interrogation service
 - `get_kustomization_status(name, namespace)` — Flux `kustomize.toolkit.fluxcd.io/v1` resource
 - `get_helmrelease_status(name, namespace)` — Flux `helm.toolkit.fluxcd.io/v2` resource
 - `get_helmrepository_status(name, namespace)`
 - `list_all_flux_status(cluster)` — aggregate status for dashboard view
+- `describe_resource(cluster, kind, namespace, name)` — returns full object (equivalent to `kubectl describe`); supports Kustomization, HelmRelease, HelmRepository, Deployment, Pod
+- `get_logs(cluster, namespace, pod_name, container)` — returns recent log lines for a pod/container
+- `list_resources(cluster, kind, namespace)` — list any k8s resource kind with status summary
 
 #### [GITGUI-009] Kubeconfig extraction service
 - Connect to the management cluster using a dedicated management cluster kubeconfig (env: `MGMT_KUBECONFIG_SECRET`)
@@ -147,6 +151,7 @@ Write operation
 - `store_kubeconfig(cluster_name, encrypted_kubeconfig)` — write `clusters/<name>/kubeconfig.sops.yaml` to gitops repo (via PR), updating the cluster spec
 - `get_kubeconfig(cluster_name, caller_role)` — decrypt and return kubeconfig, role-gated:
   - Build Manager: dev and ETE clusters only
+  - Senior Developer: dev and ETE clusters only
   - Cluster Operator: dev, ETE, and production clusters
 - Internal: per-request context switching for Flux/status queries using decrypted kubeconfigs
 
@@ -196,10 +201,13 @@ Business rule enforcement:
 - Enforcement is **primarily at the forge level** (branch protection rules — see GITGUI-025); the API mirrors the same rules for display and UX guidance
 - The `/approve` endpoint checks caller role against PR stage label and returns 403 if the role is not permitted to approve that stage
 
-#### [GITGUI-014] Status API endpoint
+#### [GITGUI-014] Status and Interrogation API endpoints
 ```
-GET    /api/v1/status              — aggregate Flux status across all clusters
-GET    /api/v1/status/{cluster}    — per-cluster kustomization + HelmRelease summary
+GET    /api/v1/status                                                          — aggregate Flux status across all clusters
+GET    /api/v1/status/{cluster}                                                — per-cluster kustomization + HelmRelease summary
+GET    /api/v1/status/{cluster}/resources                                      — list all resources (Deployments, Pods, etc.) with status
+GET    /api/v1/status/{cluster}/resources/{kind}/{namespace}/{name}            — describe a resource (equivalent to kubectl describe)
+GET    /api/v1/status/{cluster}/resources/{kind}/{namespace}/{name}/logs       — fetch logs for a pod/container
 ```
 
 ---
@@ -208,15 +216,23 @@ GET    /api/v1/status/{cluster}    — per-cluster kustomization + HelmRelease s
 
 #### [GITGUI-015] App shell, routing and role-aware nav
 - React Router with views grouped by role
-- Auth: redirect to Keycloak via OAuth2 proxy; read role from JWT (`cluster_operator` / `build_manager`)
-- Cluster Operator nav: Dashboard, Clusters, Applications, PR Reviews
-- Build Manager nav: Pipelines, PR Reviews, Test Results, Deployment History
+- Auth: redirect to Keycloak via OAuth2 proxy; read role from JWT (`cluster_operator` / `build_manager` / `senior_developer`)
+- Cluster Operator nav: Dashboard, Clusters, Applications, PR Reviews, Interrogation
+- Build Manager nav: Pipelines, PR Reviews, Test Results, Deployment History, Interrogation
+- Senior Developer nav: Interrogation, Kubeconfig (dev/ETE only)
 - Global Flux sync status indicator in header
 
 #### [GITGUI-016] Status dashboard (Cluster Operator)
 - Aggregate view: clusters, kustomizations, HelmReleases, HelmRepositories with status badges
 - Filter by cluster, status
 - Auto-refresh every 30s
+
+#### [GITGUI-026] Interrogation views (all roles)
+- **Status tree**: hierarchical view of repo sync → Flux kustomizations → HelmRepositories → HelmReleases → Deployments → Pods, each with a status badge
+- **Resource detail panel**: click any item → calls `GET /api/v1/status/{cluster}/resources/{kind}/{namespace}/{name}` → renders describe-equivalent output (conditions, events, spec summary)
+- **Log viewer panel**: for Pod resources, "View Logs" button → calls `.../logs` → scrollable log output with auto-tail option
+- **Resource list view**: tabular listing of applications, clusters, change pipelines, change specs — with PR/review/approval status columns
+- Accessible to all three roles (Cluster Operator, Build Manager, Senior Developer)
 
 #### [GITGUI-017] Cluster list + provision form (Cluster Operator)
 - Table: cluster name, node count, Flux status, k8s version
@@ -238,9 +254,10 @@ GET    /api/v1/status/{cluster}    — per-cluster kustomization + HelmRelease s
 #### [GITGUI-020] Change pipeline view (Build Manager)
 - Pipeline swimlane: Dev → ETE → Production
 - Per-stage: chart version deployed, last reconcile time, Flux status
-- Add change spec form: change request ID, description, app branch → `POST /api/v1/pipelines/{name}/changes`
+- Add change spec form: change request ID, change name, description, app branch → `POST /api/v1/pipelines/{name}/changes`
 - Promote button → `POST /api/v1/pipelines/{name}/promote` → shows resulting PR link
 - Per-stage "Download kubeconfig" button for dev and ETE stages → `GET /api/v1/clusters/{cluster_id}/kubeconfig`
+- Inline PR approval: pipeline detail view shows pending PRs with approve/merge buttons (same role-gated controls as GITGUI-019)
 
 #### [GITGUI-021] Deployment history + test results (Build Manager)
 - Timeline view of releases per pipeline
@@ -272,7 +289,7 @@ GET    /api/v1/status/{cluster}    — per-cluster kustomization + HelmRelease s
   clusters/*/   @org/cluster-operators
   gitops/gitops-apps/*/  @org/cluster-operators
   ```
-- Configure GitHub teams: `build-managers`, `cluster-operators` — sync membership with Keycloak groups
+- Configure GitHub teams: `build-managers`, `cluster-operators`, `senior-developers` — sync membership with Keycloak groups
 - Enable "Require conversation resolution before merging"
 - Enable signed commits (optional, for stronger deployment provenance alongside git tags)
 - Document repo configuration steps in `docs/GitOpsRepoSetup.md`
@@ -283,7 +300,7 @@ GET    /api/v1/status/{cluster}    — per-cluster kustomization + HelmRelease s
 - Kubernetes secret for **management cluster kubeconfig** — used to extract new cluster kubeconfigs via CAPI secrets
 - Kubernetes secret for age key — used by GITGUI-009 to SOPS-encrypt kubeconfigs before writing to gitops repo
 - ClusterRole for Flux resource reads
-- Keycloak groups: `cluster-operators`, `build-managers` — map to app roles
+- Keycloak groups: `cluster-operators`, `build-managers`, `senior-developers` — map to app roles
 - Document secret creation commands in chart NOTES.txt
 
 ---
@@ -298,8 +315,9 @@ GITGUI-001 → GITGUI-002
                         → GITGUI-007 → GITGUI-012
            → GITGUI-004 → GITGUI-013
            → GITGUI-008 → GITGUI-009 → GITGUI-014
-GITGUI-010..014 → GITGUI-015..021 (frontend)
-GITGUI-001..021 → GITGUI-022 → GITGUI-023 → GITGUI-024
+GITGUI-010..014 → GITGUI-015..021, GITGUI-026 (frontend)
+GITGUI-008     → GITGUI-026
+GITGUI-001..026 → GITGUI-022 → GITGUI-023 → GITGUI-024
 ```
 
 ---

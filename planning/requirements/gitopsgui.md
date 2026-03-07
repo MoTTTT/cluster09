@@ -11,17 +11,22 @@ Requirements
 - As a cluster operator I would like to view dev and end to end testing results
 - As a cluster operator I would like to view PR reviews for platform change migration deployment.
 - As a cluster operator I would like to manage PR approvals for platform change migration deployment.
-- As a cluster operator I would like to view gitops status {repo sync, flux gitops infrastructure and application kustomizations, chart repo, chart release, deloyments, pods, etc}
-- As a cluster operator I would like to zoom in on a gitops status, to see the detail of the object (k8s describe)
-- As a cluster operator I would like to zoom in on a gitops status, to see the logs of the object (k8s logs) if applicable
 - As a build manager I would like to add a change pipeline specification
-- As a build manager I would like to view RP reviews, and manage approvals
+- As a build manager I would like to trigger RP approvals for a change pipeline, from reviews detail and approval list views
 - As a build manager I would like to extract dev and end-to-end kubeconfig credentials
 - As a cluster operator I would like to extract dev, end-to-end, and production kubeconfig credentials
 - Business rule: Deployment to dev can be approved by build manager
 - Business rule: Deployment to end-to-end can be approved by build manager
 - Business rule: Deployment to production requires approval by both cluster operators and build manager
 - Note that these need to be enforced at the git forge repo access and authorisation level
+- As a senior developer I would like to extract dev and end-to-end kubeconfig credentials
+- As a senior developer, build manager, and cluster operator, I would like use Interrogation use cases
+
+- Interrogation use cases:
+- I would like to view gitops status {repo sync, flux gitops infrastructure and application kustomizations, chart repo, chart release, deloyments, pods, etc}
+- I would like to zoom in on a gitops status, to see the detail of the object (k8s describe)
+- I would like to zoom in on a gitops status, to see the logs of the object (k8s logs) if applicable
+- I would like to list applications, releases, clusters, change pipelines, and application change specifications, and review and approval status
 
 Deployment platform specification
 
@@ -58,6 +63,7 @@ Change pipeline specification
 Application change specification required for hosted developments
 
 - Change request ID / Incident ID / Problem ID
+- Change Name
 - Change description
 - Application repo branch
 

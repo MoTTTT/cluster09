@@ -167,8 +167,36 @@
   - [x] Break down UI views: cluster list/provision, workload list/add, change pipeline view, status dashboard.
   - [x] Identify technology stack (Python FastAPI + React, deployed via Helm on openclaw cluster).
   - [x] Create build task breakdown in `planning/requirements/gitopsgui-tasks.md`.
+  - [x] Updated spec for Senior Developer role, Interrogation use cases, change_name field (spec revisions).
+
+### [TASK-015] GitOpsGUI — Phase 1 + 2 Scaffold (GITGUI-001/002)
+- **Assigned**: 🧠 Claude Code
+- **Status**: ✅ Completed
+- **Output**: `src/gitopsgui/`, `pyproject.toml`, `Dockerfile`, `docker-compose.yml`, `Makefile`
+- **Subtasks**:
+  - [x] `src/gitopsgui/api/` — FastAPI app, routers (clusters, applications, pipelines, prs, status), JWT auth
+  - [x] `src/gitopsgui/services/` — service layer skeletons (git, github, cluster, app, pipeline, k8s, kubeconfig)
+  - [x] `src/gitopsgui/models/` — Pydantic models (cluster, application, pipeline, pr, status)
+  - [x] `src/gitopsgui/frontend/` — React + Vite scaffold with role-aware routing (App.jsx, main.jsx)
+  - [x] `pyproject.toml` — Python dependencies (FastAPI, GitPython, PyGithub, kubernetes client)
+  - [x] `Dockerfile` — multi-stage: Node frontend build + Python API
+  - [x] `docker-compose.yml` — local dev stack with env var wiring
+  - [x] `Makefile` — `make dev`, `make test`, `make build`, `make up`
+
+### [TASK-016] Scheduled Code Quality & Security Scans
+- **Assigned**: 🧠 Claude Code
+- **Status**: Scheduled
+- **Goal**: Add automated code scanning to the GitOpsGUI CI pipeline on a regular schedule.
+- **Subtasks**:
+  - [ ] Add GitHub Actions workflow `.github/workflows/code-scan.yml` triggered on push + weekly schedule.
+  - [ ] **Python security scan**: `bandit -r src/` (OWASP-aligned static analysis).
+  - [ ] **Python linting/type check**: `ruff check src/` and `mypy src/`.
+  - [ ] **Dependency vulnerability scan**: `pip-audit` for Python packages; `npm audit` for frontend.
+  - [ ] **SAST/secrets scan**: `trufflesecurity/trufflehog` or `gitleaks` to prevent accidental secret commits.
+  - [ ] Upload results as GitHub Actions artifacts and annotate PRs with findings.
 
 ## ✅ Completed
+
 - [x] Initialized cluster09 workspace.
 - [x] Created `openclaw` cluster definition and `ManagementCluster` entry.
 - [x] Updated `cluster-chart` NOTES.txt with streamlined bootstrap.
