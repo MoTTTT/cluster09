@@ -60,13 +60,14 @@
 
 ### [TASK-006] OpenClaw Application Deployment
 - **Assigned**: 🧠 Claude Code
-- **Status**: Planned
+- **Status**: ✅ Completed (2026-03-07 01:06 GMT)
 - **Requirements**: [planning/requirements/openclaw-deployment.md](./requirements/openclaw-deployment.md)
-- **Goal**: Create local Helm chart or raw manifests for OpenClaw application.
+- **Goal**: Deploy OpenClaw application via `filipegalo/openclaw-with-brain` Helm chart.
 - **Subtasks**:
-  - [ ] Document OpenClaw deployment requirements (image, config, ports, volumes).
-  - [ ] Create Helm chart in `charts/openclaw/`.
-  - [ ] Update HelmRelease to use local chart source.
+  - [x] Document OpenClaw deployment requirements (image, config, ports, volumes).
+  - [x] Select Helm chart — using `filipegalo/openclaw-with-brain` v0.1.20 (see `planning/OpenclawHelmChartSelection.md`).
+  - [x] Fix HelmRepository URL (`https://filipegalo.github.io/openclaw-with-brain`) and chart name/version in `gitops/gitops-apps/openclaw/openclaw.yaml`.
+  - [ ] Fix CoreDNS upstream forwarders on openclaw cluster (unblocks HelmRepository reconciliation).
   - [ ] Test deployment in openclaw cluster.
 
 ### [TASK-007] Networking & Gateway Config
@@ -92,9 +93,14 @@
     - [ ] Use Helm repo `https://qdrant.github.io/qdrant-helm`, chart `qdrant/qdrant`, version `1.17.0`.
     - [ ] Configure persistence and memory (2-4Gi as per recommendation).
 
----
-
-## 🔮 Backlog (Lower Priority)
+### [TASK-009] Fix Cluster DNS resolution
+- **Assigned**: 🧠 Claude Code
+- **Status**: Scheduled
+- **Goal**: Configure CoreDNS upstream forwarders to resolve external domains.
+- **Subtasks**:
+  - [ ] Patch CoreDNS ConfigMap to forward to `1.1.1.1` and `8.8.8.8`.
+  - [ ] Verify external DNS resolution from within a pod.
+  - [ ] Trigger HelmRepository reconciliation once unblocked.
 
 ### [TASK-007] AgentSync Repository Migration
 - **Assigned**: 🦉 OpenClaw (orchestration) + 🧠 Claude Code (scripting)
