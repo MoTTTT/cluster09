@@ -1,0 +1,17 @@
+replicaCount: 1
+
+persistence:
+  enabled: true
+  size: 30Gi
+
+resources:
+  requests:
+    memory: "2Gi"
+    cpu: "500m"
+  limits:
+    memory: "4Gi"
+    cpu: "1000m"
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 1

@@ -1,0 +1,19 @@
+replicaCount: 1
+
+ollama:
+  # Models to pull on startup
+  models:
+    - nomic-embed-text
+    - phi3.5
+
+resources:
+  requests:
+    cpu: "2000m"
+    memory: "4Gi"
+  limits:
+    cpu: "8000m"
+    memory: "16Gi"
+
+persistentVolume:
+  enabled: true
+  size: 20Gi

@@ -16,11 +16,12 @@
 
 ### [TASK-001] Connectivity & CAPI Validation
 - **Assigned**: 🦉 OpenClaw
-- **Status**: Investigating "no route to host" at `192.168.4.170:6443`.
+- **Status**: ✅ Completed (2026-03-07 01:34 GMT)
 - **Requirements**: [planning/requirements/connectivity.md](./requirements/connectivity.md)
+- **Outcome**: Verified full connectivity to the Management Cluster API. CAPI `openclaw` resource is in the `Provisioned` phase.
 - **Subtasks**:
-  - [ ] Verify `openclaw` CAPI resource status.
-  - [ ] Check Proxmox provider reconciliation with namespaced secret.
+  - [x] Verify `openclaw` CAPI resource status.
+  - [x] Check Proxmox provider reconciliation with namespaced secret.
 
 ### [TASK-002] Context & Secret Management
 - **Assigned**: 🦉 OpenClaw
@@ -48,27 +49,26 @@
 
 ### [TASK-005] OpenClaw Cluster Bootstrap
 - **Assigned**: 🦉 OpenClaw
-- **Status**: ⚠️ Blocked (missing Helm chart)
+- **Status**: ✅ Completed (2026-03-07 01:24 GMT)
 - **Requirements**: [planning/requirements/openclaw-deployment.md](./requirements/openclaw-deployment.md)
 - **Subtasks**:
   - [x] Retrieve `talosconfig` and `kubeconfig`.
   - [x] Apply SOPS age key to `flux-system` namespace.
   - [x] Restore infrastructure/app wiring in `flux-system/kustomization.yaml`.
   - [x] Verify Flux infrastructure reconciliation (all kustomizations Ready).
-  - [ ] **BLOCKER**: `https://charts.openclaw.ai/` doesn't exist. Need to create local Helm chart or use raw manifests.
-- **Note**: Flux is working perfectly. All infrastructure kustomizations are Applied. OpenClaw application deployment blocked on missing Helm repository.
+  - [x] Clean up duplicate resources in `flux-system/kustomization.yaml` (fixed duplicate registration error).
 
 ### [TASK-006] OpenClaw Application Deployment
 - **Assigned**: 🧠 Claude Code
-- **Status**: ✅ Completed (2026-03-07 01:06 GMT)
+- **Status**: 🚀 In Progress (Awaiting reconciliation)
 - **Requirements**: [planning/requirements/openclaw-deployment.md](./requirements/openclaw-deployment.md)
 - **Goal**: Deploy OpenClaw application via `filipegalo/openclaw-with-brain` Helm chart.
 - **Subtasks**:
   - [x] Document OpenClaw deployment requirements (image, config, ports, volumes).
-  - [x] Select Helm chart — using `filipegalo/openclaw-with-brain` v0.1.20 (see `planning/OpenclawHelmChartSelection.md`).
-  - [x] Fix HelmRepository URL (`https://filipegalo.github.io/openclaw-with-brain`) and chart name/version in `gitops/gitops-apps/openclaw/openclaw.yaml`.
-  - [ ] Fix CoreDNS upstream forwarders on openclaw cluster (unblocks HelmRepository reconciliation).
-  - [ ] Test deployment in openclaw cluster.
+  - [x] Select Helm chart — using `filipegalo/openclaw-with-brain` v0.1.20.
+  - [x] Fix HelmRepository URL and chart name in GitOps.
+  - [ ] Verify `openclaw` pod status after Flux reconciliation.
+  - [ ] Test application connectivity.
 
 ### [TASK-007] Networking & Gateway Config
 - **Assigned**: 🧠 Claude Code
@@ -114,6 +114,27 @@
 - **Assigned**: 🏠 Ollama
 - **Status**: Backlog
 - **Goal**: Periodically rebuild and publish cluster09 mkdocs site.
+
+### [TASK-010] Documentation Maintenance
+- **Assigned**: 🦉 OpenClaw
+- **Status**: 🔄 Ongoing
+- **Goal**: Maintain real-time logs of user instructions and system actions.
+- **Files**:
+  - [ ] Update `planning/prompts.md` with each new user request.
+  - [ ] Update `planning/auditTrail.md` with each system administration action.
+  - [ ] Update `planning/changelog.md` with significant milestones.
+
+### [TASK-011] Ollama Model & Resource Recommendations
+- **Assigned**: 🦉 OpenClaw
+- **Status**: Planned (depends on TASK-008 deployment)
+- **Goal**: After Ollama is running, evaluate model performance and produce tuned resource recommendations for the `openclaw` cluster.
+- **Subtasks**:
+  - [ ] Run baseline performance tests on candidate models (latency, tokens/sec, memory usage).
+  - [ ] Evaluate models for each workload: task routing, code generation, documentation, RAG embeddings.
+  - [ ] Produce model selection recommendations — update `gitops/gitops-apps/ollama/ollama-values.yaml` `ollama.models` list.
+  - [ ] Measure actual CPU and RAM usage under load on the 42-CPU host.
+  - [ ] Produce CPU and memory resource recommendations — update `requests`/`limits` in `ollama-values.yaml`.
+  - [ ] Document findings in `planning/OllamaModelRecommendations.md`.
 
 ## ✅ Completed
 - [x] Initialized cluster09 workspace.
