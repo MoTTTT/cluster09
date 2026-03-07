@@ -77,6 +77,21 @@
   - [ ] Update Cloudflare NS records.
   - [ ] Configure bastion server certs/routes.
 
+### [TASK-008] RAG Stack Deployment (Ollama & Qdrant)
+- **Assigned**: 🧠 Claude Code
+- **Status**: Planned
+- **Goal**: Deploy self-hosted RAG infrastructure on the `openclaw` cluster.
+- **Reference**: [planning/RAMRecommendation.md](./RAMRecommendation.md)
+- **Subtasks**:
+  - [ ] **Ollama Deployment**:
+    - [ ] Create `gitops/gitops-apps/ollama/` manifests.
+    - [ ] Use Helm repo `https://helm.otwld.com/`, chart `otwld/ollama`, version `latest`.
+    - [ ] Configure GPU/CPU resources (utilizing the 42 CPU host).
+  - [ ] **Qdrant Deployment**:
+    - [ ] Create `gitops/gitops-apps/qdrant/` manifests.
+    - [ ] Use Helm repo `https://qdrant.github.io/qdrant-helm`, chart `qdrant/qdrant`, version `1.17.0`.
+    - [ ] Configure persistence and memory (2-4Gi as per recommendation).
+
 ---
 
 ## 🔮 Backlog (Lower Priority)

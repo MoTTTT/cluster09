@@ -1,0 +1,187 @@
+# =============================================================================
+# openclaw-with-brain — Recommended values.yaml
+# Chart: filipegalo/openclaw-with-brain v0.1.20
+# Target: Self-managed Kubernetes with git-sync between agent contexts
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Image
+# -----------------------------------------------------------------------------
+image:
+  repository: ghcr.io/openclaw/openclaw
+  pullPolicy: IfNotPresent
+  # Pin to a specific tag in production — avoid using 'latest'
+  tag: "latest"
+
+# -----------------------------------------------------------------------------
+# Git Brain Repository (REQUIRED)
+# The core feature of this chart — bidirectional sync with your brain repo.
+# -----------------------------------------------------------------------------
+brain:
+  # SSH URL of your brain repository
+  repo: git@github.com:yourorg/your-brain.git
+  # Branch to sync against. For multi-agent setups, consider a branch per instance
+  # e.g. branch: agent-prod | agent-dev
+  branch: main
+  # Name of the Kubernetes Secret containing your SSH deploy key
+  # Create with:
+  #   kubectl create secret generic openclaw-ssh-key -n openclaw \
+  #     --from-file=id_rsa=/path/to/deploy_key \
+  #     --from-file=id_rsa.pub=/path/to/deploy_key.pub
+  sshSecretName: openclaw-ssh-key
+  # How frequently (in seconds) the agent syncs changes back to the remote repo
+  syncIntervalSeconds: 60
+  # Commit author identity used for agent-generated commits
+  gitUserName: "openclaw-agent"
+  gitUserEmail: "openclaw@yourorg.com"
+
+# -----------------------------------------------------------------------------
+# API Credentials
+# Prefer secretRef over plaintext values for production deployments.
+# -----------------------------------------------------------------------------
+env:
+  # Option A: Inline (dev/test only — do not commit to source control)
+  # ANTHROPIC_API_KEY: "sk-ant-..."
+  # OPENCLAW_GATEWAY_TOKEN: "your-gateway-token"
+
+  # Option B: Reference an existing Kubernetes Secret (recommended for production)
+  # Uncomment and configure the secretRef block below instead.
+
+envFrom:
+  - secretRef:
+      name: openclaw-secrets
+      # kubectl create secret generic openclaw-secrets -n openclaw \
+      #   --from-literal=ANTHROPIC_API_KEY=sk-ant-... \
+      #   --from-literal=OPENCLAW_GATEWAY_TOKEN=your-token
+
+# -----------------------------------------------------------------------------
+# Chromium Sidecar
+# Enables headless browser automation via Chrome DevTools Protocol (CDP).
+# Disable if your agent does not require browser tasks.
+# -----------------------------------------------------------------------------
+chromium:
+  enabled: true
+  image:
+    repository: browserless/chromium
+    tag: latest
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+# -----------------------------------------------------------------------------
+# Kubernetes Cluster Read Access
+# Provisions a ClusterRole with read-only access so the agent can introspect
+# cluster state (pods, services, deployments, etc.) without modify permissions.
+# Set to false if your agent does not require cluster awareness.
+# -----------------------------------------------------------------------------
+clusterRole:
+  enabled: true
+
+# -----------------------------------------------------------------------------
+# Persistence
+# Workspace and config are primarily git-backed, but a PVC is still recommended
+# for ephemeral working files, downloads, and session state.
+# -----------------------------------------------------------------------------
+persistence:
+  enabled: true
+  storageClass: ""       # Leave empty to use cluster default StorageClass
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+# -----------------------------------------------------------------------------
+# Service
+# -----------------------------------------------------------------------------
+service:
+  type: ClusterIP
+  port: 18789
+
+# -----------------------------------------------------------------------------
+# Ingress (optional)
+# Enable if you want to expose the OpenClaw Gateway externally.
+# -----------------------------------------------------------------------------
+ingress:
+  enabled: false
+  className: nginx
+  annotations: {}
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: openclaw.yourdomain.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: openclaw-tls
+      hosts:
+        - openclaw.yourdomain.com
+
+# -----------------------------------------------------------------------------
+# Resources
+# Adjust based on your workload. These are reasonable starting defaults.
+# -----------------------------------------------------------------------------
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+# -----------------------------------------------------------------------------
+# Security Context
+# Runs the main container as a non-root user for defence-in-depth.
+# -----------------------------------------------------------------------------
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false   # Set true only if chart supports it natively
+  capabilities:
+    drop:
+      - ALL
+
+# -----------------------------------------------------------------------------
+# Pod Disruption Budget (recommended for production)
+# Ensures at least one instance is available during voluntary disruptions.
+# -----------------------------------------------------------------------------
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+# -----------------------------------------------------------------------------
+# Node Scheduling (optional)
+# Uncomment to constrain the agent to specific nodes.
+# -----------------------------------------------------------------------------
+# nodeSelector:
+#   kubernetes.io/os: linux
+#   workload-type: ai-agents
+
+# tolerations: []
+
+# affinity: {}
+
+# -----------------------------------------------------------------------------
+# Replica Count
+# OpenClaw is a single-instance application. Do not scale above 1 unless
+# you are using a branch-per-agent strategy and separate brain branches.
+# -----------------------------------------------------------------------------
+replicaCount: 1
+
+# -----------------------------------------------------------------------------
+# Multi-Agent Branch Strategy Note
+# If you are running multiple OpenClaw instances sharing a single brain repo,
+# it is strongly recommended to use a branch-per-agent pattern to avoid
+# git write conflicts during bidirectional sync:
+#
+#   Instance 1: brain.branch = agent-prod
+#   Instance 2: brain.branch = agent-dev
+#
+# Use PRs or a merge job to consolidate brain state periodically.
+# -----------------------------------------------------------------------------
