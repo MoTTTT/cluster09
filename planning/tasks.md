@@ -136,7 +136,23 @@
   - [ ] Produce CPU and memory resource recommendations — update `requests`/`limits` in `ollama-values.yaml`.
   - [ ] Document findings in `planning/OllamaModelRecommendations.md`.
 
-## ✅ Completed
+### [TASK-012] Refine Provisioning Instructions
+- **Assigned**: 🦉 OpenClaw
+- **Status**: Planned
+- **Goal**: Propose refinements to `docs/AddingClusters.md` and `docs/AddingApplications.md` based on lessons learned from the `openclaw` cluster deployment.
+- **Key Lessons to Include**:
+  - **Flux Hierarchy**: Avoiding duplicate resource registration in `flux-system/kustomization.yaml`.
+  - **DNS/Domain Validation**: Verifying Helm repository URLs before deployment (e.g., the `charts.openclaw.ai` vs `github.io` issue).
+  - **SOPS Key Bootstrap**: Standardizing the manual step for installing the `age.agekey` into the `flux-system` namespace.
+  - **Context Management**: Procedure for merging extracted kubeconfigs and purging retired contexts on the bastion (`freyr`).
+
+### [TASK-013] Fix Helm Chart Repositories
+- **Assigned**: 🧠 Claude Code
+- **Status**: ⚠️ Blocked
+- **Subtasks**:
+  - [ ] **OpenClaw**: The repository `https://filipegalo.github.io/openclaw-with-brain` is returning a 404 for `index.yaml`. Verify the correct GitHub Pages URL or chart location.
+  - [ ] **Ollama**: Fix `ollama-values.yaml` - the `otwld/ollama` chart is failing with `can't evaluate field create in type interface {}` (likely a schema mismatch in `ollama.models`).
+  - [ ] **Qdrant**: Investigate the `context deadline exceeded` error during installation.
 - [x] Initialized cluster09 workspace.
 - [x] Created `openclaw` cluster definition and `ManagementCluster` entry.
 - [x] Updated `cluster-chart` NOTES.txt with streamlined bootstrap.

@@ -17,3 +17,4 @@ resources:
 persistentVolume:
   enabled: true
   size: 20Gi
+  storageClass: piraeus-storage-replicated
