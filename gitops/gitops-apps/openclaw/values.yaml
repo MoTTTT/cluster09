@@ -88,7 +88,7 @@ clusterRole:
 # -----------------------------------------------------------------------------
 persistence:
   enabled: true
-  storageClass: "piraeus-storage-replicated"       # Leave empty to use cluster default StorageClass
+  storageClass: "piraeus-datastore"       # Leave empty to use cluster default StorageClass
   accessMode: ReadWriteOnce
   size: 5Gi
 
