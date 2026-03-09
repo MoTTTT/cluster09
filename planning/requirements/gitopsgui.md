@@ -84,3 +84,5 @@ Technical requirements:
 - GitOpsGUI refers to the Front end that calls the API
 - GitOpsAPI Uses git git review and approval process to govern change progression to production. This triggers target cluster changes via the git gitops sync process
 - management cluster k8s cluster API credentials for the management cluster required to extract new cluster kubeconfig entries to encrypt and add to cluster specification
+- To disable an application (delete from the cluster, while retaining definition, and network configuration), comment out applicable kustomization in <clusters/<cluster name>/<application name>-apps.yaml 
+

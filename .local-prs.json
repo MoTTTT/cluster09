@@ -1,0 +1,23 @@
+{
+  "next_id": 2,
+  "prs": {
+    "1": {
+      "number": 1,
+      "branch": "application/disable-ollama-638ac224",
+      "base": "main",
+      "title": "Disable application: ollama on openclaw",
+      "body": "Comments out the `ollama` Kustomization block in `clusters/openclaw/openclaw-apps.yaml`. Other applications are unaffected. The app definition in `gitops/gitops-apps/ollama/` is retained.",
+      "labels": [
+        "application",
+        "stage:openclaw"
+      ],
+      "stage": "openclaw",
+      "resource_type": "application",
+      "state": "merged",
+      "approvals": [
+        "unknown"
+      ],
+      "pr_url": "[local] PR #1: Disable application: ollama on openclaw"
+    }
+  }
+}

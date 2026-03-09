@@ -123,6 +123,7 @@ Write operation
 - `list_applications()` — enumerate `gitops/gitops-apps/` directories
 - `get_application(name)` — parse `gitops/gitops-apps/<name>/<name>.yaml`
 - `create_application(spec)` — render HelmRepository + HelmRelease + kustomization, commit, open PR
+- `disable_application(name, cluster)` — comment out the application's kustomization entry in `clusters/<cluster>/<app>-apps.yaml` (retains the app definition in `gitops/gitops-apps/`; Flux stops reconciling the workload); commits to branch, opens PR
 
 #### [GITGUI-007] Change pipeline object reader/writer
 - `pipeline.yaml` schema: dev_cluster_id, ete_cluster_id, prod_cluster_id, app_id, chart_version, release_id
@@ -170,9 +171,12 @@ GET    /api/v1/clusters/{name}/kubeconfig  — download decrypted kubeconfig (ro
 
 #### [GITGUI-011] Application API endpoints
 ```
-POST   /api/v1/applications          — add workload to cluster (creates PR)
-GET    /api/v1/applications          — list applications with HelmRelease status
-GET    /api/v1/applications/{name}   — get application spec + live status
+POST   /api/v1/applications                    — add workload to cluster (creates PR)
+GET    /api/v1/applications                    — list applications with HelmRelease status
+GET    /api/v1/applications/{name}             — get application spec + live status
+POST   /api/v1/applications/{name}/disable     — disable workload on a cluster by commenting out its
+                                                 kustomization entry in clusters/<cluster>/<app>-apps.yaml
+                                                 (creates PR; app definition retained in gitops-apps/)
 ```
 
 #### [GITGUI-012] Change pipeline API endpoints
@@ -244,6 +248,7 @@ GET    /api/v1/status/{cluster}/resources/{kind}/{namespace}/{name}/logs       �
 - Table: app name, target cluster, chart, version, HelmRelease status
 - Add form: app name, cluster, Helm repo URL, chart name, version, values.yaml editor
 - Submit → `POST /api/v1/applications` → shows resulting PR link
+- Per-row "Disable" button → `POST /api/v1/applications/{name}/disable` → shows resulting PR link (definition retained, workload removed from cluster)
 
 #### [GITGUI-019] PR review and approval view (Cluster Operator + Build Manager)
 - List of open PRs with type badge (cluster / application / pipeline / promotion)

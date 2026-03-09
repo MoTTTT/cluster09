@@ -183,6 +183,20 @@
   - [x] `docker-compose.yml` — local dev stack with env var wiring
   - [x] `Makefile` — `make dev`, `make test`, `make build`, `make up`
 
+### [TASK-017] Requirements Tracking — GitOpsGUI
+- **Assigned**: 🧠 Claude Code
+- **Status**: 🔄 Ongoing
+- **Goal**: Monitor `planning/requirements/gitopsgui.md` for new or changed requirements and propagate them into task breakdowns, service implementations, and API endpoints.
+- **Process**:
+  - On each session start, re-read `gitopsgui.md` and diff against the last known state recorded in `planning/requirements/gitopsgui-tasks.md`.
+  - For any new requirement: add a task entry to `gitopsgui-tasks.md`, implement the service method, add the API endpoint, and add a unit test.
+  - For any changed requirement: update the corresponding task, service, endpoint, and test.
+  - Record the last-reviewed version as a comment at the top of `gitopsgui-tasks.md`.
+- **Subtasks**:
+  - [x] **2026-03-08**: Added `disable_application` operation (line 87 of gitopsgui.md) — new service method, `POST /api/v1/applications/{name}/disable` endpoint, `DisableApplicationRequest` model; updated GITGUI-006, GITGUI-011, GITGUI-018 in tasks.
+
+---
+
 ### [TASK-016] Scheduled Code Quality & Security Scans
 - **Assigned**: 🧠 Claude Code
 - **Status**: Scheduled
