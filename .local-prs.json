@@ -1,5 +1,5 @@
 {
-  "next_id": 2,
+  "next_id": 3,
   "prs": {
     "1": {
       "number": 1,
@@ -18,6 +18,24 @@
         "unknown"
       ],
       "pr_url": "[local] PR #1: Disable application: ollama on openclaw"
+    },
+    "2": {
+      "number": 2,
+      "branch": "application/disable-qdrant-9f260834",
+      "base": "main",
+      "title": "Disable application: qdrant on openclaw",
+      "body": "Comments out the `qdrant` Kustomization block in `clusters/openclaw/openclaw-apps.yaml`. Other applications are unaffected. The app definition in `gitops/gitops-apps/qdrant/` is retained.",
+      "labels": [
+        "application",
+        "stage:openclaw"
+      ],
+      "stage": "openclaw",
+      "resource_type": "application",
+      "state": "merged",
+      "approvals": [
+        "unknown"
+      ],
+      "pr_url": "[local] PR #2: Disable application: qdrant on openclaw"
     }
   }
 }
