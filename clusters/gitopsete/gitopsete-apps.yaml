@@ -1,0 +1,2 @@
+# Application workloads for gitopsete cluster
+# GitOpsAPI will be promoted to this cluster via the gitopsapi change pipeline

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gitopsete
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: podzone-charts
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://motttt.github.io/cluster09/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: gitopsete
+  namespace: flux-system
+spec:
+  targetNamespace: gitopsete
+  chart:
+    spec:
+      chart: cluster-chart
+      sourceRef:
+        kind: HelmRepository
+        name: podzone-charts
+      version: 0.1.19
+  valuesFrom:
+    - kind: ConfigMap
+      name: gitopsete-values
+  interval: 10m0s
+---

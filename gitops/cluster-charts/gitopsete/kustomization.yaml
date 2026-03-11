@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: gitopsete
+resources:
+  - gitopsete.yaml
+  - proxmox-secret.yaml
+configMapGenerator:
+  - name: gitopsete-values
+    files:
+      - values.yaml=gitopsete-values.yaml
+configurations:
+  - kustomizeconfig.yaml
