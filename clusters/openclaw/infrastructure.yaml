@@ -60,7 +60,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./gitops/gitops-gateway/managed-observability
+  path: ./gitops/gitops-gateway/openclaw
   prune: true
 
 ---

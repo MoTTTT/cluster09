@@ -1,4 +1,93 @@
 ---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: GatewayClass
+metadata:
+  name: cilium
+spec:
+  controllerName: io.cilium/gateway-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+spec:
+  gatewayClassName: cilium
+  listeners:
+
+  - hostname: thoth.podzone.cloud
+    name: thoth-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: thoth.podzone.cloud
+    name: thoth-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: thoth-tls
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: qdrant.podzone.cloud
+    name: qdrant-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: qdrant.podzone.cloud
+    name: qdrant-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: qdrant-tls
+    allowedRoutes:
+      namespaces:
+        from: All
+
+  - hostname: ollama.podzone.cloud
+    name: ollama-podzone-cloud-http
+    port: 80
+    protocol: HTTP
+  - hostname: ollama.podzone.cloud
+    name: ollama-podzone-cloud-https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: ollama-tls
+    allowedRoutes:
+      namespaces:
+        from: All
+
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: lets-encrypt
+spec:
+  acme:
+    email: martinjcolley@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-key
+    solvers:
+    - http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - name: gateway
+                namespace: kube-system
+                kind: Gateway
+
+---
+# thoth.podzone.cloud → openclaw app (service 'main' in namespace openclaw)
+# NOTE: service 'main' does not exist yet; HTTPRoute will have no valid backend
+# until the openclaw application is deployed.
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -15,6 +104,52 @@ spec:
   - backendRefs:
     - name: main
       port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+
+---
+# qdrant.podzone.cloud → Qdrant vector DB (port 6333)
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: qdrant
+  namespace: qdrant
+spec:
+  hostnames:
+  - qdrant.podzone.cloud
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: qdrant-qdrant
+      port: 6333
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+
+---
+# ollama.podzone.cloud → Ollama LLM service (port 11434)
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ollama
+  namespace: ollama
+spec:
+  hostnames:
+  - ollama.podzone.cloud
+  parentRefs:
+  - name: gateway
+    namespace: kube-system
+    kind: Gateway
+  rules:
+  - backendRefs:
+    - name: ollama-ollama
+      port: 11434
     matches:
     - path:
         type: PathPrefix
