@@ -11,7 +11,20 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: https://github.com/MoTTTT/cluster09.git
+  url: https://github.com/MoTTTT/agentsonly-infra.git
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: shared-infra
+  namespace: flux-system
+spec:
+  interval: 5m
+  ref:
+    branch: main
+  secretRef:
+    name: flux-system
+  url: https://github.com/MoTTTT/shared-infra.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
