@@ -1,0 +1,18 @@
+# Apps deployed to agentsonly cluster
+# qdrant, ollama, podzone-mpc to be migrated from openclaw (PROJ-007/T-010)
+# Uncomment each section when migrated
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: qdrant
+#   namespace: flux-system
+# spec:
+#   interval: 1h
+#   retryInterval: 1m
+#   timeout: 5m
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#   path: ./gitops/gitops-apps/qdrant
+#   prune: true
