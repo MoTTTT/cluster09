@@ -63,6 +63,9 @@ spec:
                 name: none
             proxy:
               disabled: true
+            {{- if .Values.controlplane.allow_scheduling_on_control_planes }}
+            allowSchedulingOnControlPlanes: true
+            {{- end }}
             {{- with .Values.controlplane.extra_manifests }}
             extraManifests:
             {{- toYaml . | nindent 14 }}
