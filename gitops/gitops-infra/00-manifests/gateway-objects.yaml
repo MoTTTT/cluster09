@@ -1,0 +1,40 @@
+---
+# GatewayClass — Cilium provides the gateway-api controller when
+# enable-gateway-api: "true" is set in the cilium-config ConfigMap.
+# controllerName matches Cilium's built-in gateway controller.
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: cilium
+spec:
+  controllerName: io.cilium/gateway-controller
+---
+# Gateway — single shared ingress point per cluster.
+# Placed in kube-system to match parentRefs in all HelmRelease-managed HTTPRoutes.
+# A LoadBalancer Service is created automatically by Cilium; the IP is allocated
+# from the cluster's CiliumLoadBalancerIPPool (patched per cluster in 01-network).
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: kube-system
+spec:
+  gatewayClassName: cilium
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: gateway-tls
+            namespace: kube-system
