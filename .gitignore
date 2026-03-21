@@ -8,3 +8,4 @@ worker.yaml
 controlplane-patched.yaml
 controlplane.yaml
 .local-prs.json
+.mcp.json
