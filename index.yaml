@@ -3,7 +3,17 @@ entries:
   cluster-chart:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.752744+01:00"
+    created: "2026-04-01T01:21:25.661012+01:00"
+    description: A Helm chart to generate Cluster API managed Cluster manifests.
+    digest: 2ea36e0d82607795646e8f6c30a64e9fe79d08ed7890188531a3c93e03451c57
+    name: cluster-chart
+    type: application
+    urls:
+    - https://motttt.github.io/cluster09/cluster-chart-0.1.32.tgz
+    version: 0.1.32
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-04-01T01:21:25.660587+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 9f7d203eb59d3cd3856346f60cbb43d015eb09588faa585fea4702288cf2bd16
     name: cluster-chart
@@ -13,7 +23,7 @@ entries:
     version: 0.1.31
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.7523+01:00"
+    created: "2026-04-01T01:21:25.660004+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: e563de7e485853b880456f22ea28609fc9529a61520dfaa84213872111b6a737
     name: cluster-chart
@@ -23,7 +33,7 @@ entries:
     version: 0.1.30
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.751665+01:00"
+    created: "2026-04-01T01:21:25.659291+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 25fb5800c78795fba2c4a148e432bc4a1b1798fb745daceee463fdbcfa247adf
     name: cluster-chart
@@ -33,7 +43,7 @@ entries:
     version: 0.1.29
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.751022+01:00"
+    created: "2026-04-01T01:21:25.658618+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 3cb3aa475151e6a24d6d5e5a9631d3812bc70963e568706aaebf466033ce16d3
     name: cluster-chart
@@ -43,7 +53,7 @@ entries:
     version: 0.1.27
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.750407+01:00"
+    created: "2026-04-01T01:21:25.658028+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: dd7ea1fe35a30f23c1f77a0df93876c3c6883274eda8550bdcc27c31effcbaa7
     name: cluster-chart
@@ -53,7 +63,7 @@ entries:
     version: 0.1.26
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.749726+01:00"
+    created: "2026-04-01T01:21:25.65743+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 3c06379bf105d33d2f9152902892ebce85c515f26813930e6cb31e2a0e9535f0
     name: cluster-chart
@@ -63,7 +73,7 @@ entries:
     version: 0.1.25
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.749108+01:00"
+    created: "2026-04-01T01:21:25.656792+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 0a617879a593caea911246c604abc5ceed6c763254b6ac43d38d7dd5345e8477
     name: cluster-chart
@@ -73,7 +83,7 @@ entries:
     version: 0.1.24
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.748469+01:00"
+    created: "2026-04-01T01:21:25.656162+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: d8c1a3192a7ddf86843cbd5026d199dd4563a725418b24f10d00c6fea8fada55
     name: cluster-chart
@@ -83,7 +93,7 @@ entries:
     version: 0.1.23
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.747856+01:00"
+    created: "2026-04-01T01:21:25.65555+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 122d80a4b5e728f3d2a2759a11b9b5818785e2090fcac0e98da5dbb785afbf59
     name: cluster-chart
@@ -93,7 +103,7 @@ entries:
     version: 0.1.22
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.745794+01:00"
+    created: "2026-04-01T01:21:25.654118+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: eb04a7f29042bce5d7d4cc26f5db93f7acf222773fa4a79de56938f4c7887570
     name: cluster-chart
@@ -103,7 +113,7 @@ entries:
     version: 0.1.19
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.745086+01:00"
+    created: "2026-04-01T01:21:25.653401+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 2fc65c071a1fffff405cbb57d4f898a2b4622c821d1fe3089b0345c847859c6d
     name: cluster-chart
@@ -113,7 +123,7 @@ entries:
     version: 0.1.18
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.744472+01:00"
+    created: "2026-04-01T01:21:25.65279+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 0420ef72f7dbc60089382b5f56863e6574337e0ceeee8743a615dfac0ffda98b
     name: cluster-chart
@@ -123,7 +133,7 @@ entries:
     version: 0.1.17
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-04-01T00:45:01.743873+01:00"
+    created: "2026-04-01T01:21:25.652177+01:00"
     description: A Helm chart to generate Cluster API managed Cluster manifests.
     digest: 89121c5d0e5c9167edee61424638e19a5fab98403a1279d6c70d54ce6461999c
     name: cluster-chart
@@ -131,4 +141,4 @@ entries:
     urls:
     - https://motttt.github.io/cluster09/cluster-chart-0.1.16.tgz
     version: 0.1.16
-generated: "2026-04-01T00:45:01.740909+01:00"
+generated: "2026-04-01T01:21:25.64998+01:00"
