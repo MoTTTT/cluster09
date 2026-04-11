@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: gitopsapi-github-token
+    namespace: gitopsapi
+type: Opaque
+stringData:
+    token: ENC[AES256_GCM,data:bkXTBztT8A0VK7j7Vn/WdRUWYdG/Z1+tWlySY+bcDyVp41nBQimmNQUwSUcihcxBPLUKxpe+yjVQp4MEFbY+fXxTESzZjli+f0Apmqebaa4nWOTbecxW7+1eU8Wp,iv:cgmi+grxSOuxZkvussjHwXwYwB6432vEwyJZQ54dmys=,tag:j3+yyIDESYMlhaQkhOkyag==,type:str]
+sops:
+    age:
+        - recipient: age1pfhqtcg8mhwdcx5kfzft2vfshns6encg8ptyz3wwj6mlm8cgup5qcufea4
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBUzBOVHREc0M4d0dRdXVz
+            b2FMSU5PeFIrV0xHTVRETGdFaytQUVcxdnlrCmM1NFhHSmtIVkN4Yzd4ckI4RzBK
+            QnUxS002TDQ4aFJkRFNUSnVIVFVoa2cKLS0tIGtvcG1qcmNIandXTDB0UDdqMmhp
+            QklIZXI0RGRHOFB2TVZJekFNdDhCb0kKonAwwd83dOQyVfJlWD4rnF2RGbJmv8p2
+            NReE7qBV+c8s58JeWiJ8V73Hw72pEqG0XsjPwjc5jNbYwQoHzQFdng==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-11T23:51:53Z"
+    mac: ENC[AES256_GCM,data:L2B3VbqYc0/1epvdK18dwQMsrJqr4g3Zskrfuab11PQeqxIMchcYj9qcbvovrWrMu8liq4gI/qJMCM/A26uGrXv+v2lhlRk/cJgQB6jr9C7hW07Ds1g6d5/RNYxNZnelA9DHAznjCOrtFh+RUfsLsVuvt6dG5eV4pJblD4Xkr4U=,iv:2s1g6d/ZDg8cGJECQqJdhNwsb4mc1247tpQMJSygFlc=,tag:ab/VVRqIdjQ30JuZYGZQGg==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.12.2
