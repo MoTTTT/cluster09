@@ -1,71 +1,17 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
-metadata:
-  name: gitopsete-apps
-  namespace: flux-system
-spec:
-  interval: 5m
-  ref:
-    branch: main
-  secretRef:
-    name: flux-system
-  url: https://github.com/PodZonePlatformEngineering/gitopsete-apps.git
----
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: gitopsete-apps
+  name: gitopsapi
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: 02-storage
   interval: 1h
   retryInterval: 1m
   timeout: 10m
   sourceRef:
     kind: GitRepository
-    name: gitopsete-apps
-  path: ./gitops/gitops-apps
-  prune: true
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: nexus
-  namespace: flux-system
-spec:
-  interval: 1h
-  retryInterval: 1m
-  timeout: 5m
-  sourceRef:
-    kind: GitRepository
-    name: gitopsete-apps
-  path: ./gitops/gitops-apps/nexus
-  prune: true
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
-metadata:
-  name: gitopsapi-instance-ete001
-  namespace: flux-system
-spec:
-  interval: 5m
-  ref:
-    branch: main
-  secretRef:
-    name: gitopsapi-instance-ete001
-  url: https://github.com/PodZonePlatformEngineering/gitopsapi-instance-ete001.git
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: gitopsapi-instance-ete001
-  namespace: flux-system
-spec:
-  interval: 5m
-  retryInterval: 1m
-  timeout: 5m
-  sourceRef:
-    kind: GitRepository
-    name: gitopsapi-instance-ete001
-  path: ./
+    name: flux-system
+  path: ./gitops/gitops-apps/gitopsapi-ete
   prune: true

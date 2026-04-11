@@ -1,0 +1,38 @@
+image:
+  repository: ghcr.io/motttt/gitopsapi
+  # TODO: update to ghcr.io/podzoneplatformengineering/gitopsapi after org-move image publish
+  tag: "v0.1.6"
+  pullPolicy: IfNotPresent
+
+gitops:
+  githubOrg: "PodZonePlatformEngineering"
+  localPath: /tmp/gitops-repo
+
+clusterChart:
+  repoUrl: "oci://ghcr.io/podzoneplatformengineering/cluster-chart"
+  version: "0.1.40"
+
+instance:
+  namespace: "gitopsapi"
+
+secrets:
+  githubTokenSecret: gitopsapi-github-token
+  mgmtKubeconfigSecret: gitopsapi-mgmt-kubeconfig
+  ageKeySecret: gitopsapi-sops-age
+
+expose:
+  # TODO: confirm ETE cluster gateway and hostname
+  hostname: gitopsapi.gitopsete.podzone.net
+  gatewayName: gateway
+  gatewayNamespace: kube-system
+  tlsSecretName: gitopsapi-tls
+
+externalURL: https://gitopsapi.gitopsete.podzone.net
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
