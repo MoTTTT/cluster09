@@ -5,6 +5,9 @@ image:
   pullPolicy: IfNotPresent
 
 gitops:
+  repoUrl: "https://github.com/PodZonePlatformEngineering/gitopsapi-instance-ete001.git"
+  branch: main
+  githubRepo: "PodZonePlatformEngineering/gitopsapi-instance-ete001"
   githubOrg: "PodZonePlatformEngineering"
   localPath: /tmp/gitops-repo
 
