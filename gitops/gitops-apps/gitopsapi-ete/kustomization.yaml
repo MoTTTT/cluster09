@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - gitopsapi.yaml
+  - gitopsapi-github-token.sops.yaml
 configMapGenerator:
   - name: gitopsapi-ete-values
     namespace: flux-system
