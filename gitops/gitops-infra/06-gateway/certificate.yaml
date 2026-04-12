@@ -1,0 +1,16 @@
+---
+# Wildcard TLS cert for gitopsete — covers all services on *.gitopsete.podzone.cloud.
+# Stored as gateway-tls in kube-system, referenced by the Gateway HTTPS listener
+# in 00-manifests/gateway-objects.yaml.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gateway-tls
+  namespace: kube-system
+spec:
+  secretName: gateway-tls
+  issuerRef:
+    name: lets-encrypt-dns01
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.gitopsete.podzone.cloud"

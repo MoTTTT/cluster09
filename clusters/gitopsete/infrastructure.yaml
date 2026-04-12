@@ -90,3 +90,21 @@ spec:
     name: flux-system
   path: ./gitops/gitops-infra/04-storage
   prune: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: 06-gateway
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: 00-manifests
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops/gitops-infra/06-gateway
+  prune: true
