@@ -24,12 +24,12 @@ secrets:
   ageKeySecret: gitopsapi-sops-age
 
 expose:
-  hostname: gitopsapi.gitopsete.podzone.cloud
+  hostname: gitopsapi.muso.club
   gatewayName: gateway
   gatewayNamespace: kube-system
   tlsSecretName: gitopsapi-tls
 
-externalURL: https://gitopsapi.gitopsete.podzone.cloud
+externalURL: https://gitopsapi.muso.club
 
 resources:
   requests:
