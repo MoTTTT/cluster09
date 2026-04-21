@@ -13,3 +13,37 @@ spec:
     name: flux-system
   path: ./gitops/gitops-apps/gitopsapi
   prune: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: qdrant
+  namespace: flux-system
+spec:
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops/gitops-apps/qdrant
+  prune: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: qdrant-mcp
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: qdrant
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops/gitops-apps/qdrant-mcp
+  prune: true
